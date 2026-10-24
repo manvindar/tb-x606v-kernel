@@ -9,6 +9,8 @@ on:
       tag:
         description: Release tag
         default: kernel-a16-ci
+permissions:
+  contents: write
 env:
   SRC_REPO: UsrBinLuna/kernel_lenovo_achilles6   # Lenovo OSS drop, 4.9.117 (the 4.9.302 community tree does not compile)
   AOSP: https://android.googlesource.com/platform/prebuilts
