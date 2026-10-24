@@ -1,0 +1,57 @@
+name: Build kernel
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish a GitHub release with the boot image
+        type: boolean
+        default: true
+      tag:
+        description: Release tag
+        default: kernel-a16-ci
+env:
+  SRC_REPO: Dawnace01/Lenovo_TB-X606F_kernel   # 4.9.302 tree with achilles6_row_call_defconfig
+  AOSP: https://android.googlesource.com/platform/prebuilts
+  REF: refs/heads/android10-release
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install tools
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq bc bison flex libssl-dev device-tree-compiler python3 xz-utils
+      - name: Fetch toolchains (clang r353983c, gcc 4.9 as used by the stock build)
+        run: |
+          mkdir -p tc/clang tc/gcc64 tc/gcc32
+          curl -sfL "$AOSP/clang/host/linux-x86/+archive/$REF/clang-r353983c.tar.gz" | tar xz -C tc/clang
+          curl -sfL "$AOSP/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/+archive/$REF.tar.gz" | tar xz -C tc/gcc64
+          curl -sfL "$AOSP/gcc/linux-x86/arm/arm-linux-androideabi-4.9/+archive/$REF.tar.gz" | tar xz -C tc/gcc32
+      - name: Clone and patch the kernel
+        run: |
+          git clone --depth 1 https://github.com/$SRC_REPO.git src
+          cd src
+          for p in ../patches/*.patch; do git apply --verbose "$p"; done
+      - name: Build
+        run: |
+          cd src
+          export PATH=$GITHUB_WORKSPACE/tc/clang/bin:$GITHUB_WORKSPACE/tc/gcc64/bin:$GITHUB_WORKSPACE/tc/gcc32/bin:$PATH
+          M="ARCH=arm64 O=out CC=clang CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE=aarch64-linux-android- CROSS_COMPILE_ARM32=arm-linux-androideabi-"
+          make $M achilles6_row_call_defconfig
+          ./scripts/kconfig/merge_config.sh -m -O out out/.config ../config/android16.fragment
+          make $M olddefconfig
+          make $M -j"$(nproc)" Image.gz-dtb 2>&1 | tail -n 40
+          ls -l out/arch/arm64/boot/Image.gz-dtb
+      - name: Repack boot.img
+        run: |
+          # stock boot.img is not redistributed: the repack needs it, so publish the kernel and a patch script instead
+          mkdir dist
+          cp src/out/arch/arm64/boot/Image.gz-dtb dist/
+          cp src/out/.config dist/config
+          cp scripts/repack_boot.py dist/
+          cd dist && sha256sum * > SHA256SUMS
+      - uses: actions/upload-artifact@v7
+        with: { name: kernel, path: dist/ }
+      - name: Publish release
+        if: ${{ inputs.publish }}
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: gh release create "${{ inputs.tag }}" dist/* --title "Kernel 4.9.302 for TB-X606V (${{ inputs.tag }})" --notes "Image.gz-dtb with the F_SEAL_FUTURE_WRITE backport. Pack it into your own boot.img: python3 repack_boot.py stock_boot.img Image.gz-dtb out.img, then test with fastboot boot out.img (RAM only)."
