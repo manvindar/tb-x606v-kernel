@@ -54,4 +54,6 @@ jobs:
       - name: Publish release
         if: ${{ inputs.publish }}
         env: { GH_TOKEN: "${{ github.token }}" }
-        run: gh release create "${{ inputs.tag }}" dist/* --title "Kernel 4.9.302 for TB-X606V (${{ inputs.tag }})" --notes "Image.gz-dtb with the F_SEAL_FUTURE_WRITE backport. Pack it into your own boot.img: python3 repack_boot.py stock_boot.img Image.gz-dtb out.img, then test with fastboot boot out.img (RAM only)."
+        run: |
+          gh release create "${{ inputs.tag }}" dist/* --title "Kernel 4.9.302 for TB-X606V (${{ inputs.tag }})" \
+            --notes "Image.gz-dtb with the F_SEAL_FUTURE_WRITE backport. Pack it into your boot.img with repack_boot.py, then test with fastboot boot (RAM only)."
