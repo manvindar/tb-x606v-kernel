@@ -23,7 +23,7 @@ dtb = d[off:off + dtbsz]
 knew = open(kern, 'rb').read()
 if rd_path != '-': ramdisk = open(rd_path, 'rb').read(); rsz = len(ramdisk); f[3] = rsz
 if dtb_path != '-': dtb = open(dtb_path, 'rb').read(); dtbsz = len(dtb); f[-2] = dtbsz
-if cmd != '-': f[11] = cmd.encode().ljust(512, b'\0')
+if cmd != '-': f[12] = cmd.encode().ljust(512, b'\0')  # f[11] is the 16-byte name, f[12] the cmdline
 f[1] = len(knew)
 sha = hashlib.sha1(knew + struct.pack('<I', len(knew)) + ramdisk + struct.pack('<I', rsz) +
                    struct.pack('<I', 0) + dtb + struct.pack('<I', dtbsz)).digest()
