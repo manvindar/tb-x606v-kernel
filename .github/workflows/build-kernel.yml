@@ -39,9 +39,7 @@ jobs:
           export PATH=$GITHUB_WORKSPACE/tc/clang/bin:$GITHUB_WORKSPACE/tc/gcc64/bin:$GITHUB_WORKSPACE/tc/gcc32/bin:$PATH
           printf '#!/bin/sh\nexec gcc -fcommon "$@"\n' > $GITHUB_WORKSPACE/hostgcc && chmod +x $GITHUB_WORKSPACE/hostgcc  # old dtc needs -fcommon on gcc>=10
           M="ARCH=arm64 O=out CC=clang CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE=aarch64-linux-android- CROSS_COMPILE_ARM32=arm-linux-androideabi- python=python2 HOSTCC=$GITHUB_WORKSPACE/hostgcc"
-          # base = the config of the tablet's running stock kernel (the OSS defconfig differs: SRAM ram console, which crashes fiq_cache_init)
-          mkdir -p out && cp ../config/stock-4.9.190-achilles6_row_call.config out/.config
-          make $M olddefconfig
+          make $M achilles6_row_call_defconfig
           ./scripts/kconfig/merge_config.sh -m -O out out/.config ../config/android16.fragment
           make $M olddefconfig
           make $M -k -j"$(nproc)" Image.gz-dtb > ../build.log 2>&1 || { grep -E "error:|\*\*\*|undefined reference" ../build.log | head -60; exit 1; }
