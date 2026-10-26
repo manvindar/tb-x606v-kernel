@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 """Replace the kernel in a stock Android boot.img (header v2) and keep ramdisk, dtb and cmdline.
-usage: repack_boot.py STOCK_BOOT.img NEW_Image.gz-dtb OUT_BOOT.img"""
+usage: repack_boot.py STOCK_BOOT.img NEW_Image.gz-dtb OUT_BOOT.img [RAMDISK [DTB [CMDLINE]]]
+RAMDISK/DTB default to the stock ones; use "-" to keep a stock part."""
 import struct, sys, hashlib
 FMT = '<8s10I16s512s32s1024sIQIIQ'
 HLEN = struct.calcsize(FMT)
 pad = lambda b, p: b + b'\0' * (-len(b) % p)
 
 stock, kern, out = sys.argv[1:4]
+opt = sys.argv[4:] + ['-'] * 3
+rd_path, dtb_path, cmd = opt[0], opt[1], opt[2]
 d = open(stock, 'rb').read()
 f = list(struct.unpack(FMT, d[:HLEN]))
 assert f[0] == b'ANDROID!' and f[9] == 2, 'expected an Android boot header v2'
@@ -18,6 +21,9 @@ ramdisk = d[off:off + rsz]; off += len(pad(ramdisk, page))
 off += len(pad(b'\0' * ssz, page))
 dtb = d[off:off + dtbsz]
 knew = open(kern, 'rb').read()
+if rd_path != '-': ramdisk = open(rd_path, 'rb').read(); rsz = len(ramdisk); f[3] = rsz
+if dtb_path != '-': dtb = open(dtb_path, 'rb').read(); dtbsz = len(dtb); f[-2] = dtbsz
+if cmd != '-': f[11] = cmd.encode().ljust(512, b'\0')
 f[1] = len(knew)
 sha = hashlib.sha1(knew + struct.pack('<I', len(knew)) + ramdisk + struct.pack('<I', rsz) +
                    struct.pack('<I', 0) + dtb + struct.pack('<I', dtbsz)).digest()

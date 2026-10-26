@@ -8,7 +8,7 @@ on:
         default: true
       tag:
         description: Release tag
-        default: kernel-a16-ci
+        default: kernel-a17-ci
 permissions:
   contents: write
 env:
