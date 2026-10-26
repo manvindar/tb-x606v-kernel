@@ -4,7 +4,3 @@ CONFIG_BPF_JIT=y
 CONFIG_NET_ACT_BPF=y
 CONFIG_BPF_EVENTS=y
 CONFIG_CGROUP_BPF=y
-# The OSS defconfig picks the SRAM ram console, which mis-parses this board's DT node ("ioremap failed") and leaves
-# aee_rr_rec NULL: fiq_cache_init and mtk_cpuidle_init then crash at boot. The DT reserves DRAM at 0x47c80000.
-# CONFIG_MTK_RAM_CONSOLE_USING_SRAM is not set
-CONFIG_MTK_RAM_CONSOLE_USING_DRAM=y
