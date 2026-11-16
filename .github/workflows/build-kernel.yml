@@ -10,6 +10,10 @@ on:
         description: Compile experimental PowerVR 1.13 port; never publish or flash
         type: boolean
         default: false
+      inspect_firmware:
+        description: Inspect the published donor vendor image without building or writing a tablet
+        type: boolean
+        default: false
       tag:
         description: Release tag
         default: kernel-a17-ci
@@ -21,6 +25,7 @@ env:
   REF: refs/heads/android10-release
 jobs:
   build:
+    if: ${{ !inputs.inspect_firmware }}
     runs-on: ubuntu-22.04   # python2 (MediaTek DrvGen.py) is only packaged up to 22.04
     steps:
       - name: Reject publication of an unvalidated driver port
@@ -105,3 +110,29 @@ jobs:
         run: |
           gh release create "${{ inputs.tag }}" dist/* --title "Kernel 4.9 for TB-X606V (${{ inputs.tag }})" \
             --notes "Image.gz-dtb with the F_SEAL_FUTURE_WRITE backport. Pack it into your boot.img with repack_boot.py, then test with fastboot boot (RAM only)."
+
+  donor-firmware:
+    if: inputs.inspect_firmware
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - name: Inspect exact published donor archive
+        run: |
+          set -euo pipefail
+          curl -L --fail --retry 3 -o donor.zip https://github.com/rabbit-hmi-oss/firmware/releases/download/v0.8.293/rabbit_OS_v0.8.293.zip
+          sha256sum donor.zip > donor-archive.sha256
+          unzip -p donor.zip rabbit_OS_v0.8.293_20250516110545/super.img > super.img
+          rm donor.zip
+          mkdir -p donor-gpu
+          python3 scripts/inspect_donor_gpu.py super.img donor-gpu
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: powervr-donor-gpu-stack
+          path: |
+            donor-gpu/
+            donor-archive.sha256
+          if-no-files-found: warn
