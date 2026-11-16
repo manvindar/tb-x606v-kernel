@@ -37,6 +37,11 @@ def stage(base, donor, receipt):
     text = text.replace('drivers/gpu/mediatek/gpufreq/include', 'drivers/misc/mediatek/base/power/$(MTK_PLATFORM)')
     text = text.replace('drivers/gpu/mediatek/gpu_bm', 'drivers/misc/mediatek/gpu/hal')
     makefile.write_text(text)
+    for config in target.glob('include/config_kernel_*mt6765*.h'):
+        config_text = config.read_text()
+        config_text = config_text.replace('../drivers/staging/android/aosp_ion/ion.h',
+                                          '../drivers/staging/android/ion/ion.h')
+        config.write_text(config_text)
     # Older ION's exported allocator API is already handled by the donor's
     # <4.12 branch. Supply Lenovo's allocator declarations at the new layout.
     ion_header = parent / 'm1.10ED5130912/services/system/rgx_mtk/mtk_ion_support.h'
