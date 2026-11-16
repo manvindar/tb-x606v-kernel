@@ -45,7 +45,7 @@ files = []
 libraries = ('libsrv_um.so', 'libusc.so', 'libIMGegl.so', 'libglslcompiler.so',
              'libpvrANDROID_WSEGL.so', 'libPVRScopeServices.so',
              'libPVRMtkutils.so', 'libgpu_aux.so', 'libgpud.so',
-             'libgralloc_extra.so', 'libged.so')
+             'libgralloc_extra.so', 'libgralloc_metadata.so', 'libged.so')
 for abi in ('lib', 'lib64'):
     for name in libraries:
         files.append('/' + abi + '/' + name)

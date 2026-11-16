@@ -128,6 +128,7 @@ jobs:
           rm donor.zip
           mkdir -p donor-gpu
           python3 scripts/inspect_donor_gpu.py super.img donor-gpu
+          python3 scripts/inspect_rgx_firmware.py donor-gpu/firmware/rgx.fw > donor-gpu/firmware-footer.json
       - uses: actions/upload-artifact@v7
         if: always()
         with:
