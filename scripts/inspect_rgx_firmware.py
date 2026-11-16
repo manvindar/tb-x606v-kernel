@@ -13,7 +13,7 @@ def inspect(path):
         raise ValueError('Firmware is too short')
     offset = len(data) - 4096
     version, size, count, stride, packed, page, flags = struct.unpack_from('<IIIIQII', data, offset)
-    if version != 1 or size != 32 or stride != 24 or not 0 < count <= 15:
+    if version != 1 or size != 32 or stride != 24 or not 0 < count <= 8:
         raise ValueError('Unexpected RGX_FW_INFO_HEADER layout')
     if size + count * stride > 4096:
         raise ValueError('Layout table extends outside footer')
