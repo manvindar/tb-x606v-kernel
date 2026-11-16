@@ -42,10 +42,8 @@ def stage(base, donor, receipt):
         config_text = config_text.replace('../drivers/staging/android/aosp_ion/ion.h',
                                           '../drivers/staging/android/ion/ion.h')
         config.write_text(config_text)
-    # Older ION's exported allocator API is already handled by the donor's
-    # <4.12 branch. Supply Lenovo's allocator declarations at the new layout.
-    ion_header = parent / 'm1.10ED5130912/services/system/rgx_mtk/mtk_ion_support.h'
-    shutil.copy2(ion_header, target / 'services/system/rogue/rgx_mtk/mtk_ion_support.h')
+    # Keep the donor header: it declares both Lenovo's g_ion_device and
+    # MTKGetIonClient, implemented by the donor's existing <4.12 branch.
     selector = parent / 'Makefile'
     previous = selector.read_text()
     selector.write_text('ifeq ($(findstring pvr13,$(CONFIG_MTK_GPU_VERSION)),pvr13)\nobj-y += ' + VERSION + '/\nelse\n' + previous + '\nendif\n')
