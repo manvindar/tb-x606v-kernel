@@ -88,6 +88,7 @@ jobs:
             build.log
             pvr13-stage-receipt.json
             src/out/.config
+            src/out/Module.symvers
           if-no-files-found: warn
       - name: Verify new driver is linked
         if: inputs.port_pvr13
@@ -100,6 +101,7 @@ jobs:
           mkdir dist
           cp src/out/arch/arm64/boot/Image.gz-dtb dist/
           cp src/out/.config dist/config
+          cp src/out/Module.symvers dist/Module.symvers
           cp scripts/repack_boot.py dist/
           cd dist && sha256sum * > SHA256SUMS
       - uses: actions/upload-artifact@v7
