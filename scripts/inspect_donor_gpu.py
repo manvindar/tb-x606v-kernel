@@ -43,7 +43,9 @@ for path in ('/build.prop', '/lib/egl', '/lib64/egl', '/firmware'):
 (output / 'vendor-inventory.json').write_text(json.dumps(inventory, indent=2) + '\n')
 files = []
 libraries = ('libsrv_um.so', 'libusc.so', 'libIMGegl.so', 'libglslcompiler.so',
-             'libpvrANDROID_WSEGL.so', 'libPVRScopeServices.so')
+             'libpvrANDROID_WSEGL.so', 'libPVRScopeServices.so',
+             'libPVRMtkutils.so', 'libgpu_aux.so', 'libgpud.so',
+             'libgralloc_extra.so', 'libged.so')
 for abi in ('lib', 'lib64'):
     for name in libraries:
         files.append('/' + abi + '/' + name)
