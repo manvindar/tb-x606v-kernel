@@ -28,7 +28,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p tc/clang tc/gcc64 tc/gcc32 dl out-receipts
-          A=https://android.googlesource.com/platform/prebuilts
+          A=https://android.googlesource.com
           get() {  # name repo commit subpath dest
             u="$A/$2/+archive/$3${4:+/$4}.tar.gz"
             curl -sfL --retry 6 --retry-all-errors --retry-delay 5 -o "dl/$1.tar.gz" "$u"
