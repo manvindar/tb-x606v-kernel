@@ -1,0 +1,9 @@
+{
+  "repo": "https://github.com/philmb3487/android_kernel_lenovo_achilles6.git",
+  "refs": [
+    {"sha": "0a95b5010777186eed379b2ed11e3d1a4f85921e", "note": "main tip inspected 2026-11-16, SUBLEVEL 190"},
+    {"sha": "51ba160931e89c2539f5d07b4fd978dac5f63092", "note": "'a107 base' commit that replaced the Lenovo 4.9.117 tree, SUBLEVEL 190"}
+  ],
+  "config": {"path": "config/stock-4.9.190-achilles6_row_call.config", "sha256": "ed99dd817f6fae0a0414306bd8b786cc0324bc4fb91de72f0df7514d211fbc65", "symbols": 3868, "note": "symbol-for-symbol identical to /proc/config.gz of the running TB-X606V (4.9.190+, Jun 30 2022)"},
+  "scope": "Diagnostic only: unproven source lineage; the inspected repositories do not prove that no other 4.9.190 source exists"
+}

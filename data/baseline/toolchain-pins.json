@@ -1,0 +1,6 @@
+{
+  "note": "AOSP prebuilts android10-release branch tips resolved 2026-11-16; hashes are content hashes (scripts/baseline/tree_hash.py), stable across repeated downloads, unlike the archive bytes",
+  "clang": {"repo": "platform/prebuilts/clang/host/linux-x86", "commit": "3f889f9c9d42bae85728fa89ba5f92a01704fd83", "path": "clang-r353983c", "tree_sha256": "3eb672ebef842c85d3398fa2d8dbd061bcc8d38a4dc0a0f9e876af7620fb4f0f", "files": 2695},
+  "gcc64": {"repo": "platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9", "commit": "84fb09fafc92a3d9b4d160f049d46c3c784cc941", "tree_sha256": "e540b2be229d3eb939abce95bff581afb902747dcda0a632ae996c91dc5f3e87", "files": 270},
+  "gcc32": {"repo": "platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9", "commit": "5a8beef7b1aa2c8ca0dfe4a00358559d12dfa3b6", "tree_sha256": "9f4fbc83f2850ded7d61c2ea9a5a0a0ca261b530ef8abca5c3833bc38faf8336", "files": 193}
+}
