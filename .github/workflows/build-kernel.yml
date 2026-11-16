@@ -84,6 +84,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: pvr13-compile-diagnostics
+          include-hidden-files: true
           path: |
             build.log
             pvr13-stage-receipt.json
