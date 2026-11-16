@@ -5,7 +5,11 @@ on:
       publish:
         description: Publish a GitHub release with the boot image
         type: boolean
-        default: true
+        default: false
+      port_pvr13:
+        description: Compile experimental PowerVR 1.13 port; never publish or flash
+        type: boolean
+        default: false
       tag:
         description: Release tag
         default: kernel-a17-ci
@@ -19,6 +23,9 @@ jobs:
   build:
     runs-on: ubuntu-22.04   # python2 (MediaTek DrvGen.py) is only packaged up to 22.04
     steps:
+      - name: Reject publication of an unvalidated driver port
+        if: inputs.port_pvr13 && inputs.publish
+        run: exit 1
       - uses: actions/checkout@v7
       - name: Install tools
         run: sudo apt-get update -qq && sudo apt-get install -y -qq bc bison flex libssl-dev device-tree-compiler python3 python2 xz-utils ccache
@@ -41,7 +48,15 @@ jobs:
         run: |
           git clone --depth 1 https://github.com/$SRC_REPO.git src
           cd src
+          git checkout 7f6a59c5b8d6ee27b29c91d07f77ec97393f3544
           for p in ../patches/*.patch; do git apply --check "$p" && git apply --verbose "$p" || echo "SKIPPED $p"; done
+      - name: Stage pinned PowerVR 1.13 port
+        if: inputs.port_pvr13
+        run: |
+          git clone --depth 1 --filter=blob:none --sparse https://github.com/rabbit-hmi-oss/android_kernel_rabbit_mt6765.git donor
+          git -C donor sparse-checkout set drivers/gpu/mediatek/gpu_rgx/m1.13ED5776728
+          test "$(git -C donor rev-parse HEAD)" = 8167c8c1087f057d2ef302fc93b47554291687ec
+          python3 scripts/stage_pvr13.py src donor pvr13-stage-receipt.json
       - name: Build
         run: |
           cd src
@@ -52,10 +67,28 @@ jobs:
           M="ARCH=arm64 O=out CC=$GITHUB_WORKSPACE/ccache-clang CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE=aarch64-linux-android- CROSS_COMPILE_ARM32=arm-linux-androideabi- python=python2 HOSTCC=$GITHUB_WORKSPACE/hostgcc"
           make $M achilles6_row_call_defconfig
           ./scripts/kconfig/merge_config.sh -m -O out out/.config ../config/android16.fragment
+          if [ "${{ inputs.port_pvr13 }}" = true ]; then
+            ./scripts/config --file out/.config --set-str MTK_GPU_VERSION 'rgx pvr13 m1.13ED5776728'
+          fi
           make $M olddefconfig
           make $M -k -j"$(nproc)" Image.gz-dtb > ../build.log 2>&1 || { grep -E "error:|\*\*\*|undefined reference" ../build.log | head -60; exit 1; }
           ccache -s | head -6
           ls -l out/arch/arm64/boot/Image.gz-dtb
+      - name: Retain compile diagnostics
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: pvr13-compile-diagnostics
+          path: |
+            build.log
+            pvr13-stage-receipt.json
+            src/out/.config
+          if-no-files-found: warn
+      - name: Verify new driver is linked
+        if: inputs.port_pvr13
+        run: |
+          strings src/out/vmlinux | grep -F '1.13@5776728'
+          nm src/out/vmlinux | grep -F 'RGXDevInitCompatCheck'
       - name: Repack boot.img
         run: |
           # stock boot.img is not redistributed: the repack needs it, so publish the kernel and a patch script instead
