@@ -383,5 +383,55 @@
     "insert": "#undef SENSOR_DRVNAME_OV5675_MIPI_RAW\n#define SENSOR_DRVNAME_OV5675_MIPI_RAW          \"ov5675_mipi_raw\"\n"
    }
   ]
+ },
+ {
+  "file": "fs/fat/Makefile",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "fat-y := cache.o dir.o fatent.o file.o inode.o misc.o nfs.o xattr.o"
+    ],
+    "insert": "fat-y := cache.o dir.o fatent.o file.o inode.o misc.o nfs.o\nfat-$(CONFIG_FAT_VIRTUAL_XATTR) += xattr.o\n",
+    "serves": "stock config has no FAT_VIRTUAL_XATTR (shipping image: 109 fat_* symbols, none of fat xattr); philmb built xattr.o unconditionally (run 44032568227: xattr.c:70 redefinition)"
+   },
+   {
+    "op": "delete_line",
+    "line": "fat-y := cache.o dir.o fatent.o file.o inode.o misc.o nfs.o xattr.o"
+   }
+  ],
+  "pre_blob": "c0838a02be2d87830c66898a8c8820339b0575b2",
+  "post_blob": "7eb1352aeeed422246e265780a6254525f60d66c"
+ },
+ {
+  "file": "drivers/misc/mediatek/lcm/Makefile",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "                         lcm_util.o               \\"
+    ],
+    "insert": "                         lcm_util.o\n",
+    "serves": "philmb builds sm5109/ocp2131/sgm37604a_driver here; the shipping image has the OCP2131/SGM37604A symbols from drivers/misc/mediatek/i2c/ (installed unit) and no sm5109 symbol (run 44032568227: 15 multiple definitions at drivers/misc/mediatek/built-in.o)"
+   },
+   {
+    "op": "delete_line",
+    "line": "                         lcm_util.o               \\"
+   },
+   {
+    "op": "delete_line",
+    "line": "                         sm5109.o                 \\"
+   },
+   {
+    "op": "delete_line",
+    "line": "                         ocp2131.o                \\"
+   },
+   {
+    "op": "delete_line",
+    "line": "                         sgm37604a_driver.o"
+   }
+  ],
+  "pre_blob": "0457bb0005515ea12ed40746728598bcc55f2cd7",
+  "post_blob": "fc1b8af18e7d34763ab0928e164dab0cecb79b49"
  }
 ]
