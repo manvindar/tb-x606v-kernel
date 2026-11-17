@@ -91,6 +91,37 @@ class Board(unittest.TestCase):
             bt.apply_ops('a\na\n', [{'op': 'insert_after', 'anchor_lines': ['a'], 'insert': 'b\n'}])
 
 
+class Donors(unittest.TestCase):
+    def test_second_donor_and_replace(self):
+        with tempfile.TemporaryDirectory() as d:
+            pins, hooks = setup(d)
+            write(d, 'other/inc/y.h', '#define Y 2\n')
+            write(d, 'tree/old.c', 'int old;\n')
+            write(d, 'rec/new.c', 'int fixed;\n')
+            pins['files'].append({'path': 'inc/y.h', 'blob': bt.blob((Path(d) / 'other/inc/y.h').read_bytes()), 'serves': 'Y', 'donor': 'other'})
+            pins['recovered_files'] = [{'path': 'old.c', 'bundle': 'rec/new.c', 'blob': bt.blob(b'int fixed;\n'), 'unit': 'u',
+                                        'replaces': bt.blob(b'int old;\n')}]
+            r = bt.run(Path(d) / 'len', Path(d) / 'tree', pins, hooks, base=d, donors={'other': Path(d) / 'other'})
+            self.assertTrue(r['ok'], r)
+            self.assertEqual((Path(d) / 'tree/inc/y.h').read_text(), '#define Y 2\n')
+            self.assertEqual((Path(d) / 'tree/old.c').read_text(), 'int fixed;\n')
+
+    def test_replace_refuses_other_original_and_missing_donor(self):
+        with tempfile.TemporaryDirectory() as d:
+            pins, hooks = setup(d)
+            write(d, 'tree/old.c', 'int surprise;\n')
+            write(d, 'rec/new.c', 'int fixed;\n')
+            pins['recovered_files'] = [{'path': 'old.c', 'bundle': 'rec/new.c', 'blob': bt.blob(b'int fixed;\n'), 'unit': 'u',
+                                        'replaces': bt.blob(b'int old;\n')}]
+            r = bt.run(Path(d) / 'len', Path(d) / 'tree', pins, hooks, base=d)
+            self.assertFalse(r['ok'])
+            self.assertEqual((Path(d) / 'tree/old.c').read_text(), 'int surprise;\n')   # nothing written
+            pins['recovered_files'] = []
+            pins['files'].append({'path': 'inc/y.h', 'blob': 'x', 'serves': 'Y', 'donor': 'other'})
+            with self.assertRaises(ValueError):
+                bt.run(Path(d) / 'len', Path(d) / 'tree', pins, hooks, base=d)
+
+
 class Recovered(unittest.TestCase):
     def test_recovered_file_installs_pinned_and_refuses_tamper(self):
         with tempfile.TemporaryDirectory() as d:

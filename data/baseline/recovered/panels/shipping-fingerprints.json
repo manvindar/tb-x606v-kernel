@@ -3,246 +3,294 @@
   "set_util_funcs": {
    "insns": 9,
    "bytes": 36,
-   "sha256": "48d9c560502e3f43f87311d2b3f0d1023ef5f0d5c83ab0c279150a700cd8eed9"
+   "sha256": "48d9c560502e3f43f87311d2b3f0d1023ef5f0d5c83ab0c279150a700cd8eed9",
+   "wsha256": "b55828e4c664bee0da39ca6c902ebc1b1f15532b5cfea90eebd7d8cdfc6795d3"
   },
   "get_params": {
    "insns": 53,
    "bytes": 212,
-   "sha256": "8b09e2b2ef5f75c6797074ee19872e9f425a90152780ab1ef381c48615c6e798"
+   "sha256": "8b09e2b2ef5f75c6797074ee19872e9f425a90152780ab1ef381c48615c6e798",
+   "wsha256": "5f598bdaf239db8380219519b2a3c31ac844feda883fea759f0366781744b937"
   },
   "init": {
    "insns": 211,
    "bytes": 844,
-   "sha256": "34724f81ecae5a6a894a099a79f61bc1dc35da3c5f9c4601927c8a4679a8070a"
+   "sha256": "34724f81ecae5a6a894a099a79f61bc1dc35da3c5f9c4601927c8a4679a8070a",
+   "wsha256": "43a8723852da66d42df699401b6ef3f3092e9d1dc0d0411b74522245d6ca7b49"
   },
   "suspend": {
    "insns": 76,
    "bytes": 304,
-   "sha256": "cd8ffa382a253852188bc1808d58cf5c76c1927aadd63528d69fcaae9def1dd8"
+   "sha256": "cd8ffa382a253852188bc1808d58cf5c76c1927aadd63528d69fcaae9def1dd8",
+   "wsha256": "c8885e2e2619d6dcb909af0ab5ecce22dffaf4bb1f9f6fdeaa3e6312270c42b9"
   },
   "resume": {
    "insns": 8,
    "bytes": 32,
-   "sha256": "3caa0f930e3079b2d1d5a073792965bb9661805acaaa93bc94a8ce05bdb021ff"
+   "sha256": "3caa0f930e3079b2d1d5a073792965bb9661805acaaa93bc94a8ce05bdb021ff",
+   "wsha256": "0b22728b8500939952984430c2166f24d27a5254648a6f8939e6d2d86d1133b4"
   },
   "set_cabc_mode": {
    "insns": 63,
    "bytes": 252,
-   "sha256": "997c0ddba450813920bd3bdc92aaf72a09114f4b4f775d8c7725006037b17d8c"
+   "sha256": "997c0ddba450813920bd3bdc92aaf72a09114f4b4f775d8c7725006037b17d8c",
+   "wsha256": "77772bd057709582f705171f8911a43c60546c4bbd3f9884d84c228e546d075b"
   },
   "init_power": {
    "insns": 1,
    "bytes": 4,
-   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee"
+   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee",
+   "wsha256": "fbddb5f2dd599137f740a754c8f9afa1046ce5943598d4b5f7006e475bf4d5a6"
   },
   "suspend_power": {
    "insns": 1,
    "bytes": 4,
-   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee"
+   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee",
+   "wsha256": "fbddb5f2dd599137f740a754c8f9afa1046ce5943598d4b5f7006e475bf4d5a6"
   },
   "resume_power": {
    "insns": 1,
    "bytes": 4,
-   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee"
+   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee",
+   "wsha256": "fbddb5f2dd599137f740a754c8f9afa1046ce5943598d4b5f7006e475bf4d5a6"
   },
   "set_recovery_backlight": {
    "insns": 61,
    "bytes": 244,
-   "sha256": "2bfc672ed628c5c040474662e3f93700440fce327e19fc5140180d52f0151393"
+   "sha256": "2bfc672ed628c5c040474662e3f93700440fce327e19fc5140180d52f0151393",
+   "wsha256": "433d1abfa4d2c84829d817d9fe9aaeca0146111df45afd40dd8e14a590874982"
   },
   "update": {
    "insns": 1,
    "bytes": 4,
-   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee"
+   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee",
+   "wsha256": "fbddb5f2dd599137f740a754c8f9afa1046ce5943598d4b5f7006e475bf4d5a6"
   },
   "compare_id": {
    "insns": 125,
    "bytes": 500,
-   "sha256": "2cbcc17c027938fce54208d5081b570fb618d43a99e957a4726dcaa47e76b2d6"
+   "sha256": "2cbcc17c027938fce54208d5081b570fb618d43a99e957a4726dcaa47e76b2d6",
+   "wsha256": "24c57a5e0141914e6217f21004c8c7184344461b1701dcc9b35c8a15ace8af12"
   },
   "setbacklight_cmdq": {
    "insns": 74,
    "bytes": 296,
-   "sha256": "fd761f853bea18234a85de9877492ead108398671636875577fd6ee6f57ea504"
+   "sha256": "fd761f853bea18234a85de9877492ead108398671636875577fd6ee6f57ea504",
+   "wsha256": "13401bf40b8e39dd7f38823499e24efcf871e4ec6e1ebc2c7daff8388e245311"
   },
   "esd_check": {
    "insns": 44,
    "bytes": 176,
-   "sha256": "0bb2eb8b6298861c7ef43092c625eb241362008a611b11f7444fe485b2309d4a"
+   "sha256": "0bb2eb8b6298861c7ef43092c625eb241362008a611b11f7444fe485b2309d4a",
+   "wsha256": "27b5a74cd564c6d93b1481f2d66101a92e11e4900e080f975ee4ab35fd5fe7aa"
   },
   "ata_check": {
    "insns": 82,
    "bytes": 328,
-   "sha256": "2a85f482f4042e473f0cccae248d5e697b574d7296f56d170c3bcf66c71deeba"
+   "sha256": "2a85f482f4042e473f0cccae248d5e697b574d7296f56d170c3bcf66c71deeba",
+   "wsha256": "eed0918f4301d084ff331f7052d8beca9cc697ea792bd293efb5d5c78d2aa909"
   },
   "switch_mode": {
    "insns": 2,
    "bytes": 8,
-   "sha256": "295b0c93363d27208c79cf8c39c7ee4492156161cd8740103d6591f50eb4c09e"
+   "sha256": "295b0c93363d27208c79cf8c39c7ee4492156161cd8740103d6591f50eb4c09e",
+   "wsha256": "3e50f6782324a134fc5a1b0fc67c96bc4739d5cacc46d919775b5381c21bf00a"
   }
  },
  "mipi_hx83102p_inx_video_1200p": {
   "set_util_funcs": {
    "insns": 9,
    "bytes": 36,
-   "sha256": "48d9c560502e3f43f87311d2b3f0d1023ef5f0d5c83ab0c279150a700cd8eed9"
+   "sha256": "48d9c560502e3f43f87311d2b3f0d1023ef5f0d5c83ab0c279150a700cd8eed9",
+   "wsha256": "b55828e4c664bee0da39ca6c902ebc1b1f15532b5cfea90eebd7d8cdfc6795d3"
   },
   "get_params": {
    "insns": 53,
    "bytes": 212,
-   "sha256": "8b09e2b2ef5f75c6797074ee19872e9f425a90152780ab1ef381c48615c6e798"
+   "sha256": "8b09e2b2ef5f75c6797074ee19872e9f425a90152780ab1ef381c48615c6e798",
+   "wsha256": "5f598bdaf239db8380219519b2a3c31ac844feda883fea759f0366781744b937"
   },
   "init": {
    "insns": 762,
    "bytes": 3048,
-   "sha256": "0d2305707842351556835653c581149dfed9881bed198a4da302d47702513d62"
+   "sha256": "0d2305707842351556835653c581149dfed9881bed198a4da302d47702513d62",
+   "wsha256": "224e09a6c48c9c6808513db1adb0429a45a7919a25ca68f5a5e813546730b0ea"
   },
   "suspend": {
    "insns": 73,
    "bytes": 292,
-   "sha256": "5fc1c704bc5dfcf4d81d461c01cdaf47d2ab24eb5b547dbd14544f8ca417bca9"
+   "sha256": "5fc1c704bc5dfcf4d81d461c01cdaf47d2ab24eb5b547dbd14544f8ca417bca9",
+   "wsha256": "eb12866aa08577246a7e255e484b01b98f45a0d3733f1fa74fc8a7d3d7422d89"
   },
   "resume": {
    "insns": 8,
    "bytes": 32,
-   "sha256": "3caa0f930e3079b2d1d5a073792965bb9661805acaaa93bc94a8ce05bdb021ff"
+   "sha256": "3caa0f930e3079b2d1d5a073792965bb9661805acaaa93bc94a8ce05bdb021ff",
+   "wsha256": "0b22728b8500939952984430c2166f24d27a5254648a6f8939e6d2d86d1133b4"
   },
   "set_cabc_mode": {
    "insns": 63,
    "bytes": 252,
-   "sha256": "997c0ddba450813920bd3bdc92aaf72a09114f4b4f775d8c7725006037b17d8c"
+   "sha256": "997c0ddba450813920bd3bdc92aaf72a09114f4b4f775d8c7725006037b17d8c",
+   "wsha256": "77772bd057709582f705171f8911a43c60546c4bbd3f9884d84c228e546d075b"
   },
   "init_power": {
    "insns": 1,
    "bytes": 4,
-   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee"
+   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee",
+   "wsha256": "fbddb5f2dd599137f740a754c8f9afa1046ce5943598d4b5f7006e475bf4d5a6"
   },
   "suspend_power": {
    "insns": 1,
    "bytes": 4,
-   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee"
+   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee",
+   "wsha256": "fbddb5f2dd599137f740a754c8f9afa1046ce5943598d4b5f7006e475bf4d5a6"
   },
   "resume_power": {
    "insns": 1,
    "bytes": 4,
-   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee"
+   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee",
+   "wsha256": "fbddb5f2dd599137f740a754c8f9afa1046ce5943598d4b5f7006e475bf4d5a6"
   },
   "set_recovery_backlight": {
    "insns": 61,
    "bytes": 244,
-   "sha256": "2bfc672ed628c5c040474662e3f93700440fce327e19fc5140180d52f0151393"
+   "sha256": "2bfc672ed628c5c040474662e3f93700440fce327e19fc5140180d52f0151393",
+   "wsha256": "433d1abfa4d2c84829d817d9fe9aaeca0146111df45afd40dd8e14a590874982"
   },
   "update": {
    "insns": 1,
    "bytes": 4,
-   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee"
+   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee",
+   "wsha256": "fbddb5f2dd599137f740a754c8f9afa1046ce5943598d4b5f7006e475bf4d5a6"
   },
   "compare_id": {
    "insns": 125,
    "bytes": 500,
-   "sha256": "2cbcc17c027938fce54208d5081b570fb618d43a99e957a4726dcaa47e76b2d6"
+   "sha256": "2cbcc17c027938fce54208d5081b570fb618d43a99e957a4726dcaa47e76b2d6",
+   "wsha256": "24c57a5e0141914e6217f21004c8c7184344461b1701dcc9b35c8a15ace8af12"
   },
   "setbacklight_cmdq": {
    "insns": 74,
    "bytes": 296,
-   "sha256": "fd761f853bea18234a85de9877492ead108398671636875577fd6ee6f57ea504"
+   "sha256": "fd761f853bea18234a85de9877492ead108398671636875577fd6ee6f57ea504",
+   "wsha256": "13401bf40b8e39dd7f38823499e24efcf871e4ec6e1ebc2c7daff8388e245311"
   },
   "esd_check": {
    "insns": 44,
    "bytes": 176,
-   "sha256": "0bb2eb8b6298861c7ef43092c625eb241362008a611b11f7444fe485b2309d4a"
+   "sha256": "0bb2eb8b6298861c7ef43092c625eb241362008a611b11f7444fe485b2309d4a",
+   "wsha256": "27b5a74cd564c6d93b1481f2d66101a92e11e4900e080f975ee4ab35fd5fe7aa"
   },
   "ata_check": {
    "insns": 82,
    "bytes": 328,
-   "sha256": "2a85f482f4042e473f0cccae248d5e697b574d7296f56d170c3bcf66c71deeba"
+   "sha256": "2a85f482f4042e473f0cccae248d5e697b574d7296f56d170c3bcf66c71deeba",
+   "wsha256": "eed0918f4301d084ff331f7052d8beca9cc697ea792bd293efb5d5c78d2aa909"
   },
   "switch_mode": {
    "insns": 2,
    "bytes": 8,
-   "sha256": "295b0c93363d27208c79cf8c39c7ee4492156161cd8740103d6591f50eb4c09e"
+   "sha256": "295b0c93363d27208c79cf8c39c7ee4492156161cd8740103d6591f50eb4c09e",
+   "wsha256": "3e50f6782324a134fc5a1b0fc67c96bc4739d5cacc46d919775b5381c21bf00a"
   }
  },
  "mipi_hx83102e_2nd_video_1200p": {
   "set_util_funcs": {
    "insns": 9,
    "bytes": 36,
-   "sha256": "48d9c560502e3f43f87311d2b3f0d1023ef5f0d5c83ab0c279150a700cd8eed9"
+   "sha256": "48d9c560502e3f43f87311d2b3f0d1023ef5f0d5c83ab0c279150a700cd8eed9",
+   "wsha256": "b55828e4c664bee0da39ca6c902ebc1b1f15532b5cfea90eebd7d8cdfc6795d3"
   },
   "get_params": {
    "insns": 56,
    "bytes": 224,
-   "sha256": "e6ab4bc1291893fd5771e4c537282143e34cbf0912d11c3c77b59929b7e3de3b"
+   "sha256": "e6ab4bc1291893fd5771e4c537282143e34cbf0912d11c3c77b59929b7e3de3b",
+   "wsha256": "f86cdfe36b8cb42628ac5a977a001455f91fe6ef3fbc6ec9459ccb704397b387"
   },
   "init": {
    "insns": 789,
    "bytes": 3156,
-   "sha256": "f2760e6ba8b30dc111b07b6e163f9fc34e63bb553f0e98b63a209d2abb9c8355"
+   "sha256": "f2760e6ba8b30dc111b07b6e163f9fc34e63bb553f0e98b63a209d2abb9c8355",
+   "wsha256": "249e393a63d200852d16624d66d4057bbf060f6ee93bcf462e8fa235cd2780d8"
   },
   "suspend": {
    "insns": 79,
    "bytes": 316,
-   "sha256": "7b23c975baf890bf5114d7fa7b0e1fdbcb59db89dd0087443b4284e29919fc5c"
+   "sha256": "7b23c975baf890bf5114d7fa7b0e1fdbcb59db89dd0087443b4284e29919fc5c",
+   "wsha256": "cf56100790ed0b5d75c2ab0f4f252cf431e85f6a3c8c5c8936ff8a44e7ffb557"
   },
   "resume": {
    "insns": 8,
    "bytes": 32,
-   "sha256": "3caa0f930e3079b2d1d5a073792965bb9661805acaaa93bc94a8ce05bdb021ff"
+   "sha256": "3caa0f930e3079b2d1d5a073792965bb9661805acaaa93bc94a8ce05bdb021ff",
+   "wsha256": "0b22728b8500939952984430c2166f24d27a5254648a6f8939e6d2d86d1133b4"
   },
   "set_cabc_mode": {
    "insns": 63,
    "bytes": 252,
-   "sha256": "997c0ddba450813920bd3bdc92aaf72a09114f4b4f775d8c7725006037b17d8c"
+   "sha256": "997c0ddba450813920bd3bdc92aaf72a09114f4b4f775d8c7725006037b17d8c",
+   "wsha256": "77772bd057709582f705171f8911a43c60546c4bbd3f9884d84c228e546d075b"
   },
   "init_power": {
    "insns": 1,
    "bytes": 4,
-   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee"
+   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee",
+   "wsha256": "fbddb5f2dd599137f740a754c8f9afa1046ce5943598d4b5f7006e475bf4d5a6"
   },
   "suspend_power": {
    "insns": 1,
    "bytes": 4,
-   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee"
+   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee",
+   "wsha256": "fbddb5f2dd599137f740a754c8f9afa1046ce5943598d4b5f7006e475bf4d5a6"
   },
   "resume_power": {
    "insns": 1,
    "bytes": 4,
-   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee"
+   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee",
+   "wsha256": "fbddb5f2dd599137f740a754c8f9afa1046ce5943598d4b5f7006e475bf4d5a6"
   },
   "set_recovery_backlight": {
    "insns": 61,
    "bytes": 244,
-   "sha256": "2bfc672ed628c5c040474662e3f93700440fce327e19fc5140180d52f0151393"
+   "sha256": "2bfc672ed628c5c040474662e3f93700440fce327e19fc5140180d52f0151393",
+   "wsha256": "433d1abfa4d2c84829d817d9fe9aaeca0146111df45afd40dd8e14a590874982"
   },
   "update": {
    "insns": 1,
    "bytes": 4,
-   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee"
+   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee",
+   "wsha256": "fbddb5f2dd599137f740a754c8f9afa1046ce5943598d4b5f7006e475bf4d5a6"
   },
   "compare_id": {
    "insns": 125,
    "bytes": 500,
-   "sha256": "2cbcc17c027938fce54208d5081b570fb618d43a99e957a4726dcaa47e76b2d6"
+   "sha256": "2cbcc17c027938fce54208d5081b570fb618d43a99e957a4726dcaa47e76b2d6",
+   "wsha256": "24c57a5e0141914e6217f21004c8c7184344461b1701dcc9b35c8a15ace8af12"
   },
   "setbacklight_cmdq": {
    "insns": 142,
    "bytes": 568,
-   "sha256": "3cd32619ce30b6414deaa190d038299d156de6fd5e448cd55c088731d51227e7"
+   "sha256": "3cd32619ce30b6414deaa190d038299d156de6fd5e448cd55c088731d51227e7",
+   "wsha256": "d787e22a99699eea58890048fdd415a5bd18f33cc322b77ea9ec617c41106492"
   },
   "esd_check": {
    "insns": 44,
    "bytes": 176,
-   "sha256": "0bb2eb8b6298861c7ef43092c625eb241362008a611b11f7444fe485b2309d4a"
+   "sha256": "0bb2eb8b6298861c7ef43092c625eb241362008a611b11f7444fe485b2309d4a",
+   "wsha256": "27b5a74cd564c6d93b1481f2d66101a92e11e4900e080f975ee4ab35fd5fe7aa"
   },
   "ata_check": {
    "insns": 82,
    "bytes": 328,
-   "sha256": "2a85f482f4042e473f0cccae248d5e697b574d7296f56d170c3bcf66c71deeba"
+   "sha256": "2a85f482f4042e473f0cccae248d5e697b574d7296f56d170c3bcf66c71deeba",
+   "wsha256": "eed0918f4301d084ff331f7052d8beca9cc697ea792bd293efb5d5c78d2aa909"
   },
   "switch_mode": {
    "insns": 2,
    "bytes": 8,
-   "sha256": "295b0c93363d27208c79cf8c39c7ee4492156161cd8740103d6591f50eb4c09e"
+   "sha256": "295b0c93363d27208c79cf8c39c7ee4492156161cd8740103d6591f50eb4c09e",
+   "wsha256": "3e50f6782324a134fc5a1b0fc67c96bc4739d5cacc46d919775b5381c21bf00a"
   }
  },
  "nt36523w": {

@@ -1,0 +1,10 @@
+{
+ "drivers/misc/mediatek/lcm/panel_mipi_ft8201_video_1200p/Makefile": {
+  "blob": "7a1bd8fda7319ec72f138169e10de8666ce5c2b4",
+  "bytes": 715
+ },
+ "drivers/misc/mediatek/lcm/panel_mipi_ft8201_video_1200p/panel_mipi_ft8201_video_1200p.c": {
+  "blob": "bd000ad9d11c32b551e8541f3e01cbc9d5c5c1a8",
+  "bytes": 12772
+ }
+}

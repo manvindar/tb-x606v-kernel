@@ -1,0 +1,10 @@
+{
+ "drivers/misc/mediatek/lcm/panel_mipi_hx83102e_video_1200p/Makefile": {
+  "blob": "2afc76d8b3ed2d8043e04b8355885b9f86ba0b06",
+  "bytes": 717
+ },
+ "drivers/misc/mediatek/lcm/panel_mipi_hx83102e_video_1200p/panel_mipi_hx83102e_video_1200p.c": {
+  "blob": "abb4aeedcb12fd6218098ddf607560911721f8a6",
+  "bytes": 13774
+ }
+}

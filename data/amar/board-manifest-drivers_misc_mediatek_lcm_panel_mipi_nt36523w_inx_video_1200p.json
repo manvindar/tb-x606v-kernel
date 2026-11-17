@@ -1,0 +1,10 @@
+{
+ "drivers/misc/mediatek/lcm/panel_mipi_nt36523w_inx_video_1200p/Makefile": {
+  "blob": "ba8a9aef647b8ceac8ea0f0a6ae711b1a5c40474",
+  "bytes": 721
+ },
+ "drivers/misc/mediatek/lcm/panel_mipi_nt36523w_inx_video_1200p/panel_mipi_nt36523w_inx_video_1200p.c": {
+  "blob": "584d466f2f4680501bcf9847b1d898450c939349",
+  "bytes": 26195
+ }
+}

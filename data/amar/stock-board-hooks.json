@@ -1,0 +1,185 @@
+[
+ {
+  "file": "drivers/misc/mediatek/usb20/mt6765/Makefile",
+  "pre_blob": "4e9b5edd7e6241a1db65eb0ba6b24540966e52f0",
+  "post_blob": "30a37bf5c6eef6565e0e062df880510bde6f7f3c",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "obj-$(CONFIG_DEBUG_FS)\t+= usb20_phy_debugfs.o"
+    ],
+    "insert": "obj-$(CONFIG_CC_FUSB301)\t+= fusb301a.o\nobj-$(CONFIG_CC_WUSB3801)\t+= wusb3801x.o\n",
+    "serves": "CC_FUSB301, CC_WUSB3801",
+    "lenovo_line": 41
+   }
+  ],
+  "serves": "CC_FUSB301, CC_WUSB3801"
+ },
+ {
+  "file": "drivers/misc/mediatek/usb20/Kconfig",
+  "pre_blob": "d52630ab918df57f93c861b9ee8868c6799e2739",
+  "post_blob": "8a3f131a3688594ea325218727540f3f99e892db",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "\t  Say Y here if your want to enable port0 low power mode for saving power."
+    ],
+    "insert": "config CC_FUSB301\n\tbool \"FUSB301 usb-cc ic driver\"\n\thelp\n\t  Say Y here if your want to enable FUSB301.\n\nconfig CC_WUSB3801\n\tbool \"WUSB3801 usb-cc ic driver\"\n\thelp\n\t  Say Y here if your want to enable WUSB3801.\n",
+    "serves": "CC_FUSB301, CC_WUSB3801",
+    "lenovo_line": 82
+   }
+  ],
+  "serves": "CC_FUSB301, CC_WUSB3801"
+ },
+ {
+  "file": "drivers/misc/mediatek/imgsensor/src/common/v1/imgsensor_sensor_list.c",
+  "pre_blob": "f64ef4807271b2b57f8f62028a571ed8f246cbfa",
+  "post_blob": "c40950ef1d247c818a406b9d5ecc01b927568ba9",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "#if defined(OV13B10QTECH_MIPI_RAW)",
+     "        {OV13B10QTECH_SENSOR_ID,",
+     "        SENSOR_DRVNAME_OV13B10QTECH_MIPI_RAW,",
+     "        OV13B10QTECH_MIPI_RAW_SensorInit},",
+     "#endif"
+    ],
+    "insert": "#if defined(OV5675_MIPI_RAW)\n\t{OV5675_SENSOR_ID,\n\tSENSOR_DRVNAME_OV5675_MIPI_RAW,\n\tOV5675_MIPI_RAW_SensorInit},\n#endif\n"
+   }
+  ]
+ },
+ {
+  "file": "drivers/misc/mediatek/imgsensor/src/common/v1/imgsensor_sensor_list.h",
+  "pre_blob": "be0a69cf3ef15404be1d0b0c5f792ad83a494a69",
+  "post_blob": "5e9fd1b1fc1c1ab1221cdd24ebf7c1589ea090b4",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "UINT32 OV13B10QTECH_MIPI_RAW_SensorInit(struct SENSOR_FUNCTION_STRUCT **pfFunc);"
+    ],
+    "insert": "UINT32 OV5675_MIPI_RAW_SensorInit(struct SENSOR_FUNCTION_STRUCT **pfFunc);\n"
+   }
+  ]
+ },
+ {
+  "file": "drivers/misc/mediatek/imgsensor/inc/kd_imgsensor.h",
+  "pre_blob": "530deb72d51fbcaf28503c909088f4935a7de4f1",
+  "post_blob": "1e2e0c3c3df5c6cc265c56b1112df7950db882f7",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "#define OV5675MIPI_SENSOR_ID                    0x5675"
+    ],
+    "insert": "#define OV5675_SENSOR_ID                        0x5675\n"
+   },
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "#define SENSOR_DRVNAME_OV5675_MIPI_RAW          \"ov5675mipiraw\""
+    ],
+    "insert": "#undef SENSOR_DRVNAME_OV5675_MIPI_RAW\n#define SENSOR_DRVNAME_OV5675_MIPI_RAW          \"ov5675_mipi_raw\"\n"
+   }
+  ]
+ },
+ {
+  "file": "drivers/input/touchscreen/mediatek/Kconfig",
+  "pre_blob": "0b20b85cb993cf36e9ccf148ab5fd935923ab032",
+  "post_blob": "2a6a5f88316e9ad238d5800f1b0a70c80af80107",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "source \"drivers/input/touchscreen/mediatek/NT36xxx/Kconfig\""
+    ],
+    "insert": "source \"drivers/input/touchscreen/mediatek/focaltech_mmi/Kconfig\"\n"
+   }
+  ],
+  "serves": "TOUCHSCREEN_MTK_FT8201"
+ },
+ {
+  "file": "drivers/input/touchscreen/mediatek/Makefile",
+  "pre_blob": "8222a57b99b44e4edf658c40d70a0afbbf0f1df4",
+  "post_blob": "de629c8f52de0ab123a8f8df990a447e21d61b4f",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "obj-$(CONFIG_TOUCHSCREEN_MTK_NT36xxx)\t+=  NT36xxx/"
+    ],
+    "insert": "obj-$(CONFIG_TOUCHSCREEN_MTK_FT8201)\t+=  focaltech_mmi/\n"
+   }
+  ],
+  "serves": "TOUCHSCREEN_MTK_FT8201"
+ },
+ {
+  "file": "drivers/power/supply/mediatek/charger/Kconfig",
+  "pre_blob": "cfa77927dc0308e0f5e3d0d28d6d04a2a5eda95d",
+  "post_blob": "037ef390cf688781cd0cc58d4621dd249cd7d75c",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "\t  Set to Yes if BQ24296 is used."
+    ],
+    "insert": "\nconfig CHARGER_BQ2560x\n\tbool \"BQ2560x_SUPPORT\"\n\thelp\n\t  This is to enable MediaTek supports to BQ2560x.\n\t  It depends on config MTK_SMART_BATTERY\n\t  and config MTK_SWCHR_SUPPORT\n\t  Set to Yes if BQ2560x is used.\n"
+   }
+  ],
+  "serves": "CHARGER_BQ2560x"
+ },
+ {
+  "file": "drivers/power/supply/mediatek/charger/Makefile",
+  "pre_blob": "2aac7502798b230f9fd33f1f5b62cab0ed8cb63c",
+  "post_blob": "741b57a0ef82b119765e5730f1377480db9aa03a",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "obj-$(CONFIG_CHARGER_BQ25601) += bq25601.o"
+    ],
+    "insert": "obj-$(CONFIG_CHARGER_BQ2560x) += bq2560x.o\n"
+   }
+  ],
+  "serves": "CHARGER_BQ2560x"
+ },
+ {
+  "file": "drivers/leds/Kconfig",
+  "pre_blob": "7a628c6516f66f360027e562c04b8361995deaba",
+  "post_blob": "37fe9a15ace3ee7dfba1b672c01eb397115e8383",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "config LEDS_MLXCPLD",
+     "\ttristate \"LED support for the Mellanox boards\"",
+     "\tdepends on X86_64 && DMI",
+     "\tdepends on LEDS_CLASS",
+     "\thelp",
+     "\t  This option enabled support for the LEDs on the Mellanox",
+     "\t  boards. Say Y to enabled these."
+    ],
+    "insert": "\nconfig LEDS_AW2016\n        tristate \"LED Support for AW2016\"\n        depends on LEDS_CLASS && I2C\n        help\n        this option enables support for the AW2016 RGB LED connected\n        through I2C. Say Y to enable support for the AW2016 LED\n"
+   }
+  ],
+  "serves": "LEDS_AW2016"
+ },
+ {
+  "file": "drivers/leds/Makefile",
+  "pre_blob": "3965070190f522b6a3868499f50c93ce83657416",
+  "post_blob": "addbef6607ec3ee6d3d8d2c917af1f53184a79df",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "obj-$(CONFIG_LEDS_MLXCPLD)\t\t+= leds-mlxcpld.o"
+    ],
+    "insert": "obj-$(CONFIG_LEDS_AW2016)               += leds-aw2016.o\n"
+   }
+  ],
+  "serves": "LEDS_AW2016"
+ }
+]

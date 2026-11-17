@@ -24,6 +24,10 @@ ROLES = ['set_util_funcs', 'get_params', 'init', 'suspend', 'resume', 'set_cabc_
 EXTRA = ('set_cabc_mode', 'set_recovery_backlight')   # not in the public struct layout
 
 
+class Unsupported(Exception):
+    """An instruction this normalizer cannot decode with certainty. The result for that function is NOT MEASURED, never a mismatch."""
+
+
 class Target:
     """va-addressed view of an ELF (candidate) or of the shipping image."""
     def __init__(self, elf, off, syms, mem, membase, rela):
@@ -123,7 +127,7 @@ def load_shipping(shipdir):
 
 
 def disasm(t, start, end):
-    r = subprocess.run([OBJDUMP, '-d', '--no-show-raw-insn', f'--start-address={start - t.off:#x}', f'--stop-address={end - t.off:#x}', t.elf],
+    r = subprocess.run([OBJDUMP, '-d', '--no-show-raw-insn', '--print-imm-hex', f'--start-address={start - t.off:#x}', f'--stop-address={end - t.off:#x}', t.elf],
                        capture_output=True, text=True, check=True).stdout
     out = []
     for line in r.splitlines():
@@ -132,44 +136,95 @@ def disasm(t, start, end):
     return out
 
 
-def normalize(t, start, end):
+def word(t, a):
+    return struct.unpack_from('<I', t.mem, a - t.membase)[0]
+
+
+def sext(v, bits):
+    return v - (1 << bits) if v >> (bits - 1) else v
+
+
+def branch_target(op, w, a):
+    """Absolute target of b/bl/b.cond/cbz/cbnz/tbz/tbnz from the instruction word (objdump prints '#N' or '0xADDR' depending on its version)."""
+    if op in ('b', 'bl'): return a + sext(w & 0x3ffffff, 26) * 4
+    if op in ('tbz', 'tbnz'): return a + sext((w >> 5) & 0x3fff, 14) * 4
+    return a + sext((w >> 5) & 0x7ffff, 19) * 4     # b.cond, cbz, cbnz
+
+
+ADRP_MASK, ADRP_BITS = 0x9f000000, 0x90000000
+ADR_MASK, ADR_BITS = 0x9f000000, 0x10000000
+IMM12 = 0x3ffc00
+
+
+def check_class(op, w, a):
+    """The printed mnemonic must agree with the instruction word, or the text cannot be trusted."""
+    ok = {'b': (w >> 26) == 0x05, 'bl': (w >> 26) == 0x25,
+          'cbz': (w & 0x7f000000) == 0x34000000,
+          'cbnz': (w & 0x7f000000) == 0x35000000,
+          'tbz': (w & 0x7f000000) == 0x36000000, 'tbnz': (w & 0x7f000000) == 0x37000000,
+          'adrp': (w & ADRP_MASK) == ADRP_BITS, 'adr': (w & ADR_MASK) == ADR_BITS}
+    if op.startswith('b.'): ok[op] = (w & 0xff000010) == 0x54000000
+    if op in ok and not ok[op]:
+        raise Unsupported(f'{a:#x}: printed {op!r} but instruction word {w:#010x} is not that instruction class')
+
+
+def normalize2(t, start, end):
+    """-> (text lines, masked-word lines). The word lines are objdump independent: the raw 32-bit word with pc-relative and adrp-page fields masked."""
     ins = disasm(t, start, end)
     reg = {}     # reg -> 'page' (direct adrp) | ('based', va) (adrp+add)
     adrpv = {}
-    out = []
+    out, wout = [], []
     for a, op, args in ins:
+        if op in ('<unknown>', '.inst', '.word', '.long', '.byte') or op.startswith('<'):
+            raise Unsupported(f'{a:#x}: undecodable instruction {op!r}')
+        w = word(t, a)
         txt = f'{op} {args}'.strip()
+        wtxt = f'{w:08x}'
         if op in ('bl', 'b') or op.startswith('b.') or op in ('cbz', 'cbnz', 'tbz', 'tbnz'):
-            m = re.search(r'0x([0-9a-f]+)$', args)
-            if m:
-                tgt = int(m.group(1), 16) + t.off
-                if start <= tgt < end: txt = re.sub(r'0x[0-9a-f]+$', f'F{tgt - start:+#x}', txt)
-                else: txt = re.sub(r'0x[0-9a-f]+$', 'EXT:' + (t.sym_exact(tgt) or 'UNKNOWN'), txt)
+            check_class(op, w, a)
+            tgt = branch_target(op, w, a)
+            lab = f'F{tgt - start:+#x}' if start <= tgt < end else 'EXT:' + (t.sym_exact(tgt) or 'UNKNOWN')
+            txt = f'{op} ' + ', '.join(args.split(', ')[:-1] + [lab])
+            mask = 0xfc000000 if op in ('b', 'bl') else 0xfff8001f if op in ('tbz', 'tbnz') else 0xff00001f   # keep opcode, registers, bit number, condition
+            wtxt = f'{w & mask:08x}|{lab}'
         elif op == 'adrp':
-            r, v = re.match(r'(\w+), 0x([0-9a-f]+)', args).groups()
-            adrpv[r] = int(v, 16) + t.off
+            check_class(op, w, a)
+            r = args.split(',')[0].strip()
+            if r != f'x{w & 31}' and not (w & 31 == 31 and r == 'xzr'):
+                raise Unsupported(f'{a:#x}: adrp destination {r!r} disagrees with word {w:#010x}')
+            adrpv[r] = (a & ~0xfff) + (sext(((w >> 5) & 0x7ffff) << 2 | (w >> 29) & 3, 21) << 12)
             reg[r] = 'page'
             txt = f'adrp {r}, PAGE'
+            wtxt = f'{w & 0x9f00001f:08x}|PAGE'
         elif op == 'adr':
-            txt = re.sub(r'#?0x[0-9a-f]+$|#-?0x[0-9a-f]+$', 'ADDR', txt)
+            check_class(op, w, a)
+            txt = f'adr {args.split(",")[0].strip()}, ADDR'
+            wtxt = f'{w & 0x9f00001f:08x}|ADDR'
         else:
             m = re.match(r'(\w+), (\w+), #0x([0-9a-f]+)$', args)
             if op == 'add' and m and m.group(2) in adrpv and reg.get(m.group(2)) == 'page':
                 va = adrpv[m.group(2)] + int(m.group(3), 16)
                 s = t.cstr(va)
                 txt = f'add {m.group(1)}, {m.group(2)}, ' + (f'STR:{s!r}' if s else 'PAGEOFF')
+                wtxt = f'{w & ~IMM12 & 0xffffffff:08x}|' + (f'STR:{s!r}' if s else 'PAGEOFF')
                 adrpv[m.group(1)] = va
                 reg[m.group(1)] = 'based'
             else:
                 m = re.match(r'(\w+), \[(\w+), #0x([0-9a-f]+)\]', args)
                 if op.startswith(('ldr', 'str')) and m and reg.get(m.group(2)) == 'page':
                     txt = txt.replace('#0x' + m.group(3), '#PAGEOFF')
+                    wtxt = f'{w & ~IMM12 & 0xffffffff:08x}|PAGEOFF'
                     if op.startswith('ldr'): reg.pop(m.group(1), None)
                 else:
                     d0 = args.split(',')[0].strip()
                     if d0 in reg and not op.startswith(('str', 'cmp', 'tst', 'b')): reg.pop(d0, None)
         out.append(txt)
-    return out
+        wout.append(wtxt)
+    return out, wout
+
+
+def normalize(t, start, end):
+    return normalize2(t, start, end)[0]
 
 
 def instance(t, drv):
@@ -199,13 +254,46 @@ def instance(t, drv):
     return roles
 
 
-def fingerprint_all(t, drv):
+def sha(lines):
+    return hashlib.sha256('\n'.join(lines).encode()).hexdigest()
+
+
+def fingerprint_all(t, drv, strict=True, evidence=None):
+    """strict (fingerprinting the shipping image): an unsupported instruction aborts. Not strict (compare): the role is reported NOT MEASURED.
+    evidence: directory that receives the objdump text of every role (candidate side only), written before any normalization."""
     res = {}
     for role, va in instance(t, drv).items():
         end = t.func_end(va)
-        norm = normalize(t, va, end)
-        res[role] = dict(insns=len(norm), bytes=end - va, sha256=hashlib.sha256('\n'.join(norm).encode()).hexdigest(), _stream=norm)
+        if evidence:
+            os.makedirs(evidence, exist_ok=True)
+            open(f'{evidence}/{drv}.{role}.s', 'w').write(''.join(f'{a:x}: {op} {args}\n' for a, op, args in disasm(t, va, end)))
+        try:
+            norm, wn = normalize2(t, va, end)
+        except Unsupported as e:
+            if strict: raise
+            res[role] = dict(not_measured=str(e), bytes=end - va)
+            continue
+        res[role] = dict(insns=len(norm), bytes=end - va, sha256=sha(norm), wsha256=sha(wn), _stream=norm)
     return res
+
+
+def judge(w, g):
+    """-> status for one function. w: recorded shipping entry, g: candidate entry. Only decoded instruction words may establish a mismatch."""
+    if 'not_measured' in g: return 'not-measured'
+    text = g['sha256'] == w['sha256']
+    if 'wsha256' in w and 'wsha256' in g:
+        words = g['wsha256'] == w['wsha256']
+        if words: return 'normalized-instruction-identical' if text else 'words-identical-text-differs'
+        return 'differs'
+    return 'normalized-instruction-identical' if text else 'differs'
+
+
+MATCH = ('normalized-instruction-identical', 'words-identical-text-differs')
+
+
+def exit_code(statuses):
+    """bit 0: a measured difference or a missing function; bit 1: something NOT MEASURED (unsupported syntax), reported separately."""
+    return (1 if any(x in ('differs', 'missing-in-candidate') for x in statuses) else 0) | (2 if 'not-measured' in statuses else 0)
 
 
 def names_instance(t, names, anchor):
@@ -228,8 +316,8 @@ def main_names(argv):
         fp = {}
         for n, va in names_instance(t, json.load(open(names_json)), anchor).items():
             end = t.func_end(va)
-            norm = normalize(t, va, end)
-            fp[n] = dict(insns=len(norm), bytes=end - va, sha256=hashlib.sha256('\n'.join(norm).encode()).hexdigest())
+            norm, wn = normalize2(t, va, end)
+            fp[n] = dict(insns=len(norm), bytes=end - va, sha256=sha(norm), wsha256=sha(wn))
             if streams:
                 os.makedirs(streams, exist_ok=True)
                 open(f'{streams}/{unit}.{n}.txt', 'w').write('\n'.join(norm) + '\n')
@@ -243,22 +331,28 @@ def main_names(argv):
     db = json.load(open(fpj))[unit]
     t = load_elf(elf)
     got = names_instance(t, list(db['functions']), db['anchor'])
-    rep, ok = {}, True
+    rep = {}
     for n, w in db['functions'].items():
         if n not in got:
-            rep[n] = dict(status='missing-in-candidate'); ok = False; continue
-        norm = normalize(t, got[n], t.func_end(got[n]))
-        same = hashlib.sha256('\n'.join(norm).encode()).hexdigest() == w['sha256']
-        ok &= same
-        r = dict(status='normalized-instruction-identical' if same else 'differs', shipping_insns=w['insns'], candidate_insns=len(norm))
+            rep[n] = dict(status='missing-in-candidate'); continue
+        try:
+            norm, wn = normalize2(t, got[n], t.func_end(got[n]))
+        except Unsupported as e:
+            rep[n] = dict(status='not-measured', reason=str(e)); continue
+        st = judge(w, dict(sha256=sha(norm), wsha256=sha(wn)))
+        same = st in MATCH
+        r = dict(status=st, shipping_insns=w['insns'], candidate_insns=len(norm))
         if not same and streams and os.path.exists(f'{streams}/{unit}.{n}.txt'):
             a = open(f'{streams}/{unit}.{n}.txt').read().splitlines()
             r['diff'] = list(difflib.unified_diff(a, norm, 'shipping', 'candidate', lineterm='', n=1))[:80]
         rep[n] = r
-    res = dict(unit=unit, all_match=ok, matching=sum(1 for v in rep.values() if v['status'].startswith('normalized')), total=len(rep), functions=rep)
+    ok = all(v['status'] in MATCH for v in rep.values())
+    code = exit_code([v['status'] for v in rep.values()])
+    res = dict(unit=unit, all_match=ok, exit=code, matching=sum(1 for v in rep.values() if v['status'] in MATCH),
+               not_measured=sorted(n for n, v in rep.items() if v['status'] == 'not-measured'), total=len(rep), functions=rep)
     if report: json.dump(res, open(report, 'w'), indent=1)
-    print(json.dumps({'all_match': ok, 'matching': res['matching'], 'total': res['total']}))
-    return 0 if ok else 1
+    print(json.dumps({'all_match': ok, 'matching': res['matching'], 'total': res['total'], 'not_measured': len(res['not_measured'])}))
+    return code
 
 
 def main(argv):
@@ -280,15 +374,19 @@ def main(argv):
     if mode == 'compare':
         elf, fpj, drv = argv[2:5]
         report = argv[argv.index('--report') + 1] if '--report' in argv else None
+        evidence = argv[argv.index('--disasm-out') + 1] if '--disasm-out' in argv else None
         want = json.load(open(fpj))[drv]
-        got = fingerprint_all(load_elf(elf), drv)
-        rep, ok = {}, True
+        got = fingerprint_all(load_elf(elf), drv, strict=False, evidence=evidence)
+        rep = {}
         for role, w in want.items():
             g = got.get(role)
-            if g is None: rep[role] = dict(status='missing-in-candidate'); ok = False; continue
-            same = g['sha256'] == w['sha256']
-            ok &= same
-            r = dict(status='normalized-instruction-identical' if same else 'differs', shipping_insns=w['insns'], candidate_insns=g['insns'])
+            if g is None: rep[role] = dict(status='missing-in-candidate'); continue
+            st = judge(w, g)
+            if st == 'not-measured':
+                rep[role] = dict(status=st, reason=g['not_measured'], bytes=g['bytes']); continue
+            same = st in MATCH
+            r = dict(status=st, shipping_insns=w['insns'], candidate_insns=g['insns'])
+            if st == 'words-identical-text-differs': r['note'] = 'masked instruction words equal; only objdump text differs (printing, not a binary difference)'
             if not same and streams and os.path.exists(f'{streams}/{drv}.{role}.txt'):
                 import difflib
                 a = open(f'{streams}/{drv}.{role}.txt').read().splitlines()
@@ -296,10 +394,13 @@ def main(argv):
             rep[role] = r
         for role in got:
             if role not in want: rep[role] = dict(status='extra-in-candidate')
-        out = dict(panel=drv, all_match=ok, source_identity='proved-for-matching-functions-only' if ok else 'unproved', functions=rep)
+        code = exit_code([v['status'] for v in rep.values()])
+        ok = all(v['status'] in MATCH for v in rep.values())
+        out = dict(panel=drv, all_match=ok, exit=code, not_measured=sorted(r for r, v in rep.items() if v['status'] == 'not-measured'),
+                   source_identity='proved-for-matching-functions-only' if ok else 'unproved', functions=rep)
         if report: json.dump(out, open(report, 'w'), indent=1)
         print(json.dumps({r: v['status'] for r, v in rep.items()}, indent=1))
-        return 0 if ok else 1
+        return code
     raise SystemExit(__doc__)
 
 

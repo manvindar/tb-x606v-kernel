@@ -1,0 +1,106 @@
+{
+ "drivers/input/touchscreen/mediatek/focaltech_mmi/Kconfig": {
+  "blob": "f620097cae4373e66b5dd613901a2d00e12f1f8e",
+  "bytes": 359
+ },
+ "drivers/input/touchscreen/mediatek/focaltech_mmi/Makefile": {
+  "blob": "e6de302a3f523b0abfe4f5886934ea123242e171",
+  "bytes": 1271
+ },
+ "drivers/input/touchscreen/mediatek/focaltech_mmi/focaltech_common.h": {
+  "blob": "87c35f5584738939978e41c7562e8c6a8073c2f6",
+  "bytes": 5878
+ },
+ "drivers/input/touchscreen/mediatek/focaltech_mmi/focaltech_config.h": {
+  "blob": "3bb0d41c0d78c26c04f12af63038e04e71ce42e8",
+  "bytes": 7621
+ },
+ "drivers/input/touchscreen/mediatek/focaltech_mmi/focaltech_core.c": {
+  "blob": "2ae5e7a43e2ecb685cf07a3c4f5bfec2744ef904",
+  "bytes": 49030
+ },
+ "drivers/input/touchscreen/mediatek/focaltech_mmi/focaltech_core.h": {
+  "blob": "7582ad2f238bb8e821ba3517649e2531ae487359",
+  "bytes": 9245
+ },
+ "drivers/input/touchscreen/mediatek/focaltech_mmi/focaltech_esdcheck.c": {
+  "blob": "efd595fbcb1489569726ceb8bb848415c525aa23",
+  "bytes": 14346
+ },
+ "drivers/input/touchscreen/mediatek/focaltech_mmi/focaltech_ex_fun.c": {
+  "blob": "2435fc440cf09bb8a2d9b193a60514eb94d1fb85",
+  "bytes": 35001
+ },
+ "drivers/input/touchscreen/mediatek/focaltech_mmi/focaltech_ex_mode.c": {
+  "blob": "c0c970b12e48f6c3981dc8368c6f77363cefc8ee",
+  "bytes": 9046
+ },
+ "drivers/input/touchscreen/mediatek/focaltech_mmi/focaltech_flash.c": {
+  "blob": "49b10210575f5c893b055a03f4a74156dce77910",
+  "bytes": 55839
+ },
+ "drivers/input/touchscreen/mediatek/focaltech_mmi/focaltech_flash.h": {
+  "blob": "a70785ee306d712ec03c89e37edca1ea34707162",
+  "bytes": 7631
+ },
+ "drivers/input/touchscreen/mediatek/focaltech_mmi/focaltech_flash/Makefile": {
+  "blob": "e00e744c45eadacf9573878f16b0840c95ea297d",
+  "bytes": 67
+ },
+ "drivers/input/touchscreen/mediatek/focaltech_mmi/focaltech_flash/focaltech_upgrade_ft8201.c": {
+  "blob": "d5b9fdea5a35e0d16b62ba925e1845993b13445a",
+  "bytes": 30992
+ },
+ "drivers/input/touchscreen/mediatek/focaltech_mmi/focaltech_gesture.c": {
+  "blob": "b31de64e542877d3250a73ee428ecdcd6fb9f2e4",
+  "bytes": 17503
+ },
+ "drivers/input/touchscreen/mediatek/focaltech_mmi/focaltech_i2c.c": {
+  "blob": "267fbfb0f71c3ab9e42a78d92668f35062efe56b",
+  "bytes": 9190
+ },
+ "drivers/input/touchscreen/mediatek/focaltech_mmi/focaltech_point_report_check.c": {
+  "blob": "1296af1551db1d73e91f62921e79a0810f54f72e",
+  "bytes": 4284
+ },
+ "drivers/input/touchscreen/mediatek/focaltech_mmi/focaltech_proximity.c": {
+  "blob": "a21c7a0503b67ea4e0c10b2f00f903afa6cb3493",
+  "bytes": 10920
+ },
+ "drivers/input/touchscreen/mediatek/focaltech_mmi/focaltech_test/Makefile": {
+  "blob": "c75bad0b79e61686f080d964c1151468a485f04a",
+  "bytes": 172
+ },
+ "drivers/input/touchscreen/mediatek/focaltech_mmi/focaltech_test/focaltech_test.c": {
+  "blob": "f3da8057f1ed604517ac4c22e68b670767d32fca",
+  "bytes": 61209
+ },
+ "drivers/input/touchscreen/mediatek/focaltech_mmi/focaltech_test/focaltech_test.h": {
+  "blob": "3249d1a09d2000241463a7814b2be1458492bb2a",
+  "bytes": 18456
+ },
+ "drivers/input/touchscreen/mediatek/focaltech_mmi/focaltech_test/focaltech_test_ini.c": {
+  "blob": "db1cceae1b6498a7537d41611ef6371fcbc2cdbd",
+  "bytes": 42691
+ },
+ "drivers/input/touchscreen/mediatek/focaltech_mmi/focaltech_test/focaltech_test_ini.h": {
+  "blob": "13677b23360aae8167cad5e0c154df70eed44db4",
+  "bytes": 5185
+ },
+ "drivers/input/touchscreen/mediatek/focaltech_mmi/focaltech_test/supported_ic/Makefile": {
+  "blob": "2c7728f30f66103149140456fd63e42ae7d4187c",
+  "bytes": 64
+ },
+ "drivers/input/touchscreen/mediatek/focaltech_mmi/focaltech_test/supported_ic/focaltech_test_ft8201.c": {
+  "blob": "41ed8ac1075ac490d25cb097f70de87c7b390ce1",
+  "bytes": 40528
+ },
+ "drivers/input/touchscreen/mediatek/focaltech_mmi/include/firmware/fw_sample.i": {
+  "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+  "bytes": 0
+ },
+ "drivers/input/touchscreen/mediatek/focaltech_mmi/include/pramboot/FT8006M_Pramboot_V1.6_20180426_le.i": {
+  "blob": "0db3f051175af13d23fdb1c7c0c01b63b9de2ca1",
+  "bytes": 24178
+ }
+}

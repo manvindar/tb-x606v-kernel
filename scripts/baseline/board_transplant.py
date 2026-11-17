@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Install the pinned Lenovo-drop peripheral units into the candidate tree and wire them into Kconfig/Makefiles, verified per file.
 
-usage: board_transplant.py LENOVO_CHECKOUT KERNEL_TREE PINS.json RECEIPT.json
+usage: board_transplant.py LENOVO_CHECKOUT KERNEL_TREE PINS.json RECEIPT.json [NAME=CHECKOUT ...]
+A unit or file may name another donor ("donor": NAME, checkout given as NAME=CHECKOUT, pinned in PINS "donors": {NAME: {repo, sha}}; its HEAD must be that sha).
+A recovered file may carry "replaces": BLOB to overwrite an existing file, only if the destination currently has exactly that blob.
 PINS.json lists (a) directory units (whole dirs, per-file blob manifest), (b) single files, (b2) recovered files kept in this repo (pinned by blob id), (c) a hooks file: insert-only / delete-line edits of
 target files, each guarded by the pre-edit and post-edit git blob id. Nothing is written unless every check passes first:
 the destination of a unit or file must not exist, every source blob must match its pin, every hook anchor must occur exactly once and the
@@ -37,12 +39,33 @@ def apply_ops(text, ops):
     return '\n'.join(lines)
 
 
-def plan(lenovo, tree, pins, hooks, base):
+def donor_dir(default, donors, item):
+    if not item.get('donor'):
+        return default
+    if item['donor'] not in donors:
+        raise ValueError(f"donor {item['donor']!r} has no checkout")
+    return donors[item['donor']]
+
+
+def donor_heads(pins, donors):
+    """Receipt of every extra donor: its HEAD must be the pinned sha."""
+    import subprocess
+    out = {}
+    for n, d in pins.get('donors', {}).items():
+        head = subprocess.run(['git', '-C', str(donors.get(n, '/nonexistent')), 'rev-parse', 'HEAD'], capture_output=True, text=True).stdout.strip()
+        out[n] = {'repo': d['repo'], 'pinned': d['sha'], 'head': head, 'ok': head == d['sha']}
+    return out
+
+
+def plan(lenovo, tree, pins, hooks, base, donors=None):
     """Check everything, return (receipt, writes) where writes is a list of ('dir'|'file'|'text', dst, src_or_bytes)."""
-    lenovo, tree = Path(lenovo), Path(tree)
+    default, tree = Path(lenovo), Path(tree)
+    donors = {k: Path(v) for k, v in (donors or {}).items()}
     rec = {'target': pins['target'], 'source': pins['source'], 'units': [], 'files': [], 'recovered': [], 'hooks': [], 'blocked': pins['blocked']}
+    rec['donors'] = donor_heads(pins, donors)
     writes = []
     for u in pins['units']:
+        lenovo = donor_dir(default, donors, u)
         manifest = json.loads((Path(base) / u['manifest']).read_text())
         chk = ct.verify(lenovo, u['path'], manifest) if (lenovo / u['path']).is_dir() else None
         exists = (tree / u['path']).exists()
@@ -51,7 +74,7 @@ def plan(lenovo, tree, pins, hooks, base):
         if ok:
             writes.append(('dir', tree / u['path'], lenovo / u['path']))
     for f in pins['files']:
-        src, dst = lenovo / f['path'], tree / f['path']
+        src, dst = donor_dir(default, donors, f) / f['path'], tree / f['path']
         got = blob(src.read_bytes()) if src.is_file() else None
         ok = got == f['blob'] and not dst.exists()
         rec['files'].append({'path': f['path'], 'serves': f['serves'], 'blob': got, 'pinned': f['blob'], 'destination_exists': dst.exists(), 'ok': ok})
@@ -60,8 +83,12 @@ def plan(lenovo, tree, pins, hooks, base):
     for f in pins.get('recovered_files', []):   # files shipped in this repo (recovered from the shipping image), pinned by blob id
         src, dst = Path(base) / f['bundle'], tree / f['path']
         got = blob(src.read_bytes()) if src.is_file() else None
-        ok = got == f['blob'] and not dst.exists()
-        rec['recovered'].append({'path': f['path'], 'unit': f['unit'], 'blob': got, 'pinned': f['blob'], 'destination_exists': dst.exists(), 'ok': ok})
+        if f.get('replaces'):     # overwrite only the exact pinned original
+            dest_ok = dst.is_file() and blob(dst.read_bytes()) == f['replaces']
+        else:
+            dest_ok = not dst.exists()
+        ok = got == f['blob'] and dest_ok
+        rec['recovered'].append({'path': f['path'], 'unit': f['unit'], 'blob': got, 'pinned': f['blob'], 'replaces': f.get('replaces'), 'destination_exists': dst.exists(), 'ok': ok})
         if ok:
             writes.append(('file', dst, src))
     for h in hooks:
@@ -87,12 +114,12 @@ def plan(lenovo, tree, pins, hooks, base):
             continue
         entry['ok'] = True
         writes.append(('text', p, post))
-    rec['ok'] = all(x['ok'] for k in ('units', 'files', 'recovered', 'hooks') for x in rec[k])
+    rec['ok'] = all(x['ok'] for k in ('units', 'files', 'recovered', 'hooks') for x in rec[k]) and all(d['ok'] for d in rec['donors'].values())
     return rec, writes
 
 
-def run(lenovo, tree, pins, hooks, base='.'):
-    rec, writes = plan(lenovo, tree, pins, hooks, base)
+def run(lenovo, tree, pins, hooks, base='.', donors=None):
+    rec, writes = plan(lenovo, tree, pins, hooks, base, donors)
     if rec['ok']:
         for kind, dst, src in writes:
             if kind == 'dir':
@@ -111,10 +138,11 @@ def run(lenovo, tree, pins, hooks, base='.'):
 
 if __name__ == '__main__':
     lenovo, tree, pins_path, out = sys.argv[1:5]
+    donors = dict(a.split('=', 1) for a in sys.argv[5:])
     pins = json.loads(Path(pins_path).read_text())
     base = Path(pins_path).resolve().parents[2]
     hooks = json.loads((base / pins['hooks']).read_text())
-    r = run(lenovo, tree, pins, hooks, base)
+    r = run(lenovo, tree, pins, hooks, base, donors)
     Path(out).write_text(json.dumps(r, indent=1))
     bad = [(k, x.get('path') or x.get('file'), x.get('error')) for k in ('units', 'files', 'recovered', 'hooks') for x in r[k] if not x['ok']]
     print('ok' if r['ok'] else f'FAIL {bad}')

@@ -1,0 +1,16 @@
+{
+ "repo": "https://github.com/DevZillion/android_kernel_lenovo_amar.git",
+ "refs": [
+  {
+   "sha": "213b300e669ccbabc945845b7175bb1fd43a530e",
+   "note": "DevZillion/android_kernel_lenovo_amar android-10 head resolved 2026-11-17, SUBLEVEL 190, full commit id"
+  }
+ ],
+ "config": {
+  "path": "config/stock-4.9.190-achilles6_row_call.config",
+  "sha256": "ed99dd817f6fae0a0414306bd8b786cc0324bc4fb91de72f0df7514d211fbc65",
+  "symbols": 3868,
+  "note": "symbol-for-symbol identical to /proc/config.gz of the running TB-X606V (4.9.190+, Jun 30 2022)"
+ },
+ "scope": "Diagnostic only: a different Lenovo product tree (amar); tests whether its core headers reproduce the shipping export CRCs. Not a claim that amar is the shipping source."
+}

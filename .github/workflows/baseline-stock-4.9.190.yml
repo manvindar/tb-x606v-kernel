@@ -30,6 +30,7 @@ jobs:
           python3 scripts/baseline/test_display_core.py
           python3 scripts/baseline/test_stage_gpu113.py
           python3 scripts/baseline/test_makefile_hooks.py
+          python3 scripts/baseline/test_fncompare.py
       - name: Install tools
         run: sudo apt-get update -qq && sudo apt-get install -y -qq bc bison flex libssl-dev device-tree-compiler python3 python2 xz-utils
       - name: Fetch and verify pinned toolchains

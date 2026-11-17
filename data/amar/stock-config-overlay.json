@@ -1,0 +1,5 @@
+{
+ "policy": "amar needs no explicit-off or neutral constant: the raw olddefconfig closure of the stock config on amar@213b300e changes and adds nothing (receipt amar-closure.json). Kept so config_gate.py can run unchanged.",
+ "explicit_off": [],
+ "neutral_constants": []
+}

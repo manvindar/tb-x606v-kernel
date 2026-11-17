@@ -1,0 +1,279 @@
+name: Baseline amar 4.9.190 diagnostic (v12-amar)
+# Hypothesis test, separate from the philmb baseline: do the amar core headers reproduce the shipping export CRCs (module gate)?
+# Diagnostic only: builds Image.gz from a pinned third-party 4.9.190 tree with the pinned stock device config
+# (no android16 fragment, no PowerVR port, no release, no device action) and gates it against the shipping kernel
+# export CRCs and the complete installed vendor module set. A PASS is necessary, not sufficient, for any flash.
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+env:
+  SRC_REPO: https://github.com/DevZillion/android_kernel_lenovo_amar.git   # Lenovo amar (Android 10), exact commit in data/amar/sources.json
+  PHIL_REPO: https://github.com/philmb3487/android_kernel_lenovo_achilles6.git   # donor of the board units amar lacks (data/amar/stock-board-transplant.json)
+  CAM_REPO: https://github.com/UsrBinLuna/kernel_lenovo_achilles6.git   # Lenovo official 4.9.117 drop: camera units (data/baseline/camera-transplant.json) and the usb-cc / sgm37604a files
+  GPU_DONOR_REPO: https://github.com/rabbit-hmi-oss/android_kernel_rabbit_mt6765.git   # Linux 4.19.191 tree: the DDK 1.13 driver directory only (data/baseline/gpu113-stage.json)
+jobs:
+  baseline:
+    runs-on: ubuntu-22.04   # python2 (MediaTek DrvGen.py) is only packaged up to 22.04
+    timeout-minutes: 150
+    strategy:
+      fail-fast: false
+      matrix:
+        sha:   # one ref: the board hooks are pinned to the pre-edit blobs of this commit
+          - 213b300e669ccbabc945845b7175bb1fd43a530e
+    steps:
+      - uses: actions/checkout@v7
+      - name: Unit tests for the gate and inventory tools
+        run: |
+          python3 scripts/baseline/test_gate_candidate.py
+          python3 scripts/baseline/test_camera_tools.py
+          python3 scripts/baseline/test_board_tools.py
+          python3 scripts/baseline/test_display_core.py
+          python3 scripts/baseline/test_stage_gpu113.py
+          python3 scripts/baseline/test_makefile_hooks.py
+          python3 scripts/baseline/test_fncompare.py
+      - name: Install tools
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq bc bison flex libssl-dev device-tree-compiler python3 python2 xz-utils
+      - name: Fetch and verify pinned toolchains
+        run: |
+          set -euo pipefail
+          mkdir -p tc/clang tc/gcc64 tc/gcc32 dl out-receipts
+          A=https://android.googlesource.com
+          get() {  # name repo commit subpath dest
+            u="$A/$2/+archive/$3${4:+/$4}.tar.gz"
+            curl -sfL --retry 6 --retry-all-errors --retry-delay 5 -o "dl/$1.tar.gz" "$u"
+            tar xzf "dl/$1.tar.gz" -C "tc/$5"
+            python3 - "$1" "dl/$1.tar.gz" <<'PY'
+          import json, sys
+          sys.path.insert(0, 'scripts/baseline')
+          from tree_hash import tree_hash
+          name, path = sys.argv[1:3]
+          pin = json.load(open('data/baseline/toolchain-pins.json'))[name]
+          digest, files = tree_hash(path)
+          print(name, digest, files)
+          assert digest == pin['tree_sha256'] and files == pin['files'], f'{name} content hash differs from pin'
+          PY
+          }
+          P=data/baseline/toolchain-pins.json
+          pin() { python3 -c "import json;print(json.load(open('$P'))['$1']['$2'])"; }
+          get clang "$(pin clang repo)" "$(pin clang commit)" clang-r353983c clang
+          get gcc64 "$(pin gcc64 repo)" "$(pin gcc64 commit)" "" gcc64
+          get gcc32 "$(pin gcc32 repo)" "$(pin gcc32 commit)" "" gcc32
+          rm -rf dl
+      - name: Fetch and verify the pinned source
+        run: |
+          set -euo pipefail
+          mkdir src && cd src && git init -q . && git fetch -q --depth 1 "$SRC_REPO" "${{ matrix.sha }}" && git checkout -q FETCH_HEAD
+          test "$(git rev-parse HEAD)" = "${{ matrix.sha }}"
+          grep -E '^(VERSION|PATCHLEVEL|SUBLEVEL) =' Makefile | tr -d ' ' | tr '\n' ' ' | grep -qx 'VERSION=4 PATCHLEVEL=9 SUBLEVEL=190 '
+          cd ..
+          python3 - <<'PY'
+          import hashlib, json
+          src = json.load(open('data/amar/sources.json'))
+          assert "${{ matrix.sha }}" in [r['sha'] for r in src['refs']], 'sha not in pinned list'
+          h = hashlib.sha256(open(src['config']['path'], 'rb').read()).hexdigest()
+          assert h == src['config']['sha256'], 'stock config differs from pin'
+          json.dump(dict(repo=src['repo'], sha="${{ matrix.sha }}", config_sha256=h), open('out-receipts/source-receipt.json', 'w'), indent=1)
+          PY
+      - name: Transplant the pinned Lenovo camera units (imgsensor, cam_cal)
+        run: |
+          set -euo pipefail
+          sha=$(python3 -c "import json;print(json.load(open('data/baseline/camera-transplant.json'))['source']['sha'])")
+          mkdir cam && cd cam && git init -q . && git fetch -q --depth 1 "$CAM_REPO" "$sha" && git checkout -q FETCH_HEAD
+          test "$(git rev-parse HEAD)" = "$sha"
+          grep -E '^(VERSION|PATCHLEVEL|SUBLEVEL) =' Makefile | tr -d ' ' | tr '\n' ' ' | grep -qx 'VERSION=4 PATCHLEVEL=9 SUBLEVEL=117 '
+          python3 - <<'PY'
+          import json, subprocess
+          for u in json.load(open('../data/baseline/camera-transplant.json'))['units']:
+              got = subprocess.check_output(['git', 'rev-parse', 'HEAD:' + u['path']], text=True).strip()
+              assert got == u['git_tree'], f"{u['path']}: tree {got} != pin {u['git_tree']}"
+          PY
+          cd ..
+          python3 scripts/baseline/camera_transplant.py cam src data/baseline/camera-transplant.json out-receipts/camera-transplant.json
+      - name: Install the pinned board units amar lacks (philmb FT8201 touch, 3 panels, BQ2560x, AW2016 / Lenovo 4.9.117 usb-cc, sgm37604a / recovered AC107, 2 panels, ov5675) and re-pinned Kconfig/Makefile hooks
+        run: |
+          set -uo pipefail
+          rc=0
+          sha=$(python3 -c "import json;print(json.load(open('data/amar/stock-board-transplant.json'))['donors']['philmb']['sha'])")
+          mkdir phil && (cd phil && git init -q . && git fetch -q --depth 1 "$PHIL_REPO" "$sha" && git checkout -q FETCH_HEAD) || rc=$?
+          python3 scripts/baseline/board_transplant.py cam src data/amar/stock-board-transplant.json out-receipts/board-transplant.json philmb=phil || rc=$?
+          echo "$rc" > out-receipts/board-transplant.exit
+          exit 0   # enforced in the last step so the build still reports every other error
+      - name: Sensor contract guard (after the recovered sensors are installed)
+        run: |
+          set -uo pipefail
+          rc=0
+          python3 scripts/baseline/sensor_contract_guard.py src/drivers/misc/mediatek/imgsensor config/stock-4.9.190-achilles6_row_call.config out-receipts/sensor-contract.json || rc=$?
+          echo "$rc" > out-receipts/sensor-contract.exit
+          exit 0   # enforced in the last step so the build still reports every other error
+      - name: Configure with the stock config
+        run: |
+          set -euo pipefail
+          cd src
+          export PATH=$GITHUB_WORKSPACE/tc/clang/bin:$GITHUB_WORKSPACE/tc/gcc64/bin:$GITHUB_WORKSPACE/tc/gcc32/bin:$PATH
+          printf '#!/bin/sh\nexec gcc -fcommon "$@"\n' > $GITHUB_WORKSPACE/hostgcc && chmod +x $GITHUB_WORKSPACE/hostgcc  # old dtc needs -fcommon on gcc>=10
+          mkdir -p out && cp ../config/stock-4.9.190-achilles6_row_call.config out/.config
+          # symbols the stock config does not contain stay off (amar needs none: data/amar/stock-config-overlay.json is empty by measurement)
+          python3 -c "import json;[print('# CONFIG_%s is not set' % x['symbol']) for x in json.load(open('../data/amar/stock-config-overlay.json'))['explicit_off']]" >> out/.config
+          # KCFLAGS=-w: amar's top Makefile builds with -Wall (the philmb tree used -w) and its touchscreen/camera subtrees carry -Werror; warnings are silenced so they cannot fail the build (no effect on exported CRCs)
+          M="ARCH=arm64 O=out CC=clang CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE=aarch64-linux-android- CROSS_COMPILE_ARM32=arm-linux-androideabi- python=python2 HOSTCC=$GITHUB_WORKSPACE/hostgcc KCFLAGS=-w"
+          printf 'M=%q\n' "$M" > ../make-vars.env
+          make $M olddefconfig > ../olddefconfig.log 2>&1 || { tail -40 ../olddefconfig.log; exit 1; }
+          python3 ../scripts/baseline/config_drift.py ../config/stock-4.9.190-achilles6_row_call.config out/.config ../out-receipts/config-drift.json
+          rc=0
+          python3 ../scripts/baseline/config_gate.py ../config/stock-4.9.190-achilles6_row_call.config out/.config ../data/amar/stock-board-transplant.json ../data/amar/stock-config-overlay.json ../out-receipts/config-gate.json . || rc=$?
+          echo "$rc" > ../out-receipts/config-gate.exit   # 0 OK, 1 FAIL, 3 BLOCKED; enforced in the last step
+          { clang --version | head -2; aarch64-linux-android-gcc --version | head -1; python2 --version 2>&1; dpkg-query -W bc bison flex libssl-dev device-tree-compiler python2; } > ../out-receipts/tool-versions.txt 2>&1
+      - name: Declared link-diagnostic deviation (the one sensor with no recoverable source is left out of the BUILT config only; the result is a diagnostic, never a candidate)
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, re
+          p = 'src/out/.config'
+          t = open(p).read()
+          m = re.search(r'^CONFIG_CUSTOM_KERNEL_IMGSENSOR="([^"]*)"$', t, re.M)
+          names = m.group(1).split()
+          drop = [n for n in names if n == 's5k4h7yxqtech1_mipi_raw']
+          assert drop, 'qtech1 not in the stock sensor list'
+          keep = [n for n in names if n not in drop]
+          open(p, 'w').write(t[:m.start()] + 'CONFIG_CUSTOM_KERNEL_IMGSENSOR="%s"' % ' '.join(keep) + t[m.end():])
+          json.dump({'status': 'DEVIATION', 'removed_from_built_config': drop, 'reason': 'no source and only a partial recovery exists (recon-sensors/RECON-SENSORS.md); without a Makefile the sensor directory stops the link, which would hide every later link-level error. NT36523W has no code in the tree, so olddefconfig already dropped it (config gate lists it as blocked).',
+                     'effect': 'the resulting Image is NOT a stock-equivalent kernel and must never be flashed'}, open('out-receipts/link-deviation.json', 'w'), indent=1)
+          PY
+      - name: Build Image.gz (no modules, no DTBs, no PVR port)
+        run: |
+          set -uo pipefail
+          cd src
+          export PATH=$GITHUB_WORKSPACE/tc/clang/bin:$GITHUB_WORKSPACE/tc/gcc64/bin:$GITHUB_WORKSPACE/tc/gcc32/bin:$PATH
+          . ../make-vars.env
+          export KBUILD_BUILD_USER=baseline KBUILD_BUILD_HOST=github
+          # make -k reports compile errors; qtech1 is excluded only under the recorded diagnostic link deviation. This Image is not a candidate.
+          # the step shell is 'bash -e': a bare 'make; rc=$?' would exit before the receipts exist, so capture the status explicitly
+          rc=0
+          make $M -k -j"$(nproc)" Image.gz > ../build.log 2>&1 || rc=$?
+          echo "{\"image_gz_exit\": $rc}" > ../out-receipts/build-exit.json
+          grep -E "error:|\*\*\*|undefined reference|No rule to make target" ../build.log > ../out-receipts/compile-errors.txt || true
+          head -80 ../out-receipts/compile-errors.txt
+          exit $rc
+      - name: Sensor symbol-layout receipt against the shipping kernel (diagnostic; source identity is not established by it)
+        if: always()
+        continue-on-error: true
+        run: |
+          set -uo pipefail
+          export PATH=$GITHUB_WORKSPACE/tc/gcc64/bin:$PATH
+          test -f src/out/vmlinux || { echo '{"error": "no vmlinux (build did not link)"}' > out-receipts/sensor-fidelity.json; exit 0; }
+          aarch64-linux-android-nm -n src/out/vmlinux > out-receipts/vmlinux-nm-n.txt
+          python3 scripts/baseline/text_fidelity.py data/baseline/shipping-sensor-symbols.json out-receipts/vmlinux-nm-n.txt out-receipts/sensor-fidelity.json
+      - name: AC107 relocation-exact compare against the recorded shipping evidence (masks only relocation operand fields; unmasked words, call targets, strings, data targets and pointer slots)
+        if: always()
+        run: |
+          set -uo pipefail
+          rc=0
+          python3 scripts/baseline/reloc_sig.py check src/out/sound/soc/codecs/ac107.o data/baseline/recovered/ac107/evidence.json out-receipts/ac107-reloc-sig.json || rc=$?
+          echo "$rc" > out-receipts/ac107-compare.exit
+          exit 0   # enforced in the last step
+      - name: Panel function compare against the recorded shipping fingerprints (hash-only fingerprints; needs a linked vmlinux)
+        if: always()
+        run: |
+          set -uo pipefail
+          export LLVM_OBJDUMP=$GITHUB_WORKSPACE/tc/clang/bin/llvm-objdump
+          rc=0
+          if test -f src/out/vmlinux; then
+            # exit bits: 1 = measured difference or missing function, 2 = NOT MEASURED (unsupported instruction syntax); the objdump text of every panel function is kept
+            for p in mipi_hx83102p_inx_video_1200p mipi_hx83102e_2nd_video_1200p; do
+              r=0
+              python3 scripts/baseline/fncompare.py compare src/out/vmlinux data/baseline/recovered/panels/shipping-fingerprints.json $p --report out-receipts/panel-$p.json --disasm-out out-receipts/panel-disasm || r=$?
+              rc=$((rc | r))
+            done
+            $GITHUB_WORKSPACE/tc/clang/bin/llvm-objdump --version | head -3 > out-receipts/panel-objdump-version.txt
+          else
+            echo '{"error": "no vmlinux (build did not link)"}' > out-receipts/panel-compare-error.json; rc=2
+          fi
+          echo "$rc" > out-receipts/panel-compare.exit
+          exit 0   # enforced in the last step
+      - name: Scoped DDK 1.13 object compile (one directory, stock config; says nothing about the Image, link, firmware, userspace or device)
+        if: always()
+        run: |
+          set -uo pipefail
+          sha=$(python3 -c "import json;print(json.load(open('data/baseline/gpu113-stage.json'))['donor']['sha'])")
+          mkdir donor && cd donor && git init -q . && git fetch -q --depth 1 "$GPU_DONOR_REPO" "$sha" && git sparse-checkout init --cone && git sparse-checkout set drivers/gpu/mediatek/gpu_rgx/m1.13ED5776728 && git checkout -q FETCH_HEAD
+          cd ..
+          rc=0
+          python3 scripts/baseline/stage_gpu113.py donor src data/baseline/gpu113-stage.json out-receipts/gpu113-stage.json || rc=$?
+          echo "$rc" > out-receipts/gpu113-stage.exit
+          if [ "$rc" = 0 ]; then
+            cd src
+            export PATH=$GITHUB_WORKSPACE/tc/clang/bin:$GITHUB_WORKSPACE/tc/gcc64/bin:$GITHUB_WORKSPACE/tc/gcc32/bin:$PATH
+            . ../make-vars.env
+            export KBUILD_BUILD_USER=baseline KBUILD_BUILD_HOST=github
+            crc=0
+            make $M -k -j"$(nproc)" drivers/misc/mediatek/gpu/gpu_rgx/m1.13ED5776728/ > ../gpu113-build.log 2>&1 || crc=$?
+            cd ..
+            grep -E "error:|\*\*\*|No rule to make target|undefined reference" gpu113-build.log > out-receipts/gpu113-compile-errors.txt || true
+            python3 - "$crc" <<'PY'
+          import json, re, subprocess, sys
+          root = 'src/out/drivers/misc/mediatek/gpu/gpu_rgx/m1.13ED5776728'
+          objs = subprocess.run(['find', root, '-name', '*.o', '!', '-name', 'built-in.o', '!', '-name', 'pvrsrvkm.o'], capture_output=True, text=True).stdout.split()
+          errs = open('out-receipts/gpu113-compile-errors.txt').read().splitlines()
+          files = sorted({m.group(1) for l in errs for m in [re.match(r'([^:\s]+\.[ch]):\d+', l)] if m})
+          import os
+          json.dump({'scope': 'one directory target of the pinned 1.13 driver staged next to the 1.11 driver; stock .config; objects and the relocatable pvrsrvkm.o only', 'make_exit': int(sys.argv[1]),
+                     'objects_built': len(objs), 'pvrsrvkm_o_exists': os.path.isfile(root + '/pvrsrvkm.o'), 'built_in_o_exists': os.path.isfile(root + '/built-in.o'),
+                     'error_lines': len(errs), 'files_with_errors': files,
+                     'not_claimed': 'no vmlinux link, no Image, no firmware, no userspace, no device; selector Makefile not edited, so the main build above never contained this driver'},
+                    open('out-receipts/gpu113-compile.json', 'w'), indent=1)
+          PY
+          fi
+          exit 0   # the stage identity result is enforced in the last step; compile errors are the measurement, not a failure of the step
+      - name: Whole-tree function fidelity (diagnostic only; pattern-masked, not relocation-exact; needs the optional fingerprint DB)
+        if: always()
+        continue-on-error: true
+        run: |
+          set -uo pipefail
+          DB=data/baseline/shipping-function-fingerprints.json.gz
+          test -f "$DB" || { echo "no fingerprint DB, skipped"; exit 0; }
+          echo "7c73c50be0648c834393c39f7b2212e530f7b471827d16dca790e1e3723d569f  $DB" | sha256sum -c - || exit 0
+          python3 scripts/baseline/fidelity/object_fidelity.py "$DB" out-receipts/fidelity.json src/out --root src/out > out-receipts/fidelity.txt || true
+      - name: Best-effort DTB build (diagnostic only)
+        continue-on-error: true
+        run: |
+          cd src
+          export PATH=$GITHUB_WORKSPACE/tc/clang/bin:$GITHUB_WORKSPACE/tc/gcc64/bin:$GITHUB_WORKSPACE/tc/gcc32/bin:$PATH
+          . ../make-vars.env
+          rc=0
+          make $M -j"$(nproc)" dtbs > ../dtbs.log 2>&1 || rc=$?
+          echo "{\"dtbs_exit\": $rc}" > ../out-receipts/dtbs-exit.json
+          tail -20 ../dtbs.log; exit $rc
+      - name: Gate against shipping kernel and installed module set
+        run: |
+          set -o pipefail
+          python3 scripts/baseline/gate_candidate.py --symvers src/out/Module.symvers --image src/out/arch/arm64/boot/Image.gz \
+            --inventory data/baseline/shipping-module-inventory.json --shipping-exports data/baseline/shipping-export-crcs.json \
+            --report out-receipts/gate.json | tee gate.txt
+      - name: Collect bounded outputs
+        if: always()
+        run: |
+          mkdir -p dist
+          cp -f out-receipts/* dist/ 2>/dev/null || true
+          if test -d out-receipts/panel-disasm; then cp -R out-receipts/panel-disasm dist/; fi
+          cp -f src/out/arch/arm64/boot/Image.gz src/out/.config src/out/Module.symvers dist/ 2>/dev/null || true
+          tail -n 3000 build.log > dist/build-tail.log 2>/dev/null || true
+          tail -n 3000 gpu113-build.log > dist/gpu113-build-tail.log 2>/dev/null || true
+          tail -n 200 dtbs.log > dist/dtbs-tail.log 2>/dev/null || true
+          # retained linked ELF (debug info stripped) so any compare can be re-run offline
+          if test -f src/out/vmlinux; then PATH=$GITHUB_WORKSPACE/tc/gcc64/bin:$PATH aarch64-linux-android-objcopy --strip-debug src/out/vmlinux vmlinux.nodebug && xz -T0 -6 -c vmlinux.nodebug > dist/vmlinux-nodebug.xz; ls -l dist/vmlinux-nodebug.xz; fi
+          cp -f olddefconfig.log dist/ 2>/dev/null || true
+          (cd dist && find . -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS)
+          du -sh dist; { echo "### ${{ matrix.sha }}"; sed -n '1,40p' gate.txt 2>/dev/null; } >> "$GITHUB_STEP_SUMMARY" || true
+      - name: Require the guards (sensor contract, board transplant, config gate, AC107 relocation-exact compare, panel compare; BLOCKED means open source gaps, not flashable)
+        if: always()
+        run: |
+          for g in sensor-contract board-transplant config-gate ac107-compare panel-compare gpu113-stage; do echo "$g exit $(cat out-receipts/$g.exit 2>/dev/null || echo missing)"; done
+          test "$(cat out-receipts/sensor-contract.exit)" = 0 && test "$(cat out-receipts/board-transplant.exit)" = 0 && test "$(cat out-receipts/config-gate.exit)" = 0 && test "$(cat out-receipts/ac107-compare.exit)" = 0 && test "$(cat out-receipts/panel-compare.exit)" = 0 && test "$(cat out-receipts/gpu113-stage.exit)" = 0
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: baseline-${{ matrix.sha }}
+          path: dist/
+          retention-days: 14
+          if-no-files-found: warn

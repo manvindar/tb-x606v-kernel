@@ -1,0 +1,218 @@
+{
+ "target": {
+  "repo": "https://github.com/DevZillion/android_kernel_lenovo_amar.git",
+  "sha": "213b300e669ccbabc945845b7175bb1fd43a530e",
+  "note": "hooks are verified against the pre-edit blob id of every target file, so they apply to this commit only"
+ },
+ "source": {
+  "repo": "https://github.com/UsrBinLuna/kernel_lenovo_achilles6.git",
+  "sha": "7f6a59c5b8d6ee27b29c91d07f77ec97393f3544",
+  "note": "Lenovo official OSS drop (Linux 4.9.117), pinned; default donor (usb-cc and sgm37604a files; camera units are handled by camera_transplant.py)"
+ },
+ "donors": {
+  "philmb": {
+   "repo": "https://github.com/philmb3487/android_kernel_lenovo_achilles6.git",
+   "sha": "0a95b5010777186eed379b2ed11e3d1a4f85921e"
+  }
+ },
+ "units": [
+  {
+   "path": "drivers/input/touchscreen/mediatek/focaltech_mmi",
+   "git_tree": "ef7a24cc05b06f2f5a6af1bc4d356c3f016767ef",
+   "manifest": "data/amar/board-manifest-drivers_input_touchscreen_mediatek_focaltech_mmi.json",
+   "files": 26,
+   "serves": "TOUCHSCREEN_MTK_FT8201",
+   "donor": "philmb"
+  },
+  {
+   "path": "drivers/misc/mediatek/lcm/panel_mipi_ft8201_video_1200p",
+   "git_tree": "d2406856b6722adfe49b42998b070f445b77b747",
+   "manifest": "data/amar/board-manifest-drivers_misc_mediatek_lcm_panel_mipi_ft8201_video_1200p.json",
+   "files": 2,
+   "serves": "CUSTOM_KERNEL_LCM panel_mipi_ft8201_video_1200p",
+   "donor": "philmb"
+  },
+  {
+   "path": "drivers/misc/mediatek/lcm/panel_mipi_hx83102e_video_1200p",
+   "git_tree": "7794392387c34d7a855047177248c24ff4f1c1fb",
+   "manifest": "data/amar/board-manifest-drivers_misc_mediatek_lcm_panel_mipi_hx83102e_video_1200p.json",
+   "files": 2,
+   "serves": "CUSTOM_KERNEL_LCM panel_mipi_hx83102e_video_1200p",
+   "donor": "philmb"
+  },
+  {
+   "path": "drivers/misc/mediatek/lcm/panel_mipi_nt36523w_inx_video_1200p",
+   "git_tree": "ea75252a73e1903ded1f183d6764e82874a6dca8",
+   "manifest": "data/amar/board-manifest-drivers_misc_mediatek_lcm_panel_mipi_nt36523w_inx_video_1200p.json",
+   "files": 2,
+   "serves": "CUSTOM_KERNEL_LCM panel_mipi_nt36523w_inx_video_1200p",
+   "donor": "philmb"
+  }
+ ],
+ "files": [
+  {
+   "path": "drivers/misc/mediatek/usb20/mt6765/fusb301a.c",
+   "blob": "aa611e4d03b295eaaf919ff767f59d160fd29e92",
+   "bytes": 52547,
+   "serves": "CC_FUSB301"
+  },
+  {
+   "path": "drivers/misc/mediatek/usb20/mt6765/wusb3801x.c",
+   "blob": "40146eb67d366dfc848ce5b26d398803ffecc277",
+   "bytes": 63203,
+   "serves": "CC_WUSB3801"
+  },
+  {
+   "path": "drivers/misc/mediatek/i2c/sgm37604a_driver.c",
+   "blob": "0ddfa096d68de21eacc0c3db73dec2839e0e7650",
+   "bytes": 7674,
+   "serves": "MTK_LCM_BACKLIGHT_SGM37604A (amar i2c Makefile already lists it; file absent)"
+  },
+  {
+   "path": "drivers/power/supply/mediatek/charger/bq2560x.c",
+   "blob": "a99a5d763629bc2016e0fa58e81db4071dac72bf",
+   "bytes": 37159,
+   "serves": "CHARGER_BQ2560x",
+   "donor": "philmb"
+  },
+  {
+   "path": "drivers/power/supply/mediatek/charger/bq2560x.h",
+   "blob": "8429a70e607f643df64b2cce2163ef83914374f2",
+   "bytes": 1258,
+   "serves": "CHARGER_BQ2560x",
+   "donor": "philmb"
+  },
+  {
+   "path": "drivers/power/supply/mediatek/charger/bq2560x_reg.h",
+   "blob": "404506d77a3e131577a130b4ef22633ffd2f7f6a",
+   "bytes": 8406,
+   "serves": "CHARGER_BQ2560x",
+   "donor": "philmb"
+  },
+  {
+   "path": "drivers/leds/leds-aw2016.c",
+   "blob": "6ffb2f14181a743d902e0a0657f2b83ab045d07b",
+   "bytes": 22083,
+   "serves": "LEDS_AW2016",
+   "donor": "philmb"
+  },
+  {
+   "path": "include/linux/leds-aw2016.h",
+   "blob": "44531a29da3f8699aa7b43b68aa5c593b3b40510",
+   "bytes": 1119,
+   "serves": "LEDS_AW2016",
+   "donor": "philmb"
+  }
+ ],
+ "hooks": "data/amar/stock-board-hooks.json",
+ "blocked": [
+  {
+   "id": "sensor:s5k4h7yxqtech1_mipi_raw",
+   "kind": "camera sensor",
+   "config": "CONFIG_CUSTOM_KERNEL_IMGSENSOR",
+   "evidence": "in the shipping image; source in neither tree",
+   "expect_path": "drivers/misc/mediatek/imgsensor/src/common/v1/s5k4h7yxqtech1_mipi_raw/Makefile"
+  },
+  {
+   "id": "touch:TOUCHSCREEN_MTK_NT36523W",
+   "kind": "touch controller",
+   "config": "CONFIG_TOUCHSCREEN_MTK_NT36523W",
+   "evidence": "the symbol is defined in neither tree, so olddefconfig drops it silently. The shipping image has nvt_* code including pen support (nvt_pen_diff_open, nvt_set_pen_inband_mode_1, nvt_get_fw_pipe) that the Lenovo NT36xxx driver lacks (54 of its 83 function names are in the shipping symbols)",
+   "expect_path": "drivers/input/touchscreen/mediatek/NT36523W/Makefile"
+  }
+ ],
+ "no_code_in_shipping": [],
+ "recovered_files": [
+  {
+   "path": "sound/soc/codecs/ac107.c",
+   "bundle": "data/baseline/recovered/ac107/ac107.c",
+   "blob": "c0fa4d44a547ec8c8c791b2b7be59fe255a33f1f",
+   "unit": "codec:ac107",
+   "provenance": "Lenovo MediaTek 4.9 public ac107.c (blob 062ed14ffb20e0a9958c323a82b795c6a0dae63a, Bakoubak/android_kernel_lenovo_x306x-10@90ff197c) plus one line: ac107_dump_regs(i2c_ctrl[0]) after ac107_hw_init in ac107_i2c_probe (ac107.c.diff). Host receipt: 21/21 functions byte-exact and .rodata/.data 0 mismatches against the shipping Image (recon-ac107/RECON-AC107.md) | v12-amar: replaces the amar base blob 062ed14ffb20e0a9958c323a82b795c6a0dae63a (the unmodified public file this recovery was derived from, if equal to the blob named in the provenance)",
+   "replaces": "062ed14ffb20e0a9958c323a82b795c6a0dae63a"
+  },
+  {
+   "path": "drivers/misc/mediatek/lcm/panel_mipi_hx83102p_inx_video_1200p/panel_mipi_hx83102p_inx_video_1200p.c",
+   "bundle": "data/baseline/recovered/panels/panel_mipi_hx83102p_inx_video_1200p/panel_mipi_hx83102p_inx_video_1200p.c",
+   "blob": "89068478830f5340e9e3e5604d12401e989f289c",
+   "unit": "lcm:panel_mipi_hx83102p_inx_video_1200p",
+   "provenance": "candidate generated from the shipping image (recon/RECON-PANELS-TOUCH.md): data and call order trace-exact; 8 functions text-identical to the Lenovo amar hx83102e_boe_800p source. PARTIAL until fncompare exits 0 on the CI vmlinux"
+  },
+  {
+   "path": "drivers/misc/mediatek/lcm/panel_mipi_hx83102p_inx_video_1200p/Makefile",
+   "bundle": "data/baseline/recovered/panels/panel_mipi_hx83102p_inx_video_1200p/Makefile",
+   "blob": "cd44e77996c3c26596a345606b8e66b4dd099c75",
+   "unit": "lcm:panel_mipi_hx83102p_inx_video_1200p",
+   "provenance": "candidate generated from the shipping image (recon/RECON-PANELS-TOUCH.md): data and call order trace-exact; 8 functions text-identical to the Lenovo amar hx83102e_boe_800p source. PARTIAL until fncompare exits 0 on the CI vmlinux"
+  },
+  {
+   "path": "drivers/misc/mediatek/lcm/panel_mipi_hx83102e_2nd_video_1200p/panel_mipi_hx83102e_2nd_video_1200p.c",
+   "bundle": "data/baseline/recovered/panels/panel_mipi_hx83102e_2nd_video_1200p/panel_mipi_hx83102e_2nd_video_1200p.c",
+   "blob": "06ee619123cda949c0d3bda4915c2e9f85ab9a9a",
+   "unit": "lcm:panel_mipi_hx83102e_2nd_video_1200p",
+   "provenance": "candidate generated from the shipping image (recon/RECON-PANELS-TOUCH.md): data and call order trace-exact; 8 functions text-identical to the Lenovo amar hx83102e_boe_800p source. PARTIAL until fncompare exits 0 on the CI vmlinux"
+  },
+  {
+   "path": "drivers/misc/mediatek/lcm/panel_mipi_hx83102e_2nd_video_1200p/Makefile",
+   "bundle": "data/baseline/recovered/panels/panel_mipi_hx83102e_2nd_video_1200p/Makefile",
+   "blob": "082cfca8d44b98bd09bf68094f5d36a385bba35d",
+   "unit": "lcm:panel_mipi_hx83102e_2nd_video_1200p",
+   "provenance": "candidate generated from the shipping image (recon/RECON-PANELS-TOUCH.md): data and call order trace-exact; 8 functions text-identical to the Lenovo amar hx83102e_boe_800p source. PARTIAL until fncompare exits 0 on the CI vmlinux"
+  },
+  {
+   "path": "drivers/misc/mediatek/imgsensor/src/common/v1/ov5675_mipi_raw/Makefile",
+   "bundle": "data/baseline/recovered/ov5675/Makefile",
+   "blob": "db25cbe393e63b1c53c54387222eb0cf668196b5",
+   "unit": "sensor:ov5675_mipi_raw",
+   "provenance": "TB-X606F port ov5675mipiraw_Sensor.{c,h} (kingcome variant) with OV5675_OTP_ENABLE 0 and the module name \"ofilm ov5675 5m\": every shipping log string and all register write runs equal this source (recon-sensors/RECON-SENSORS.md); code equality beyond that is unproved until sensor_compare exits 0 on the CI vmlinux"
+  },
+  {
+   "path": "drivers/misc/mediatek/imgsensor/src/common/v1/ov5675_mipi_raw/ov5675mipiraw_Sensor.c",
+   "bundle": "data/baseline/recovered/ov5675/ov5675mipiraw_Sensor.c",
+   "blob": "c7744de6f95408edbaa636f93adae6b2b3632061",
+   "unit": "sensor:ov5675_mipi_raw",
+   "provenance": "TB-X606F port ov5675mipiraw_Sensor.{c,h} (kingcome variant) with OV5675_OTP_ENABLE 0 and the module name \"ofilm ov5675 5m\": every shipping log string and all register write runs equal this source (recon-sensors/RECON-SENSORS.md); code equality beyond that is unproved until sensor_compare exits 0 on the CI vmlinux"
+  },
+  {
+   "path": "drivers/misc/mediatek/imgsensor/src/common/v1/ov5675_mipi_raw/ov5675mipiraw_Sensor.h",
+   "bundle": "data/baseline/recovered/ov5675/ov5675mipiraw_Sensor.h",
+   "blob": "3789e150923b6b21f0036bf5f1d25a6654522802",
+   "unit": "sensor:ov5675_mipi_raw",
+   "provenance": "TB-X606F port ov5675mipiraw_Sensor.{c,h} (kingcome variant) with OV5675_OTP_ENABLE 0 and the module name \"ofilm ov5675 5m\": every shipping log string and all register write runs equal this source (recon-sensors/RECON-SENSORS.md); code equality beyond that is unproved until sensor_compare exits 0 on the CI vmlinux"
+  }
+ ],
+ "recovered_pending_ci": [
+  {
+   "id": "codec:ac107",
+   "config": "CONFIG_AC107",
+   "object": "sound/soc/codecs/ac107.o",
+   "evidence": "CONFIG_AC107=y in the stock config; 23 ac107_* symbols in the shipping kallsyms; host recovery with function and data receipts (data/baseline/recovered/ac107/evidence.json). RECOVERED only when the CI build of this tree makes reloc_sig.py check exit 0 for sound/soc/codecs/ac107.o against that evidence; the earlier statement that AC107 has no code was wrong",
+   "check": "python3 scripts/baseline/reloc_sig.py check src/out/sound/soc/codecs/ac107.o data/baseline/recovered/ac107/evidence.json out-receipts/ac107-reloc-sig.json",
+   "evidence_file": "data/baseline/recovered/ac107/evidence.json"
+  },
+  {
+   "id": "lcm:panel_mipi_hx83102p_inx_video_1200p",
+   "config": "CONFIG_CUSTOM_KERNEL_LCM",
+   "object": "drivers/misc/mediatek/lcm/panel_mipi_hx83102p_inx_video_1200p",
+   "evidence": "host recovery from the shipping image (trace-exact init/suspend/get_params, text-identical sibling functions); needs the amar-generation display core (data/baseline/display-core.json). RECOVERED only when fncompare compare exits 0 on the CI vmlinux",
+   "check": "python3 scripts/baseline/fncompare.py compare src/out/vmlinux data/baseline/recovered/panels/shipping-fingerprints.json mipi_hx83102p_inx_video_1200p --report out-receipts/panel-mipi_hx83102p_inx_video_1200p.json",
+   "evidence_file": "data/baseline/recovered/panels/shipping-fingerprints.json"
+  },
+  {
+   "id": "lcm:panel_mipi_hx83102e_2nd_video_1200p",
+   "config": "CONFIG_CUSTOM_KERNEL_LCM",
+   "object": "drivers/misc/mediatek/lcm/panel_mipi_hx83102e_2nd_video_1200p",
+   "evidence": "host recovery from the shipping image (trace-exact init/suspend/get_params, text-identical sibling functions); needs the amar-generation display core (data/baseline/display-core.json). RECOVERED only when fncompare compare exits 0 on the CI vmlinux",
+   "check": "python3 scripts/baseline/fncompare.py compare src/out/vmlinux data/baseline/recovered/panels/shipping-fingerprints.json mipi_hx83102e_2nd_video_1200p --report out-receipts/panel-mipi_hx83102e_2nd_video_1200p.json",
+   "evidence_file": "data/baseline/recovered/panels/shipping-fingerprints.json"
+  },
+  {
+   "id": "sensor:ov5675_mipi_raw",
+   "config": "CONFIG_CUSTOM_KERNEL_IMGSENSOR",
+   "object": "drivers/misc/mediatek/imgsensor/src/common/v1/ov5675_mipi_raw/",
+   "evidence": "host recovery from the shipping image (register write runs 155/33/33 exact, 66 vs 71 explained by tail merge, 53 of 53 strings, sensor-list entry id 0x5675 name \"ov5675_mipi_raw\" after ov13b10qtech). RECOVERED only when sensor_compare check reports every function IDENTICAL on the CI vmlinux",
+   "check": "python3 recon-sensors/tools/sensor_compare.py check recon-sensors/pins/shipping-pins.json src/out/vmlinux out-receipts/vmlinux-nm-n.txt out-receipts/ov5675-compare.json   # private pins (normalized shipping streams); not in this patch",
+   "evidence_file": null
+  }
+ ]
+}
