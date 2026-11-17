@@ -1,0 +1,17 @@
+[
+ {
+  "file": "drivers/misc/mediatek/gpu/gpu_rgx/Makefile",
+  "pre_blob": "8b569a746310ac52b69ae734f462ca6bef1bfee9",
+  "post_blob": "95dbcdab6fcab0ed8ff7ec2b1c61f4f06d01147e",
+  "serves": "DDK 1.13 selection: doma -> m1.13ED5776728; the 1.11 mapping stays selectable as doma-ddk-1.11",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "ifeq ($(word 2,$(MTK_GPU_VERSION)),doma)"
+    ],
+    "insert": "\tobj-y += m1.13ED5776728/\nelse ifeq ($(word 2,$(MTK_GPU_VERSION)),doma-ddk-1.11)\n"
+   }
+  ]
+ }
+]

@@ -1,8 +1,11 @@
-name: Baseline amar 4.9.190 diagnostic (v12-amar)
+name: "Baseline amar 4.9.190 diagnostic (v14 - DDK 1.13 integration, SX9310, device-tree diagnostic)"
 # Hypothesis test, separate from the philmb baseline: do the amar core headers reproduce the shipping export CRCs (module gate)?
 # Diagnostic only: builds Image.gz from a pinned third-party 4.9.190 tree with the pinned stock device config
-# (no android16 fragment, no PowerVR port, no release, no device action) and gates it against the shipping kernel
+# (no android16 fragment, no release, no device action) and gates it against the shipping kernel
 # export CRCs and the complete installed vendor module set. A PASS is necessary, not sufficient, for any flash.
+# v14: two legs of the same build (matrix gpu): `none` = control (the shipping 1.11 GPU driver, as in run 44045545603 plus the SX9310 swap) and `ddk113` (the pinned DDK 1.13
+# driver selected for the stock GPU word, so a GPU compile/link error cannot hide the control leg's link, module and export results). A separate job builds the device-tree
+# diagnostic (philmb achilles6_row_call) into its own artifact; its failure does not touch the Image legs.
 on:
   workflow_dispatch:
 permissions:
@@ -21,6 +24,9 @@ jobs:
       matrix:
         sha:   # one ref: the board hooks are pinned to the pre-edit blobs of this commit
           - 213b300e669ccbabc945845b7175bb1fd43a530e
+        gpu:   # none = control (shipping 1.11 selection); ddk113 = the pinned DDK 1.13 driver replaces it in the Image
+          - none
+          - ddk113
     steps:
       - uses: actions/checkout@v7
       - name: Unit tests for the gate and inventory tools
@@ -32,6 +38,9 @@ jobs:
           python3 scripts/baseline/test_stage_gpu113.py
           python3 scripts/baseline/test_makefile_hooks.py
           python3 scripts/baseline/test_fncompare.py
+          python3 scripts/baseline/test_lcm_registration.py
+          python3 scripts/baseline/test_gpu113_integrate.py
+          python3 scripts/baseline/test_dtbo_receipt.py
       - name: Install tools
         run: sudo apt-get update -qq && sudo apt-get install -y -qq bc bison flex libssl-dev device-tree-compiler python3 python2 xz-utils
       - name: Fetch and verify pinned toolchains
@@ -99,6 +108,27 @@ jobs:
           python3 scripts/baseline/board_transplant.py cam src data/amar/stock-board-transplant.json out-receipts/board-transplant.json philmb=phil || rc=$?
           echo "$rc" > out-receipts/board-transplant.exit
           exit 0   # enforced in the last step so the build still reports every other error
+      - name: LCM registration guard (every configured panel has exactly one lcm_driver_list entry, extern, definition and built object; AW2016 include hook)
+        run: |
+          set -uo pipefail
+          rc=0
+          python3 scripts/baseline/lcm_registration.py src config/stock-4.9.190-achilles6_row_call.config out-receipts/lcm-registration.json || rc=$?
+          echo "$rc" > out-receipts/lcm-registration.exit
+          exit 0   # enforced in the last step
+      - name: Integrate the pinned DDK 1.13 driver (stage + selector switch, all-or-nothing; the control leg keeps the shipping 1.11 selection)
+        if: matrix.gpu == 'ddk113'
+        run: |
+          set -uo pipefail
+          rc=0
+          sha=$(python3 -c "import json;print(json.load(open('data/baseline/gpu113-integration-pins.json'))['donor']['sha'])")
+          mkdir donor && (cd donor && git init -q . && git fetch -q --depth 1 "$GPU_DONOR_REPO" "$sha" && git sparse-checkout init --cone && git sparse-checkout set drivers/gpu/mediatek/gpu_rgx/m1.13ED5776728 && git checkout -q FETCH_HEAD) || rc=$?
+          if [ "$rc" = 0 ]; then
+            python3 scripts/baseline/gpu113_integrate.py donor src data/baseline/gpu113-integration-pins.json data/amar/gpu113-selector-hooks.json out-receipts/gpu113-integrate.json || rc=$?
+          else
+            echo '{"integrated": false, "error": "donor fetch failed"}' > out-receipts/gpu113-integrate.json
+          fi
+          echo "$rc" > out-receipts/gpu113-integrate.exit
+          exit 0   # enforced in the last step; when not integrated the tree is unchanged (1.11 selection) and the build below still reports every other gate
       - name: Sensor contract guard (after the recovered sensors are installed)
         run: |
           set -uo pipefail
@@ -140,7 +170,7 @@ jobs:
           json.dump({'status': 'DEVIATION', 'removed_from_built_config': drop, 'reason': 'no source and only a partial recovery exists (recon-sensors/RECON-SENSORS.md); without a Makefile the sensor directory stops the link, which would hide every later link-level error. NT36523W has no code in the tree, so olddefconfig already dropped it (config gate lists it as blocked).',
                      'effect': 'the resulting Image is NOT a stock-equivalent kernel and must never be flashed'}, open('out-receipts/link-deviation.json', 'w'), indent=1)
           PY
-      - name: Build Image.gz (no modules, no DTBs, no PVR port)
+      - name: Build Image.gz (no modules, no DTBs; the GPU driver is the leg's own, the 1.11 control or the integrated 1.13)
         run: |
           set -uo pipefail
           cd src
@@ -191,40 +221,31 @@ jobs:
           fi
           echo "$rc" > out-receipts/panel-compare.exit
           exit 0   # enforced in the last step
-      - name: Scoped DDK 1.13 object compile (one directory, stock config; says nothing about the Image, link, firmware, userspace or device)
+      - name: DDK assertions (which GPU driver the Image contains - selector, built objects, linked symbols, exports, version string)
         if: always()
         run: |
           set -uo pipefail
-          sha=$(python3 -c "import json;print(json.load(open('data/baseline/gpu113-stage.json'))['donor']['sha'])")
-          mkdir donor && cd donor && git init -q . && git fetch -q --depth 1 "$GPU_DONOR_REPO" "$sha" && git sparse-checkout init --cone && git sparse-checkout set drivers/gpu/mediatek/gpu_rgx/m1.13ED5776728 && git checkout -q FETCH_HEAD
-          cd ..
+          export PATH=$GITHUB_WORKSPACE/tc/gcc64/bin:$PATH
+          if [ "${{ matrix.gpu }}" = ddk113 ]; then exp=ddk113; else exp=none; fi
+          nmf=""
+          if test -f src/out/vmlinux; then aarch64-linux-android-nm -n src/out/vmlinux > out-receipts/vmlinux-nm-n.txt && nmf=out-receipts/vmlinux-nm-n.txt; fi
           rc=0
-          python3 scripts/baseline/stage_gpu113.py donor src data/baseline/gpu113-stage.json out-receipts/gpu113-stage.json || rc=$?
-          echo "$rc" > out-receipts/gpu113-stage.exit
-          if [ "$rc" = 0 ]; then
-            cd src
-            export PATH=$GITHUB_WORKSPACE/tc/clang/bin:$GITHUB_WORKSPACE/tc/gcc64/bin:$GITHUB_WORKSPACE/tc/gcc32/bin:$PATH
-            . ../make-vars.env
-            export KBUILD_BUILD_USER=baseline KBUILD_BUILD_HOST=github
-            crc=0
-            make $M -k -j"$(nproc)" drivers/misc/mediatek/gpu/gpu_rgx/m1.13ED5776728/ > ../gpu113-build.log 2>&1 || crc=$?
-            cd ..
-            grep -E "error:|\*\*\*|No rule to make target|undefined reference" gpu113-build.log > out-receipts/gpu113-compile-errors.txt || true
-            python3 - "$crc" <<'PY'
-          import json, re, subprocess, sys
-          root = 'src/out/drivers/misc/mediatek/gpu/gpu_rgx/m1.13ED5776728'
-          objs = subprocess.run(['find', root, '-name', '*.o', '!', '-name', 'built-in.o', '!', '-name', 'pvrsrvkm.o'], capture_output=True, text=True).stdout.split()
-          errs = open('out-receipts/gpu113-compile-errors.txt').read().splitlines()
-          files = sorted({m.group(1) for l in errs for m in [re.match(r'([^:\s]+\.[ch]):\d+', l)] if m})
-          import os
-          json.dump({'scope': 'one directory target of the pinned 1.13 driver staged next to the 1.11 driver; stock .config; objects and the relocatable pvrsrvkm.o only', 'make_exit': int(sys.argv[1]),
-                     'objects_built': len(objs), 'pvrsrvkm_o_exists': os.path.isfile(root + '/pvrsrvkm.o'), 'built_in_o_exists': os.path.isfile(root + '/built-in.o'),
-                     'error_lines': len(errs), 'files_with_errors': files,
-                     'not_claimed': 'no vmlinux link, no Image, no firmware, no userspace, no device; selector Makefile not edited, so the main build above never contained this driver'},
-                    open('out-receipts/gpu113-compile.json', 'w'), indent=1)
-          PY
+          python3 scripts/baseline/gpu113_assert.py --expect "$exp" --tree src --out src/out --config src/out/.config --nm "$nmf" --vmlinux src/out/vmlinux --symvers src/out/Module.symvers \
+            --symbols data/baseline/gpu113-symbols.json --compile-errors out-receipts/compile-errors.txt --build-log build.log --report out-receipts/gpu113-assert.json || rc=$?
+          echo "$rc" > out-receipts/gpu113-assert.exit
+          exit 0   # enforced in the last step: 0 all PASS, 1 a FAIL, 2 NOT MEASURED (no link)
+      - name: Export-CRC accounting against the pinned accounting of run 44045545603 (82 mismatches and 6 absent stay visible; a changed set is listed, never hidden)
+        if: always()
+        run: |
+          set -uo pipefail
+          rc=0
+          if test -f src/out/Module.symvers; then
+            python3 scripts/baseline/export_accounting.py src/out/Module.symvers data/baseline/shipping-export-crcs.json data/baseline/export-accounting-44045545603.json out-receipts/export-accounting.json || rc=$?
+          else
+            echo '{"error": "no Module.symvers (build did not link)"}' > out-receipts/export-accounting.json; rc=2
           fi
-          exit 0   # the stage identity result is enforced in the last step; compile errors are the measurement, not a failure of the step
+          echo "$rc" > out-receipts/export-accounting.exit
+          exit 0   # enforced in the last step: 0 identical to the pin, 1 changed, 2 not measured
       - name: Whole-tree function fidelity (diagnostic only; pattern-masked, not relocation-exact; needs the optional fingerprint DB)
         if: always()
         continue-on-error: true
@@ -258,22 +279,119 @@ jobs:
           if test -d out-receipts/panel-disasm; then cp -R out-receipts/panel-disasm dist/; fi
           cp -f src/out/arch/arm64/boot/Image.gz src/out/.config src/out/Module.symvers dist/ 2>/dev/null || true
           tail -n 3000 build.log > dist/build-tail.log 2>/dev/null || true
-          tail -n 3000 gpu113-build.log > dist/gpu113-build-tail.log 2>/dev/null || true
           tail -n 200 dtbs.log > dist/dtbs-tail.log 2>/dev/null || true
           # retained linked ELF (debug info stripped) so any compare can be re-run offline
           if test -f src/out/vmlinux; then PATH=$GITHUB_WORKSPACE/tc/gcc64/bin:$PATH aarch64-linux-android-objcopy --strip-debug src/out/vmlinux vmlinux.nodebug && xz -T0 -6 -c vmlinux.nodebug > dist/vmlinux-nodebug.xz; ls -l dist/vmlinux-nodebug.xz; fi
           cp -f olddefconfig.log dist/ 2>/dev/null || true
           (cd dist && find . -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS)
-          du -sh dist; { echo "### ${{ matrix.sha }}"; sed -n '1,40p' gate.txt 2>/dev/null; } >> "$GITHUB_STEP_SUMMARY" || true
-      - name: Require the guards (sensor contract, board transplant, config gate, AC107 relocation-exact compare, panel compare; BLOCKED means open source gaps, not flashable)
+          du -sh dist; { echo "### ${{ matrix.sha }} gpu=${{ matrix.gpu }}"; sed -n '1,40p' gate.txt 2>/dev/null; } >> "$GITHUB_STEP_SUMMARY" || true
+      - name: Require the guards (sensor contract, board transplant, config gate, AC107, panel compare, LCM registration, GPU integration and assertions, export accounting; BLOCKED means open source gaps, not flashable)
         if: always()
         run: |
-          for g in sensor-contract board-transplant config-gate ac107-compare panel-compare gpu113-stage; do echo "$g exit $(cat out-receipts/$g.exit 2>/dev/null || echo missing)"; done
-          test "$(cat out-receipts/sensor-contract.exit)" = 0 && test "$(cat out-receipts/board-transplant.exit)" = 0 && test "$(cat out-receipts/config-gate.exit)" = 0 && test "$(cat out-receipts/ac107-compare.exit)" = 0 && test "$(cat out-receipts/panel-compare.exit)" = 0 && test "$(cat out-receipts/gpu113-stage.exit)" = 0
+          G="sensor-contract board-transplant config-gate ac107-compare panel-compare lcm-registration gpu113-assert export-accounting"
+          if [ "${{ matrix.gpu }}" = ddk113 ]; then G="$G gpu113-integrate"; fi
+          bad=0
+          for g in $G; do v=$(cat out-receipts/$g.exit 2>/dev/null || echo missing); echo "$g exit $v"; [ "$v" = 0 ] || bad=1; done
+          exit $bad
       - uses: actions/upload-artifact@v7
         if: always()
         with:
-          name: baseline-${{ matrix.sha }}
+          name: baseline-${{ matrix.sha }}-gpu-${{ matrix.gpu }}
           path: dist/
           retention-days: 14
           if-no-files-found: warn
+
+  dtbo-diagnostic:
+    # Device-tree diagnostic, independent of the Image legs (no `needs`, own artifact): does the open-source overlay philmb builds as achilles6_row_call (dts + MediaTek DrvGen
+    # from the .dws, merged onto mt6765 by ufdt_apply_overlay) describe this unit? Only the files are produced here; the comparison with the unit's live tree is done offline.
+    # It is NOT the shipping dtbo and no identity is claimed. Run 44036431871 already ran this build path (dtbs_exit 0) but uploaded only logs.
+    runs-on: ubuntu-22.04   # python2 (DrvGen.py) is only packaged up to 22.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v7
+      - name: Unit test of the receipt tool
+        run: python3 scripts/baseline/test_dtbo_receipt.py
+      - name: Install tools
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq bc bison flex libssl-dev device-tree-compiler python3 python2 xz-utils
+      - name: Fetch and verify pinned toolchains
+        run: |
+          set -euo pipefail
+          mkdir -p tc/clang tc/gcc64 tc/gcc32 dl out-receipts
+          A=https://android.googlesource.com
+          get() {  # name repo commit subpath dest
+            u="$A/$2/+archive/$3${4:+/$4}.tar.gz"
+            curl -sfL --retry 6 --retry-all-errors --retry-delay 5 -o "dl/$1.tar.gz" "$u"
+            tar xzf "dl/$1.tar.gz" -C "tc/$5"
+            python3 - "$1" "dl/$1.tar.gz" <<'PY'
+          import json, sys
+          sys.path.insert(0, 'scripts/baseline')
+          from tree_hash import tree_hash
+          name, path = sys.argv[1:3]
+          pin = json.load(open('data/baseline/toolchain-pins.json'))[name]
+          digest, files = tree_hash(path)
+          print(name, digest, files)
+          assert digest == pin['tree_sha256'] and files == pin['files'], f'{name} content hash differs from pin'
+          PY
+          }
+          P=data/baseline/toolchain-pins.json
+          pin() { python3 -c "import json;print(json.load(open('$P'))['$1']['$2'])"; }
+          get clang "$(pin clang repo)" "$(pin clang commit)" clang-r353983c clang
+          get gcc64 "$(pin gcc64 repo)" "$(pin gcc64 commit)" "" gcc64
+          get gcc32 "$(pin gcc32 repo)" "$(pin gcc32 commit)" "" gcc32
+          rm -rf dl
+      - name: Fetch and verify the pinned philmb source and the stock config
+        run: |
+          set -euo pipefail
+          sha=$(python3 -c "import json;print(json.load(open('data/amar/dtbo-diagnostic.json'))['source']['sha'])")
+          mkdir src out-receipts && cd src && git init -q . && git fetch -q --depth 1 "$PHIL_REPO" "$sha" && git checkout -q FETCH_HEAD
+          test "$(git rev-parse HEAD)" = "$sha"
+          grep -E '^(VERSION|PATCHLEVEL|SUBLEVEL) =' Makefile | tr -d ' ' | tr '\n' ' ' | grep -qx 'VERSION=4 PATCHLEVEL=9 SUBLEVEL=190 '
+          cd ..
+          python3 - <<'PY'
+          import hashlib, json
+          p = json.load(open('data/amar/dtbo-diagnostic.json'))
+          assert hashlib.sha256(open(p['config']['path'], 'rb').read()).hexdigest() == p['config']['sha256'], 'stock config differs from pin'
+          PY
+      - name: Configure with the stock config and build only the device-tree outputs (python2 DrvGen.py runs from the kernel's own rule)
+        run: |
+          set -uo pipefail
+          cd src
+          export PATH=$GITHUB_WORKSPACE/tc/clang/bin:$GITHUB_WORKSPACE/tc/gcc64/bin:$GITHUB_WORKSPACE/tc/gcc32/bin:$PATH
+          printf '#!/bin/sh\nexec gcc -fcommon "$@"\n' > $GITHUB_WORKSPACE/hostgcc && chmod +x $GITHUB_WORKSPACE/hostgcc
+          mkdir -p out && cp ../config/stock-4.9.190-achilles6_row_call.config out/.config
+          M="ARCH=arm64 O=out CC=clang CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE=aarch64-linux-android- CROSS_COMPILE_ARM32=arm-linux-androideabi- python=python2 HOSTCC=$GITHUB_WORKSPACE/hostgcc KCFLAGS=-w"
+          make $M olddefconfig > ../olddefconfig.log 2>&1 || { tail -40 ../olddefconfig.log; echo 1 > ../out-receipts/olddefconfig.exit; }
+          rc=0
+          make $M -j"$(nproc)" dtbs > ../dtbs.log 2>&1 || rc=$?
+          echo "$rc" > ../out-receipts/dtbs.exit
+          tail -5 ../dtbs.log
+          { python2 --version; dtc --version; out/scripts/dtc/dtc --version; clang --version | head -1; } > ../out-receipts/tool-versions.txt 2>&1 || true
+          exit 0   # the receipt below records the result
+      - name: Receipt and offline-comparison files (decompiled text, generated cust dtsi, inputs by blob id)
+        if: always()
+        run: |
+          set -uo pipefail
+          rc=0
+          python3 scripts/baseline/dtbo_receipt.py src src/out data/amar/dtbo-diagnostic.json "$(cat out-receipts/dtbs.exit 2>/dev/null || echo 99)" out-receipts/dtbo-receipt.json || rc=$?
+          echo "$rc" > out-receipts/dtbo-receipt.exit
+          mkdir -p dist
+          D=src/out/arch/arm64/boot/dts/mediatek
+          for f in mt6765.dtb achilles6_row_call.dtb achilles6_row_call.dtb.merge; do
+            test -f $D/$f && cp $D/$f dist/ && src/out/scripts/dtc/dtc -I dtb -O dts -o dist/$f.dts $D/$f 2>/dev/null
+          done
+          (cd $D && find . -name 'cust*.dtsi' -print0 | xargs -0 -I{} cp --parents {} ../../../../../../../dist/ 2>/dev/null) || true
+          cp -f out-receipts/* dist/ 2>/dev/null || true
+          tail -n 400 dtbs.log > dist/dtbs-tail.log 2>/dev/null || true
+          grep -n "DCT_INFO\|DrvGen" dtbs.log | head -40 > dist/drvgen-info.txt 2>/dev/null || true
+          (cd dist && find . -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS)
+          du -sh dist
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: dtbo-diagnostic-philmb-0a95b50
+          path: dist/
+          retention-days: 14
+          if-no-files-found: warn
+      - name: Require the receipt (inputs match their pins and every output exists)
+        if: always()
+        run: test "$(cat out-receipts/dtbo-receipt.exit 2>/dev/null || echo missing)" = 0

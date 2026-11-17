@@ -211,5 +211,24 @@
    }
   ],
   "serves": "CUSTOM_KERNEL_LCM stock panels"
+ },
+ {
+  "file": "drivers/misc/mediatek/sensors-1.0/capsensor/Makefile",
+  "pre_blob": "a7e2537e93d8282ac713eeba6aec131c0b8e70c2",
+  "post_blob": "4d7cc23fecba26f6f0d18e32bbbf8f2a4cd7eb06",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "obj-$(CONFIG_MTK_SX9310)\t\t+= sx932x.o"
+    ],
+    "insert": "obj-$(CONFIG_MTK_SX9310)\t\t+= sx9310.o"
+   },
+   {
+    "op": "delete_line",
+    "line": "obj-$(CONFIG_MTK_SX9310)\t\t+= sx932x.o"
+   }
+  ],
+  "serves": "MTK_SX9310: build the Lenovo sx9310.c (compatible mediatek,sx9311) instead of amar sx932x.c; sx932x.c/.h stay in the tree, unbuilt"
  }
 ]

@@ -69,5 +69,63 @@ class Judge(unittest.TestCase):
         self.assertEqual(F.exit_code([m, 'missing-in-candidate']), 1)
 
 
+class Instance(unittest.TestCase):
+    """instance() finds the LCM_DRIVER by its driver-name string + the relocation record that points at it. The linker may tail-merge the name into a longer string
+    ('panel_' + name, seen on the real CI vmlinux for ft8201 and hx83102e), so a name that is not at the start of a string must still be found."""
+    NAME = 'mipi_x_video_1200p'
+    BASE = 0x1000
+
+    def build(self, strings, reloc_to):
+        """strings: list of str placed back to back (NUL separated); reloc_to: index of the string the struct's name pointer targets (None = no record)."""
+        mem = bytearray(0x400)
+        va, at = {}, 0x100
+        for i, st in enumerate(strings):
+            mem[at:at + len(st) + 1] = st.encode() + b'\0'
+            va[i] = at + self.BASE + (len(st) - len(self.NAME) if st.endswith(self.NAME) else 0)   # address of the NAME inside it
+            at += len(st) + 1
+        syms = [(self.BASE + 0x300, 8, 'lcm_init'), (self.BASE + 0x308, 8, 'lcm_suspend')]
+        s0 = self.BASE + 0x20
+        rela = {s0 + 8: self.BASE + 0x300, s0 + 16: self.BASE + 0x308}
+        if reloc_to is not None: rela[s0] = va[reloc_to]
+        return F.Target('x.elf', 0, syms, bytes(mem), self.BASE, rela)
+
+    def test_name_at_string_start(self):
+        r = F.instance(self.build([self.NAME], 0), self.NAME)
+        self.assertEqual(sorted(r), ['init', 'suspend'])
+
+    def test_tail_merged_name_is_found(self):
+        r = F.instance(self.build(['panel_' + self.NAME], 0), self.NAME)
+        self.assertEqual(sorted(r), ['init', 'suspend'])
+
+    def test_the_relocated_occurrence_wins_over_an_unrelocated_one(self):
+        t = self.build(['other_' + self.NAME, 'panel_' + self.NAME], 1)    # the struct points at the second; the first is unrelated data
+        self.assertEqual(sorted(F.instance(t, self.NAME)), ['init', 'suspend'])
+
+    def test_two_relocated_occurrences_are_ambiguous(self):
+        t = self.build(['a_' + self.NAME, 'b_' + self.NAME], 0)
+        t.rela[0x1000 + 0x40] = 0x1000 + 0x100 + len('a_' + self.NAME) + 1 + len('b_')   # a second record, at the second occurrence
+        with self.assertRaises(SystemExit): F.instance(t, self.NAME)
+
+    def test_name_with_no_relocation_record_is_an_error(self):
+        with self.assertRaises(SystemExit): F.instance(self.build(['panel_' + self.NAME], None), self.NAME)
+
+    def test_absent_name(self):
+        with self.assertRaises(SystemExit): F.instance(self.build(['panel_other'], 0), self.NAME)
+
+
+class Scope(unittest.TestCase):
+    ROLES = {'init': 0x100, 'suspend': 0x180, 'compare_id': 0x200}
+
+    def test_extra_roles_inside_and_outside_the_panel_object(self):
+        r = dict(self.ROLES, set_cabc_mode=0x150, set_recovery_backlight=0x400)
+        s = F.role_scopes(r)
+        self.assertEqual(s['init'], 'own')
+        self.assertEqual(s['set_cabc_mode'], 'inside-object-span')
+        self.assertEqual(s['set_recovery_backlight'], 'outside-object-span')      # a neighbouring panel's function
+
+    def test_extra_role_below_the_object_is_outside(self):
+        self.assertEqual(F.role_scopes(dict(self.ROLES, set_cabc_mode=0x50))['set_cabc_mode'], 'outside-object-span')
+
+
 if __name__ == '__main__':
     unittest.main()

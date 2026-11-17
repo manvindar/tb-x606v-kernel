@@ -229,14 +229,19 @@ def normalize(t, start, end):
 
 def instance(t, drv):
     """-> {role: va}"""
-    name_va = None
+    # the linker may tail-merge the name into a longer string ("panel_" + name), so every occurrence of name+NUL is a candidate address;
+    # the one that a relocation record points at is the driver name pointer (exactly one must)
     needle = drv.encode() + b'\0'
-    pos = -1
+    pos, cands = -1, []
     while True:
         pos = t.mem.find(needle, pos + 1)
         if pos < 0: break
-        if pos == 0 or t.mem[pos - 1] == 0: name_va = pos + t.membase; break
-    if name_va is None: raise SystemExit(f'driver name {drv!r} not found')
+        cands.append(pos + t.membase)
+    if not cands: raise SystemExit(f'driver name {drv!r} not found')
+    withrel = [va for va in cands if any(ad == va for ad in t.rela.values())]
+    if len(withrel) > 1 or (not withrel and not os.environ.get('FNCOMPARE_BY_NAME')):
+        raise SystemExit(f'driver name {drv!r}: {len(cands)} occurrences, {len(withrel)} with relocation records')
+    name_va = withrel[0] if withrel else cands[0]
     structs = [ro for ro, ad in t.rela.items() if ad == name_va]
     if not structs and os.environ.get('FNCOMPARE_BY_NAME'):     # single-object smoke test: every lcm_* symbol is unique
         return {n[4:]: v[0] for n, v in t.by_name.items() if n.startswith('lcm_') and len(v) == 1 and n[4:] in ROLES}
@@ -254,6 +259,15 @@ def instance(t, drv):
     return roles
 
 
+def role_scopes(roles):
+    """Where each role's function lives. The struct-pointed roles are the panel's own functions; EXTRA roles are found by "nearest same-named symbol to lcm_init",
+    which can land in a NEIGHBOURING panel's object when this panel defines none (seen on the real CI vmlinux). An extra role is `inside-object-span` only if it lies
+    between the lowest and highest struct-pointed function of this panel; otherwise it is `outside-object-span` and a verdict on it says nothing about this panel."""
+    base = [v for k, v in roles.items() if k not in EXTRA]
+    lo, hi = (min(base), max(base)) if base else (0, -1)
+    return {k: ('own' if k not in EXTRA else 'inside-object-span' if lo <= v <= hi else 'outside-object-span') for k, v in roles.items()}
+
+
 def sha(lines):
     return hashlib.sha256('\n'.join(lines).encode()).hexdigest()
 
@@ -262,7 +276,9 @@ def fingerprint_all(t, drv, strict=True, evidence=None):
     """strict (fingerprinting the shipping image): an unsupported instruction aborts. Not strict (compare): the role is reported NOT MEASURED.
     evidence: directory that receives the objdump text of every role (candidate side only), written before any normalization."""
     res = {}
-    for role, va in instance(t, drv).items():
+    roles = instance(t, drv)
+    scopes = role_scopes(roles)
+    for role, va in roles.items():
         end = t.func_end(va)
         if evidence:
             os.makedirs(evidence, exist_ok=True)
@@ -271,9 +287,9 @@ def fingerprint_all(t, drv, strict=True, evidence=None):
             norm, wn = normalize2(t, va, end)
         except Unsupported as e:
             if strict: raise
-            res[role] = dict(not_measured=str(e), bytes=end - va)
+            res[role] = dict(not_measured=str(e), bytes=end - va, scope=scopes[role])
             continue
-        res[role] = dict(insns=len(norm), bytes=end - va, sha256=sha(norm), wsha256=sha(wn), _stream=norm)
+        res[role] = dict(insns=len(norm), bytes=end - va, sha256=sha(norm), wsha256=sha(wn), scope=scopes[role], _stream=norm)
     return res
 
 
@@ -383,9 +399,9 @@ def main(argv):
             if g is None: rep[role] = dict(status='missing-in-candidate'); continue
             st = judge(w, g)
             if st == 'not-measured':
-                rep[role] = dict(status=st, reason=g['not_measured'], bytes=g['bytes']); continue
+                rep[role] = dict(status=st, reason=g['not_measured'], bytes=g['bytes'], scope=g.get('scope')); continue
             same = st in MATCH
-            r = dict(status=st, shipping_insns=w['insns'], candidate_insns=g['insns'])
+            r = dict(status=st, scope=g.get('scope'), shipping_insns=w['insns'], candidate_insns=g['insns'])
             if st == 'words-identical-text-differs': r['note'] = 'masked instruction words equal; only objdump text differs (printing, not a binary difference)'
             if not same and streams and os.path.exists(f'{streams}/{drv}.{role}.txt'):
                 import difflib
@@ -396,7 +412,10 @@ def main(argv):
             if role not in want: rep[role] = dict(status='extra-in-candidate')
         code = exit_code([v['status'] for v in rep.values()])
         ok = all(v['status'] in MATCH for v in rep.values())
+        outside = sorted(r for r, v in rep.items() if v.get('scope') == 'outside-object-span')
+        own = [v for r, v in rep.items() if r not in outside]
         out = dict(panel=drv, all_match=ok, exit=code, not_measured=sorted(r for r, v in rep.items() if v['status'] == 'not-measured'),
+                   own_object=dict(matching=sum(1 for v in own if v['status'] in MATCH), total=len(own)), outside_object_span_roles=outside,
                    source_identity='proved-for-matching-functions-only' if ok else 'unproved', functions=rep)
         if report: json.dump(out, open(report, 'w'), indent=1)
         print(json.dumps({r: v['status'] for r, v in rep.items()}, indent=1))

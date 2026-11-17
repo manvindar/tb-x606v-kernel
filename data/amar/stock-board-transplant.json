@@ -102,6 +102,18 @@
    "bytes": 1119,
    "serves": "LEDS_AW2016",
    "donor": "philmb"
+  },
+  {
+   "path": "drivers/misc/mediatek/sensors-1.0/capsensor/sx9310.c",
+   "blob": "a98eb337db8fa09d17ed5366a3586af2a57589ba",
+   "bytes": 32688,
+   "serves": "MTK_SX9310 (the unit binds mediatek,sx9311; amar builds sx932x.c instead)"
+  },
+  {
+   "path": "drivers/misc/mediatek/sensors-1.0/capsensor/sx9310.h",
+   "blob": "79d48c9c2bf262f956513844824d058d8e17b487",
+   "bytes": 8847,
+   "serves": "MTK_SX9310 (the unit binds mediatek,sx9311; amar builds sx932x.c instead)"
   }
  ],
  "hooks": "data/amar/stock-board-hooks.json",

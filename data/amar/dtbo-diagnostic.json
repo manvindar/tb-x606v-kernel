@@ -1,0 +1,36 @@
+{
+ "purpose": "Diagnostic: does the open-source overlay the philmb tree builds as achilles6_row_call (dts + MediaTek DrvGen from the .dws) describe the hardware of this unit? Builds only the device-tree outputs with the stock config; independent of the Image jobs (own job, own artifact); a failure here cannot hide a GPU/link/module result.",
+ "source": {
+  "repo": "https://github.com/philmb3487/android_kernel_lenovo_achilles6.git",
+  "sha": "0a95b5010777186eed379b2ed11e3d1a4f85921e",
+  "sublevel": 190
+ },
+ "config": {
+  "path": "config/stock-4.9.190-achilles6_row_call.config",
+  "sha256": "ed99dd817f6fae0a0414306bd8b786cc0324bc4fb91de72f0df7514d211fbc65"
+ },
+ "inputs_blob": {
+  "arch/arm64/boot/dts/mediatek/achilles6_row_call.dts": "9a9eadfbefccfbdf65472d1ba89afc4163499c97",
+  "arch/arm64/boot/dts/mediatek/mt6765.dts": "c25b6cfbf591014dc3f06f14a1fa2913c7009060",
+  "drivers/misc/mediatek/dws/mt6765/achilles6_row_call.dws": "e562b916021d4640c05c2089c3ba714bf3208bd9",
+  "tools/dct/DrvGen.py": "f7bac504fcff57db7f20e435336e678d45430276"
+ },
+ "drvgen_tree": {
+  "path": "tools/dct",
+  "git_tree": "de29fbe1bcc151df9a87ff75d675f50ec8d933e0"
+ },
+ "outputs": [
+  "arch/arm64/boot/dts/mediatek/mt6765.dtb",
+  "arch/arm64/boot/dts/mediatek/achilles6_row_call.dtb",
+  "arch/arm64/boot/dts/mediatek/achilles6_row_call.dtb.merge"
+ ],
+ "carrier_base_dtb_sha256": "3df1c6005184cf6fa16d4919b453a26acb26c44dd1b3278b987b6199e7687e56",
+ "carrier_note": "sha256 of the single DTB appended to the kernel of the retained carrier boot image (boot-current.img); informational, to say whether the CI base tree equals it. Equal or not says nothing about the overlay.",
+ "evidence_precedent": "run 44036431871 (philmb 0a95b50 + stock config) already ran `make dtbs` with python2 DrvGen.py on achilles6_row_call.dws, produced achilles6_row_call.dtb and ran ufdt_apply_overlay mt6765.dtb + overlay -> .dtb.merge (dtbs_exit 0); only logs were uploaded, not the files.",
+ "not_claimed": [
+  "the stock dtbo partition bytes (not retained)",
+  "that philmb achilles6_row_call is the shipping overlay or that its reconstruction is the shipping dtbo",
+  "that any amar device tree matches this unit",
+  "runtime behaviour"
+ ]
+}

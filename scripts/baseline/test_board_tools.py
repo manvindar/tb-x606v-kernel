@@ -225,5 +225,23 @@ class AmarPanelRegistration(unittest.TestCase):
             self.assertEqual(declarations.count('extern struct LCM_DRIVER ' + symbol + ';'), 1)
 
 
+class AmarSx9310(unittest.TestCase):
+    """The unit binds mediatek,sx9311 (driver sx9310.c); amar builds sx932x.c instead. v14 installs the pinned Lenovo sx9310.c/.h and builds them under the same symbol."""
+    CAP = 'drivers/misc/mediatek/sensors-1.0/capsensor'
+
+    def test_files_and_makefile_hook(self):
+        base = Path(__file__).resolve().parents[2]
+        t = json.loads((base / 'data/amar/stock-board-transplant.json').read_text())
+        f = {x['path']: x for x in t['files'] if x['path'].startswith(self.CAP)}
+        self.assertEqual(sorted(f), [self.CAP + '/sx9310.c', self.CAP + '/sx9310.h'])
+        self.assertTrue(all(not x.get('donor') for x in f.values()))      # default donor: the pinned Lenovo 4.9.117 drop, like the usb-cc files
+        self.assertEqual(f[self.CAP + '/sx9310.c']['blob'], 'a98eb337db8fa09d17ed5366a3586af2a57589ba')   # the blob the philmb-base baseline already pins
+        self.assertEqual(f[self.CAP + '/sx9310.h']['blob'], '79d48c9c2bf262f956513844824d058d8e17b487')
+        hook = next(h for h in json.loads((base / 'data/amar/stock-board-hooks.json').read_text()) if h['file'] == self.CAP + '/Makefile')
+        pre = 'obj-$(CONFIG_MTK_SX9310)\t\t+= sx932x.o\n'
+        post = bt.apply_ops(pre, hook['ops'])
+        self.assertEqual(post, 'obj-$(CONFIG_MTK_SX9310)\t\t+= sx9310.o\n')     # one object, the Lenovo one, under the same config symbol
+
+
 if __name__ == '__main__':
     unittest.main()

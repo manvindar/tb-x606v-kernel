@@ -1,0 +1,129 @@
+{
+ "target": {
+  "repo": "https://github.com/DevZillion/android_kernel_lenovo_amar.git",
+  "sha": "213b300e669ccbabc945845b7175bb1fd43a530e"
+ },
+ "donor": {
+  "repo": "https://github.com/rabbit-hmi-oss/android_kernel_rabbit_mt6765.git",
+  "sha": "8167c8c1087f057d2ef302fc93b47554291687ec",
+  "subtree": "drivers/gpu/mediatek/gpu_rgx/m1.13ED5776728",
+  "tree": "3f9f51550fdf486ed389646636af40562860711f",
+  "files": 774,
+  "version": "m1.13ED5776728",
+  "kernel": "Linux 4.19.191 tree",
+  "license": "Dual MIT/GPL driver sources; repository licence field undeclared"
+ },
+ "selector": {
+  "path": "drivers/misc/mediatek/gpu/gpu_rgx/Makefile",
+  "blob": "8b569a746310ac52b69ae734f462ca6bef1bfee9",
+  "note": "checked, never edited"
+ },
+ "dest": "drivers/misc/mediatek/gpu/gpu_rgx/m1.13ED5776728",
+ "edits": [
+  {
+   "path": "Makefile",
+   "pre": "c0856fcb432952804cb62dc1bccc427daa1bb107",
+   "ops": [
+    {
+     "op": "prepend",
+     "text": "MTK_PLATFORM := $(subst \",,$(CONFIG_MTK_PLATFORM))\nMTK_GPU_VERSION := $(subst \",,$(CONFIG_MTK_GPU_VERSION))\n"
+    },
+    {
+     "op": "replace",
+     "old": "drivers/gpu/mediatek/ged/include",
+     "new": "drivers/misc/mediatek/gpu/ged/include",
+     "count": 1
+    },
+    {
+     "op": "replace",
+     "old": "drivers/gpu/mediatek/gpufreq/include",
+     "new": "drivers/misc/mediatek/base/power/$(MTK_PLATFORM)",
+     "count": 1
+    },
+    {
+     "op": "replace",
+     "old": "drivers/gpu/mediatek/gpu_bm",
+     "new": "drivers/misc/mediatek/gpu/gpu_bm",
+     "count": 1
+    }
+   ],
+   "post": "364b1f2c7e55346f434a1bf327383b14a1e40dea"
+  },
+  {
+   "path": "include/config_kernel_eng_mt6765.h",
+   "pre": "c4fb222eefad85ab33bd5a64ff439433453c7b7f",
+   "ops": [
+    {
+     "op": "replace",
+     "old": "../drivers/staging/android/aosp_ion/ion.h",
+     "new": "../drivers/staging/android/ion/ion.h",
+     "count": 1
+    }
+   ],
+   "post": "d2f7719a6819195ed00266254f70a5011a11245d"
+  },
+  {
+   "path": "include/config_kernel_user_mt6765.h",
+   "pre": "395f662b99acb397bf063162590028865931fd54",
+   "ops": [
+    {
+     "op": "replace",
+     "old": "../drivers/staging/android/aosp_ion/ion.h",
+     "new": "../drivers/staging/android/ion/ion.h",
+     "count": 1
+    }
+   ],
+   "post": "ee6421f60550f16694a10a6f9df29afb12ecd76b"
+  },
+  {
+   "path": "services/system/rogue/rgx_mtk/mt6765/mtk_mfgsys.c",
+   "pre": "da45be95e414704f606102181d7b9da5a24e2ea1",
+   "ops": [
+    {
+     "op": "replace",
+     "old": "\tIMG_UINT32 ui32RGXDevIdx;\n",
+     "new": "\tPVRSRV_DEVICE_NODE *psDevNode;\n",
+     "count": 1
+    },
+    {
+     "op": "replace",
+     "old": "\tui32RGXDevIdx = MTKGetRGXDevIdx();\n\tif (ui32RGXDevIdx == MTK_RGX_DEVICE_INDEX_INVALID)\n\t\treturn IMG_FALSE;\n",
+     "new": "\tpsDevNode = MTKGetRGXDevNode();\n\tif (!psDevNode)\n\t\treturn IMG_FALSE;\n",
+     "count": 1
+    },
+    {
+     "op": "replace",
+     "old": "PVRSRVDevicePreClockSpeedChange(ui32RGXDevIdx,",
+     "new": "PVRSRVDevicePreClockSpeedChange(psDevNode,",
+     "count": 1
+    },
+    {
+     "op": "replace",
+     "old": "PVRSRVGetDevicePowerState(ui32RGXDevIdx, &ePowerState);",
+     "new": "PVRSRVGetDevicePowerState(psDevNode, &ePowerState);",
+     "count": 1
+    },
+    {
+     "op": "replace",
+     "old": "MTKWriteBackFreqToRGX(ui32RGXDevIdx, ui32GPUFreq);",
+     "new": "MTKWriteBackFreqToRGX(psDevNode, ui32GPUFreq);",
+     "count": 1
+    },
+    {
+     "op": "replace",
+     "old": "PVRSRVDevicePostClockSpeedChange(ui32RGXDevIdx,",
+     "new": "PVRSRVDevicePostClockSpeedChange(psDevNode,",
+     "count": 1
+    }
+   ],
+   "post": "049503f21efac0fee5e4e204c2d3a63916442a02",
+   "why": "mt6765 glue MTKDoGpuDVFS passes a device INDEX where the 1.13 API takes a device-node POINTER (host clang -Wint-conversion at mtk_mfgsys.c:409,412,421,433; CI -w hides it); same file MTKCommitFreqIdx already uses MTKGetRGXDevNode(), the pattern copied here"
+  }
+ ],
+ "adaptation": "gpu113-stage.json (published, unchanged edits) plus one pinned donor edit: mtk_mfgsys.c MTKDoGpuDVFS passes the device NODE to the four 1.13 power/clock calls (the donor passed a device index; the same file's MTKCommitFreqIdx already uses MTKGetRGXDevNode()). A fifth index site (MTKCalPowerIndex) sits under #ifdef MTK_CAL_POWER_INDEX, which no config header defines, and is not edited. Selector Makefile: edited only by data/amar/gpu113-selector-hooks.json through gpu113_integrate.py",
+ "compile": {
+  "dir": "drivers/misc/mediatek/gpu/gpu_rgx/m1.13ED5776728/",
+  "scope": "compiled as part of the Image build (selector -> obj-y) when integration succeeded; the scoped per-directory compile is no longer a separate step"
+ },
+ "note": "v14 integration pins: the 774-file donor subtree at the pinned commit, 4 edited donor files, destination next to the 1.11 driver. Not an Image by itself: gpu113_integrate.py also switches the selector."
+}

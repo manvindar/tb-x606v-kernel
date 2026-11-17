@@ -1,0 +1,426 @@
+{
+ "run": "44045545603",
+ "commit": "f01dbd8e8d93c5dc87d684e82a4bee9dba3150a7",
+ "base": "213b300e669ccbabc945845b7175bb1fd43a530e",
+ "note": "accounting of the first linked amar run (Image.gz 9,516,351 B): candidate CRC vs shipping CRC (decimal). 18 power_supply (predicted), 54 charger_dev/charger_device (uncalibrated), 10 other; none is imported by the 8 shipping modules. A changed set is reported, never judged by this file.",
+ "mismatch": {
+  "charger_dev_do_event": {
+   "candidate": 2961927904,
+   "shipping": 3598186384,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_dump_registers": {
+   "candidate": 2143995336,
+   "shipping": 3497049801,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_enable": {
+   "candidate": 4068680111,
+   "shipping": 3780721525,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_enable_cable_drop_comp": {
+   "candidate": 3440835284,
+   "shipping": 719269448,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_enable_chg_type_det": {
+   "candidate": 2147018785,
+   "shipping": 3808865661,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_enable_chip": {
+   "candidate": 3722776139,
+   "shipping": 473396563,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_enable_direct_charging": {
+   "candidate": 756236424,
+   "shipping": 2007212489,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_enable_discharge": {
+   "candidate": 605140626,
+   "shipping": 1420521691,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_enable_otg": {
+   "candidate": 3382337683,
+   "shipping": 2948258064,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_enable_powerpath": {
+   "candidate": 2040298606,
+   "shipping": 930881471,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_enable_safety_timer": {
+   "candidate": 3486476779,
+   "shipping": 1130576972,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_enable_termination": {
+   "candidate": 371922591,
+   "shipping": 2630628103,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_enable_vbus_ovp": {
+   "candidate": 3156162838,
+   "shipping": 4149801133,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_get_charging_current": {
+   "candidate": 118765874,
+   "shipping": 3674572630,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_get_constant_voltage": {
+   "candidate": 3427294583,
+   "shipping": 923695690,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_get_eoc_current": {
+   "candidate": 291665030,
+   "shipping": 4038431169,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_get_ibus": {
+   "candidate": 3593008554,
+   "shipping": 1380942535,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_get_input_current": {
+   "candidate": 329105586,
+   "shipping": 1070525213,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_get_min_charging_current": {
+   "candidate": 235009827,
+   "shipping": 4095308229,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_get_min_input_current": {
+   "candidate": 1200781653,
+   "shipping": 2394246952,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_get_mivr_state": {
+   "candidate": 1576402094,
+   "shipping": 295438477,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_get_temperature": {
+   "candidate": 2162274168,
+   "shipping": 379954412,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_get_vbus": {
+   "candidate": 1655329227,
+   "shipping": 3799628053,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_get_zcv": {
+   "candidate": 1262359728,
+   "shipping": 3000103259,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_hz_mode": {
+   "candidate": 1766970216,
+   "shipping": 4174182880,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_is_charging_done": {
+   "candidate": 4200172877,
+   "shipping": 3463077488,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_is_chip_enabled": {
+   "candidate": 1390580642,
+   "shipping": 2069639110,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_is_enabled": {
+   "candidate": 3684310269,
+   "shipping": 2872714843,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_is_otg": {
+   "candidate": 3063591934,
+   "shipping": 2365459794,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_is_powerpath_enabled": {
+   "candidate": 1130656801,
+   "shipping": 2975126897,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_is_safety_timer_enabled": {
+   "candidate": 1601218959,
+   "shipping": 463865705,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_kick_direct_charging_wdt": {
+   "candidate": 3924525129,
+   "shipping": 98872579,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_kick_wdt": {
+   "candidate": 1777165174,
+   "shipping": 3383832350,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_plug_in": {
+   "candidate": 438577238,
+   "shipping": 2618899009,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_plug_out": {
+   "candidate": 2888254806,
+   "shipping": 973380551,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_reset_eoc_state": {
+   "candidate": 3081916669,
+   "shipping": 3987495653,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_reset_ta": {
+   "candidate": 4237568790,
+   "shipping": 2871173027,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_run_aicl": {
+   "candidate": 2955418390,
+   "shipping": 2893708221,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_send_ta20_current_pattern": {
+   "candidate": 3650822586,
+   "shipping": 255038291,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_send_ta_current_pattern": {
+   "candidate": 2395867555,
+   "shipping": 2998764519,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_set_boost_current_limit": {
+   "candidate": 563942031,
+   "shipping": 4257450516,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_set_charging_current": {
+   "candidate": 1948765076,
+   "shipping": 3001201077,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_set_constant_voltage": {
+   "candidate": 2071702769,
+   "shipping": 1617660007,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_set_direct_charging_ibusoc": {
+   "candidate": 795387418,
+   "shipping": 1898623207,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_set_direct_charging_vbusov": {
+   "candidate": 1541730344,
+   "shipping": 1043819408,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_set_eoc_current": {
+   "candidate": 3388162667,
+   "shipping": 3578338279,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_set_input_current": {
+   "candidate": 3778373315,
+   "shipping": 1435431730,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_set_mivr": {
+   "candidate": 2098710869,
+   "shipping": 1070556087,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_dev_set_pe20_efficiency_table": {
+   "candidate": 990161155,
+   "shipping": 1754460423,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_device_register": {
+   "candidate": 1274587055,
+   "shipping": 3810965791,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "charger_device_unregister": {
+   "candidate": 659361451,
+   "shipping": 2312236757,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "debug_data": {
+   "candidate": 1640678021,
+   "shipping": 3453308120,
+   "class": "drift_without_calibrated_after"
+  },
+  "devm_power_supply_get_by_phandle": {
+   "candidate": 3728185285,
+   "shipping": 1193196714,
+   "class": "predicted_power_supply_regression"
+  },
+  "devm_power_supply_register": {
+   "candidate": 1757008192,
+   "shipping": 4036601615,
+   "class": "predicted_power_supply_regression"
+  },
+  "devm_power_supply_register_no_ws": {
+   "candidate": 171474677,
+   "shipping": 3516306773,
+   "class": "predicted_power_supply_regression"
+  },
+  "g_core_fp": {
+   "candidate": 539197288,
+   "shipping": 1465241998,
+   "class": "drift_without_calibrated_after"
+  },
+  "g_target_report_data": {
+   "candidate": 3978410419,
+   "shipping": 873488974,
+   "class": "drift_without_calibrated_after"
+  },
+  "get_charger_by_name": {
+   "candidate": 887028476,
+   "shipping": 3290289077,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "himax_input_register": {
+   "candidate": 2557740532,
+   "shipping": 256674594,
+   "class": "drift_without_calibrated_after"
+  },
+  "himax_parse_dt": {
+   "candidate": 4175267993,
+   "shipping": 24099505,
+   "class": "drift_without_calibrated_after"
+  },
+  "ic_data": {
+   "candidate": 1063297287,
+   "shipping": 3319006667,
+   "class": "drift_without_calibrated_after"
+  },
+  "pdriver_op": {
+   "candidate": 3617512914,
+   "shipping": 1336461711,
+   "class": "drift_without_calibrated_after"
+  },
+  "pflash_op": {
+   "candidate": 2772268085,
+   "shipping": 1039540312,
+   "class": "drift_without_calibrated_after"
+  },
+  "pfw_op": {
+   "candidate": 1110364480,
+   "shipping": 3822680020,
+   "class": "drift_without_calibrated_after"
+  },
+  "power_supply_am_i_supplied": {
+   "candidate": 249479279,
+   "shipping": 4242921317,
+   "class": "predicted_power_supply_regression"
+  },
+  "power_supply_changed": {
+   "candidate": 4218330244,
+   "shipping": 3706976797,
+   "class": "predicted_power_supply_regression"
+  },
+  "power_supply_external_power_changed": {
+   "candidate": 928197792,
+   "shipping": 950047777,
+   "class": "predicted_power_supply_regression"
+  },
+  "power_supply_get_by_name": {
+   "candidate": 1308899758,
+   "shipping": 942563981,
+   "class": "predicted_power_supply_regression"
+  },
+  "power_supply_get_by_phandle": {
+   "candidate": 999555775,
+   "shipping": 2730306000,
+   "class": "predicted_power_supply_regression"
+  },
+  "power_supply_get_drvdata": {
+   "candidate": 1684889504,
+   "shipping": 2582248543,
+   "class": "predicted_power_supply_regression"
+  },
+  "power_supply_get_property": {
+   "candidate": 4178924907,
+   "shipping": 2949947917,
+   "class": "predicted_power_supply_regression"
+  },
+  "power_supply_powers": {
+   "candidate": 326467585,
+   "shipping": 2337226579,
+   "class": "predicted_power_supply_regression"
+  },
+  "power_supply_property_is_writeable": {
+   "candidate": 994146166,
+   "shipping": 851304978,
+   "class": "predicted_power_supply_regression"
+  },
+  "power_supply_put": {
+   "candidate": 4086799144,
+   "shipping": 1258946443,
+   "class": "predicted_power_supply_regression"
+  },
+  "power_supply_register": {
+   "candidate": 907438603,
+   "shipping": 2199189007,
+   "class": "predicted_power_supply_regression"
+  },
+  "power_supply_register_no_ws": {
+   "candidate": 2073737142,
+   "shipping": 2640432065,
+   "class": "predicted_power_supply_regression"
+  },
+  "power_supply_set_battery_charged": {
+   "candidate": 191014836,
+   "shipping": 3674602783,
+   "class": "predicted_power_supply_regression"
+  },
+  "power_supply_set_property": {
+   "candidate": 2196451168,
+   "shipping": 3451543193,
+   "class": "predicted_power_supply_regression"
+  },
+  "power_supply_unregister": {
+   "candidate": 916956216,
+   "shipping": 3809172794,
+   "class": "predicted_power_supply_regression"
+  },
+  "private_ts": {
+   "candidate": 2775662277,
+   "shipping": 935699274,
+   "class": "drift_without_calibrated_after"
+  },
+  "register_charger_device_notifier": {
+   "candidate": 3091193623,
+   "shipping": 3559802369,
+   "class": "excluded_uncalibrated_charger"
+  },
+  "unregister_charger_device_notifier": {
+   "candidate": 3168573607,
+   "shipping": 320272057,
+   "class": "excluded_uncalibrated_charger"
+  }
+ },
+ "absent": [
+  "CFG_TABLE_FLASH_ADDR",
+  "HX_EXCP_RESET_ACTIVATE",
+  "charger_dev_enable_fod_oneshot",
+  "charger_dev_get_fod_status",
+  "charger_dev_is_typec_ot",
+  "himax_parse_assign_cmd"
+ ]
+}
