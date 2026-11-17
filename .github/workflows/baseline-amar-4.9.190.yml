@@ -377,7 +377,10 @@ jobs:
           mkdir -p dist
           D=src/out/arch/arm64/boot/dts/mediatek
           for f in mt6765.dtb achilles6_row_call.dtb achilles6_row_call.dtb.merge; do
-            test -f $D/$f && cp $D/$f dist/ && src/out/scripts/dtc/dtc -I dtb -O dts -o dist/$f.dts $D/$f 2>/dev/null
+            test -f $D/$f || continue
+            cp $D/$f dist/
+            # decompile is a convenience copy: tree-check errors are logged, not fatal (-f still writes the text)
+            src/out/scripts/dtc/dtc -f -I dtb -O dts -o dist/$f.dts $D/$f 2> dist/$f.dtc.log || echo "$f dtc exit $?" >> dist/dtc-exit.txt
           done
           (cd $D && find . -name 'cust*.dtsi' -print0 | xargs -0 -I{} cp --parents {} ../../../../../../../dist/ 2>/dev/null) || true
           cp -f out-receipts/* dist/ 2>/dev/null || true
