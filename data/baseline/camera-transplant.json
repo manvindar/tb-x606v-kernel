@@ -1,0 +1,33 @@
+{
+ "source": {
+  "repo": "https://github.com/UsrBinLuna/kernel_lenovo_achilles6.git",
+  "sha": "7f6a59c5b8d6ee27b29c91d07f77ec97393f3544",
+  "note": "Lenovo official OSS drop (Linux 4.9.117), pinned; used ONLY for the camera units below"
+ },
+ "units": [
+  {
+   "path": "drivers/misc/mediatek/imgsensor",
+   "git_tree": "35298a45b8dcca3e36234eb07ba5868694cd4419",
+   "manifest": "data/baseline/camera-manifest-imgsensor.json",
+   "files": 317,
+   "why": "ioctl contract headers (kd_imgsensor*.h, kd_seninf.h), sensor core, mt6765 platform glue and the stock sensor drivers must come from one tree; the 190 tree's imgsensor is a different vendor BSP"
+  },
+  {
+   "path": "drivers/misc/mediatek/cam_cal",
+   "git_tree": "33f70c2cecc46ff4b4e7ffdc900352b3becb73a0",
+   "manifest": "data/baseline/camera-manifest-cam_cal.json",
+   "files": 19,
+   "why": "cam_cal_list.c in the 190 tree references N21_* sensor ids that do not exist in the Lenovo kd_imgsensor.h"
+  }
+ ],
+ "known_gaps": [
+  {
+   "sensor": "ov5675_mipi_raw",
+   "evidence": "compiled into the shipping 4.9.190 image from .../common/v1/ov5675_mipi_raw/ov5675mipiraw_Sensor.c (module string 'ofilm ov5675 5m'); source absent from both public trees; the TB-X606F port repo carries a different variant ('kingcome ov5675 5m')"
+  },
+  {
+   "sensor": "s5k4h7yxqtech1_mipi_raw",
+   "evidence": "compiled into the shipping 4.9.190 image from .../common/v1/s5k4h7yxqtech1_mipi_raw/s5k4h7yxqtech1mipiraw_Sensor.c; source absent from both public trees (GitHub filename search: 0 hits)"
+  }
+ ]
+}
