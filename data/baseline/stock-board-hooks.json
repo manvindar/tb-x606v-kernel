@@ -433,5 +433,27 @@
   ],
   "pre_blob": "0457bb0005515ea12ed40746728598bcc55f2cd7",
   "post_blob": "fc1b8af18e7d34763ab0928e164dab0cecb79b49"
+ },
+ {
+  "file": "include/net/ncm.h",
+  "pre_blob": "fb8559c6196af32c63d2033d46167eee9eb0c896",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "/* The list of function which is being referenced */"
+    ],
+    "insert": "#ifndef CONFIG_KNOX_NCM\n/* NPA is off in the stock config (shipping image has no NPA code): the unguarded callers in sock.c, udp.c and nf_conntrack_core.c see \"flag off\" */\nstatic inline unsigned int check_ncm_flag(void) { return 0; }\nstatic inline void knox_collect_conntrack_data(struct nf_conn *ct, int startStop, int where) {}\nstatic inline unsigned int check_intermediate_flag(void) { return 0; }\nstatic inline unsigned int get_intermediate_timeout(void) { return 0; }\n#else\n",
+    "serves": "KNOX_NCM explicitly off (stock-config-overlay); run 44034228971: 19 undefined references to these 4 functions from net/core/sock.c, net/ipv4/udp.c, net/netfilter/nf_conntrack_core.c"
+   },
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "extern unsigned int get_intermediate_timeout(void);"
+    ],
+    "insert": "#endif /* CONFIG_KNOX_NCM */\n"
+   }
+  ],
+  "post_blob": "8c980ac4c791477560e17877bfcb4c70185707ce"
  }
 ]
