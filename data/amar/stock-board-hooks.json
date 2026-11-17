@@ -170,16 +170,46 @@
  {
   "file": "drivers/leds/Makefile",
   "pre_blob": "3965070190f522b6a3868499f50c93ce83657416",
-  "post_blob": "addbef6607ec3ee6d3d8d2c917af1f53184a79df",
+  "post_blob": "b256d19c5b30df9c9422313ad18b5c475745c3e3",
   "ops": [
    {
     "op": "insert_after",
     "anchor_lines": [
      "obj-$(CONFIG_LEDS_MLXCPLD)\t\t+= leds-mlxcpld.o"
     ],
-    "insert": "obj-$(CONFIG_LEDS_AW2016)               += leds-aw2016.o\n"
+    "insert": "obj-$(CONFIG_LEDS_AW2016)               += leds-aw2016.o\n# v13: run 44043020010: amar keeps charger_class.h only under include/mt-plat (philmb added the charger dir to subdir-ccflags)\nCFLAGS_leds-aw2016.o += -I$(srctree)/drivers/misc/mediatek/include/mt-plat\n"
    }
   ],
   "serves": "LEDS_AW2016"
+ },
+ {
+  "file": "drivers/misc/mediatek/lcm/mt65xx_lcm_list.h",
+  "pre_blob": "6144f4c665a8cccfa19211ba3841eb577d28a953",
+  "post_blob": "b884eecbe35c859b72f4c2d0b5265fb76b1c420d",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "extern struct LCM_DRIVER mipi_hx83102e_inx_video_800p_lcm_drv;"
+    ],
+    "insert": "extern struct LCM_DRIVER mipi_ft8201_video_1200p_lcm_drv;\nextern struct LCM_DRIVER mipi_hx83102e_video_1200p_lcm_drv;\nextern struct LCM_DRIVER mipi_hx83102p_inx_video_1200p_lcm_drv;\nextern struct LCM_DRIVER mipi_nt36523w_inx_video_1200p_lcm_drv;\nextern struct LCM_DRIVER mipi_hx83102e_2nd_video_1200p_lcm_drv;\n"
+   }
+  ],
+  "serves": "CUSTOM_KERNEL_LCM stock panels"
+ },
+ {
+  "file": "drivers/misc/mediatek/lcm/mt65xx_lcm_list.c",
+  "pre_blob": "805400feef59f87fd998ee9bfa7dcf05dc8b282d",
+  "post_blob": "85f56ab514113e39a44a3f509a99c19cd3fe8496",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "struct LCM_DRIVER *lcm_driver_list[] = {"
+    ],
+    "insert": "#if defined(PANEL_MIPI_FT8201_VIDEO_1200P)\n\t&mipi_ft8201_video_1200p_lcm_drv,\n#endif\n\n#if defined(PANEL_MIPI_HX83102E_VIDEO_1200P)\n\t&mipi_hx83102e_video_1200p_lcm_drv,\n#endif\n\n#if defined(PANEL_MIPI_HX83102P_INX_VIDEO_1200P)\n\t&mipi_hx83102p_inx_video_1200p_lcm_drv,\n#endif\n\n#if defined(PANEL_MIPI_NT36523W_INX_VIDEO_1200P)\n\t&mipi_nt36523w_inx_video_1200p_lcm_drv,\n#endif\n\n#if defined(PANEL_MIPI_HX83102E_2ND_VIDEO_1200P)\n\t&mipi_hx83102e_2nd_video_1200p_lcm_drv,\n#endif\n\n"
+   }
+  ],
+  "serves": "CUSTOM_KERNEL_LCM stock panels"
  }
 ]

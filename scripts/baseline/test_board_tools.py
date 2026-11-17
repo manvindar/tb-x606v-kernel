@@ -207,5 +207,23 @@ class Gate(unittest.TestCase):
             self.assertEqual(self.go(STOCK, tree=t)['status'], 'OK')
 
 
+class AmarPanelRegistration(unittest.TestCase):
+    def test_stock_config_panels_have_conditional_list_and_extern_entries(self):
+        import re
+        base = Path(__file__).resolve().parents[2]
+        config = (base / 'config/stock-4.9.190-achilles6_row_call.config').read_text()
+        panels = re.search(r'^CONFIG_CUSTOM_KERNEL_LCM="([^"]+)"$', config, re.M).group(1).split()
+        hooks = json.loads((base / 'data/amar/stock-board-hooks.json').read_text())
+        def inserted(suffix):
+            hook = next(h for h in hooks if h['file'].endswith(suffix))
+            return ''.join(op.get('insert', '') for op in hook['ops'])
+        entries, declarations = inserted('mt65xx_lcm_list.c'), inserted('mt65xx_lcm_list.h')
+        for panel in panels:
+            symbol = panel.removeprefix('panel_') + '_lcm_drv'
+            self.assertEqual(entries.count('&' + symbol + ','), 1)
+            self.assertIn('#if defined(' + panel.upper() + ')\n\t&' + symbol + ',\n#endif', entries)
+            self.assertEqual(declarations.count('extern struct LCM_DRIVER ' + symbol + ';'), 1)
+
+
 if __name__ == '__main__':
     unittest.main()
