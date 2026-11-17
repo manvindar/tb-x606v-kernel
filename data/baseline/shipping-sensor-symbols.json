@@ -1,0 +1,474 @@
+{
+"note": "shipping 4.9.190 kernel: imgsensor sensor-driver symbol region from kallsyms; delta = distance to the next symbol (size + alignment padding), in link order",
+"first": "S5K4H7YXQTECH1_MIPI_RAW_SensorInit",
+"region": [
+{
+"name": "S5K4H7YXQTECH1_MIPI_RAW_SensorInit",
+"delta": 24
+},
+{
+"name": "open",
+"delta": 1912
+},
+{
+"name": "get_info",
+"delta": 224
+},
+{
+"name": "get_resolution",
+"delta": 124
+},
+{
+"name": "feature_control",
+"delta": 3360
+},
+{
+"name": "control",
+"delta": 4344
+},
+{
+"name": "close",
+"delta": 68
+},
+{
+"name": "set_shutter",
+"delta": 1052
+},
+{
+"name": "streaming_control",
+"delta": 632
+},
+{
+"name": "set_max_framerate",
+"delta": 280
+},
+{
+"name": "set_dummy",
+"delta": 356
+},
+{
+"name": "preview",
+"delta": 2016
+},
+{
+"name": "capture_setting",
+"delta": 1872
+},
+{
+"name": "S5K4H7YX_MIPI_RAW_SensorInit",
+"delta": 24
+},
+{
+"name": "open",
+"delta": 768
+},
+{
+"name": "get_info",
+"delta": 224
+},
+{
+"name": "get_resolution",
+"delta": 124
+},
+{
+"name": "feature_control",
+"delta": 3568
+},
+{
+"name": "control",
+"delta": 2008
+},
+{
+"name": "close",
+"delta": 68
+},
+{
+"name": "set_shutter",
+"delta": 1060
+},
+{
+"name": "streaming_control",
+"delta": 632
+},
+{
+"name": "set_max_framerate",
+"delta": 280
+},
+{
+"name": "set_dummy",
+"delta": 356
+},
+{
+"name": "preview",
+"delta": 456
+},
+{
+"name": "GC5035MIPI_RAW_SensorInit",
+"delta": 24
+},
+{
+"name": "open",
+"delta": 7148
+},
+{
+"name": "get_info",
+"delta": 280
+},
+{
+"name": "get_resolution",
+"delta": 124
+},
+{
+"name": "feature_control",
+"delta": 4560
+},
+{
+"name": "control",
+"delta": 9540
+},
+{
+"name": "close",
+"delta": 68
+},
+{
+"name": "gc5035_otp_read_group",
+"delta": 376
+},
+{
+"name": "gc5035_otp_read_sensor_info",
+"delta": 2488
+},
+{
+"name": "set_max_framerate",
+"delta": 308
+},
+{
+"name": "preview",
+"delta": 2488
+},
+{
+"name": "S5K4H7YXFRONT_MIPI_RAW_SensorInit",
+"delta": 24
+},
+{
+"name": "open",
+"delta": 1556
+},
+{
+"name": "get_info",
+"delta": 228
+},
+{
+"name": "get_resolution",
+"delta": 124
+},
+{
+"name": "feature_control",
+"delta": 3852
+},
+{
+"name": "control",
+"delta": 1732
+},
+{
+"name": "close",
+"delta": 68
+},
+{
+"name": "set_shutter",
+"delta": 908
+},
+{
+"name": "streaming_control",
+"delta": 568
+},
+{
+"name": "set_max_framerate",
+"delta": 280
+},
+{
+"name": "set_dummy",
+"delta": 304
+},
+{
+"name": "s5k4h7yxfront_read_otp_page_data",
+"delta": 640
+},
+{
+"name": "preview",
+"delta": 336
+},
+{
+"name": "OV13B10_MIPI_RAW_SensorInit",
+"delta": 24
+},
+{
+"name": "open",
+"delta": 1096
+},
+{
+"name": "get_info",
+"delta": 248
+},
+{
+"name": "get_resolution",
+"delta": 56
+},
+{
+"name": "feature_control",
+"delta": 3224
+},
+{
+"name": "control",
+"delta": 1544
+},
+{
+"name": "close",
+"delta": 8
+},
+{
+"name": "set_shutter",
+"delta": 1128
+},
+{
+"name": "streaming_control",
+"delta": 292
+},
+{
+"name": "preview",
+"delta": 424
+},
+{
+"name": "S5K4H7YXQTECH_MIPI_RAW_SensorInit",
+"delta": 24
+},
+{
+"name": "open",
+"delta": 1912
+},
+{
+"name": "get_info",
+"delta": 224
+},
+{
+"name": "get_resolution",
+"delta": 124
+},
+{
+"name": "feature_control",
+"delta": 3312
+},
+{
+"name": "control",
+"delta": 4344
+},
+{
+"name": "close",
+"delta": 68
+},
+{
+"name": "set_shutter",
+"delta": 1052
+},
+{
+"name": "streaming_control",
+"delta": 632
+},
+{
+"name": "set_max_framerate",
+"delta": 280
+},
+{
+"name": "set_dummy",
+"delta": 356
+},
+{
+"name": "preview",
+"delta": 2016
+},
+{
+"name": "capture_setting",
+"delta": 1872
+},
+{
+"name": "GC5035KINGCOMEMIPI_RAW_SensorInit",
+"delta": 24
+},
+{
+"name": "open",
+"delta": 7096
+},
+{
+"name": "get_info",
+"delta": 280
+},
+{
+"name": "get_resolution",
+"delta": 124
+},
+{
+"name": "feature_control",
+"delta": 4512
+},
+{
+"name": "control",
+"delta": 9540
+},
+{
+"name": "close",
+"delta": 68
+},
+{
+"name": "gc5035kingcome_otp_read_group",
+"delta": 376
+},
+{
+"name": "gc5035kingcome_otp_read_sensor_info",
+"delta": 2488
+},
+{
+"name": "set_max_framerate",
+"delta": 308
+},
+{
+"name": "preview",
+"delta": 2488
+},
+{
+"name": "S5K4H7YXLCETRON_MIPI_RAW_SensorInit",
+"delta": 24
+},
+{
+"name": "open",
+"delta": 1556
+},
+{
+"name": "get_info",
+"delta": 228
+},
+{
+"name": "get_resolution",
+"delta": 124
+},
+{
+"name": "feature_control",
+"delta": 3932
+},
+{
+"name": "control",
+"delta": 1732
+},
+{
+"name": "close",
+"delta": 68
+},
+{
+"name": "set_shutter",
+"delta": 908
+},
+{
+"name": "streaming_control",
+"delta": 568
+},
+{
+"name": "set_max_framerate",
+"delta": 280
+},
+{
+"name": "set_dummy",
+"delta": 304
+},
+{
+"name": "s5k4h7yxlcetron_read_otp_page_data",
+"delta": 640
+},
+{
+"name": "preview",
+"delta": 336
+},
+{
+"name": "OV13B10QTECH_MIPI_RAW_SensorInit",
+"delta": 24
+},
+{
+"name": "open",
+"delta": 1096
+},
+{
+"name": "get_info",
+"delta": 248
+},
+{
+"name": "get_resolution",
+"delta": 56
+},
+{
+"name": "feature_control",
+"delta": 3256
+},
+{
+"name": "control",
+"delta": 1544
+},
+{
+"name": "close",
+"delta": 8
+},
+{
+"name": "set_shutter",
+"delta": 1128
+},
+{
+"name": "streaming_control",
+"delta": 292
+},
+{
+"name": "preview",
+"delta": 424
+},
+{
+"name": "OV5675_MIPI_RAW_SensorInit",
+"delta": 24
+},
+{
+"name": "open",
+"delta": 5544
+},
+{
+"name": "get_info",
+"delta": 224
+},
+{
+"name": "get_resolution",
+"delta": 124
+},
+{
+"name": "feature_control",
+"delta": 3496
+},
+{
+"name": "control",
+"delta": 2224
+},
+{
+"name": "close",
+"delta": 68
+},
+{
+"name": "set_max_framerate",
+"delta": 496
+},
+{
+"name": "preview_setting",
+"delta": 1120
+},
+{
+"name": "set_mirror_flip",
+"delta": 720
+},
+{
+"name": "capture_setting",
+"delta": 2164
+}
+]
+}

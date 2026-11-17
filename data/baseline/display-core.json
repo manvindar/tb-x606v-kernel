@@ -1,0 +1,650 @@
+{
+ "target": {
+  "repo": "https://github.com/philmb3487/android_kernel_lenovo_achilles6.git",
+  "sha": "0a95b5010777186eed379b2ed11e3d1a4f85921e"
+ },
+ "source": {
+  "repo": "https://github.com/DevZillion/android_kernel_lenovo_amar.git",
+  "sha": "213b300e669ccbabc945845b7175bb1fd43a530e",
+  "branch": "android-10",
+  "license_field": "GPL-2.0"
+ },
+ "why": "shipping LCM_PARAMS is 0x4c8 bytes with physical_width 0x434, esd_check 0xd8, ata_check 0xf0 and a set_reset_pin_gpio util slot: only the amar lcm_drv.h matches; philmb has 0x478 and no such slot. The panels recovered from the shipping image cannot be built against philmb lcm_drv.h",
+ "evidence_class": "file-level blob compare plus string-literal presence in the shipping Image; layout/lineage hint only, NOT source identity. Compile and per-function fidelity are the open gates",
+ "files": [
+  {
+   "path": "drivers/misc/mediatek/cmdq/v2/cmdq_core.c",
+   "old": "f335c2258dfc7b3a04efa04c6782e618d1ae9574",
+   "new": "43f0ea29c44e311709ee0563fd6cc56fa7876320",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/cmdq/v2/cmdq_core.h",
+   "old": "36fc77ac052f5fc810e7c97405b5e246c6f5be2f",
+   "new": "e29d1db2e21193cde26cf38dfe1cf95c31cd521d",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/cmdq/v2/cmdq_def.h",
+   "old": "e48aa0a9b497936c9b830bbdbb9769551f61e7b3",
+   "new": "0593663563ad2b71cf458d8bd0e36ba79ff819d5",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/cmdq/v2/cmdq_mdp_common.h",
+   "old": "83a9d1e07588264d3370659e814522f68863eff4",
+   "new": "43680eefaa8530c48cf6cb8184ac24c46e34c37d",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 1,
+    "amar_only_in_ship": 0,
+    "verdict": "tie"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/cmdq/v2/cmdq_virtual.c",
+   "old": "e3acb01bfacc04cde60413add49f933aed1d78e0",
+   "new": "353cdb37b72f63b2ea03d8b8571334d3c6d2ab8c",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/cmdq/v3/cmdq_helper_ext.c",
+   "old": "b8057aa14ca48264c8fefd00505f68e288d1d67c",
+   "new": "61256b2cf93c0885cbdc1e86a069b2e646590354",
+   "evidence": {
+    "phil_only": 1,
+    "phil_only_in_ship": 0,
+    "amar_only": 2,
+    "amar_only_in_ship": 2,
+    "verdict": "amar"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/cmdq/v3/cmdq_helper_ext.h",
+   "old": "6d663df82069731fe15c542181dd9ca2fcda2b81",
+   "new": "8644909f990a453b78aeec24693377b5be21db71",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/cmdq/v3/cmdq_mdp_common.c",
+   "old": "79f1c79ae21e832a0d05e1dee19f1344607859c8",
+   "new": "fad59a392d4b7cbb7e864f04b604f1ba401c693a",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 1,
+    "amar_only_in_ship": 1,
+    "verdict": "amar"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/cmdq/v3/mt6765/Makefile",
+   "old": "5df18e7b7233c3a765a583bd9e78dbbacd99957b",
+   "new": "b48849d3d32622f96d3d3fb81fd3a143606627d8",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/cmdq/v3/mt6765/cmdq_engine.h",
+   "old": "42256f5457bd88ecccd25a71f10589f9388cf8fc",
+   "new": "8868e6c176432e32e8f8175cfbb53f0e6d823f77",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/cmdq/v3/mt6765/cmdq_mdp.c",
+   "old": "d0882ee884c608de78a2706b5e3bb19e347eb405",
+   "new": "21a9f4df7f585ceb7e8d69b898c3da1520473789",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 1,
+    "amar_only_in_ship": 0,
+    "verdict": "tie"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/lcm/inc/lcm_drv.h",
+   "old": "09cf91b12411b23ae40ea68adb7ad6ab53fe343f",
+   "new": "53f50c80cbce2fce20e0b3f62f20af1b398401c5",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/leds/mt6765/mtk_leds.c",
+   "old": "142d050e68ce53925c9aa592e5fe571ad8c7c492",
+   "new": "ed2caf1297e86bb34f5f9de55c1cedb043985777",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/common/aal30/ddp_aal.c",
+   "old": "1cbedcaf6015c0e49b2e75553825d7c14ceee9c3",
+   "new": "15f7026c1d555bc647842842eff40459fa40508c",
+   "evidence": {
+    "phil_only": 15,
+    "phil_only_in_ship": 0,
+    "amar_only": 1,
+    "amar_only_in_ship": 0,
+    "verdict": "tie"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/common/corr10/Makefile",
+   "old": "0a71e6295d157305c3fb941fdc5bfd267c99dfb0",
+   "new": "3f0a4684b39adcbf4bc30c01c289d8d394da6a95",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/common/fbconfig_kdebug.c",
+   "old": "73173409be43a075fa4b03af9a649feec1f7494b",
+   "new": "fcc02afcc4c7f27c612595a3f966ef07c5cf20ea",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/common/layering_rule_base/Makefile",
+   "old": "4bb1adeccc43fbf1f884fde3543238f7212b173b",
+   "new": "211b10041051e966845a7ebbb31b0fbe888f89b4",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/common/layering_rule_base/v1.1/Makefile",
+   "old": "8bcf7082955bce08604dc158b8219748e428912e",
+   "new": "ffdd9daf4a13a0afe0859aa4d3b0cf5963179a10",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/common/layering_rule_base/v1.1/layering_rule_base.c",
+   "old": "475200b8d5c6c07e977fae644b18a11053815abd",
+   "new": "c46a8dfbee2cc94f5d7f3752b10575bc06c826db",
+   "evidence": {
+    "phil_only": 2,
+    "phil_only_in_ship": 0,
+    "amar_only": 2,
+    "amar_only_in_ship": 2,
+    "verdict": "amar"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/common/layering_rule_base/v1.1/layering_rule_base.h",
+   "old": "db884f54dde459cf11556a33853f0b5766177522",
+   "new": "d246c31cb595db85319779d40f7939f5f01c9b5f",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/common/layering_rule_base/v1.2/Makefile",
+   "old": "6ccd782e77a24fca4922a84e0efcc00e7c3f74fa",
+   "new": "924a7c9a03aa206f01cd38ce19b99465a1897da9",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/common/layering_rule_base/v1.2/layering_rule_base.c",
+   "old": "f6663e76c3c63839666dfa9479a7e474e88aa826",
+   "new": "85552c029178306e08b4c19ced426d4dd3deb9e7",
+   "evidence": {
+    "phil_only": 1,
+    "phil_only_in_ship": 0,
+    "amar_only": 3,
+    "amar_only_in_ship": 0,
+    "verdict": "tie"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/common/layering_rule_base/v1.2/layering_rule_base.h",
+   "old": "4b1322a59a04a58f974a7ac9383a770911e9bbae",
+   "new": "a6389c00aacc30f545461eb448c9c1cbb023f462",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/common/rdma20/Makefile",
+   "old": "ea430ec3a16f5e710a5d31f06c0b6724f778d053",
+   "new": "968c87495db8e514b6edd0942ceddc74eadcd834",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/common/rdma20/ddp_rdma.c",
+   "old": "8f25eea1888075e3982aa06d7a4e49f95729effb",
+   "new": "11014d0117c8f32e98db203012505860b3e68795",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/common/rdma20/ddp_rdma.h",
+   "old": "c69b5b220edabc8a8c6f1f12941125b4d6b090b2",
+   "new": "06364bd6673801090a1aef630fd00309f818a2e0",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/common/wdma20/Makefile",
+   "old": "22c1fbf83f3899ccff0c2ffd049bf481969ac781",
+   "new": "e432a302283db1b7a111b5115360f3254838d851",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/common/wdma20/ddp_wdma.c",
+   "old": "f9d12544dd680160b8cbedf2bea0234bfe08a8be",
+   "new": "8a5da5ef36a636839082a61a7fd6496848aa68ee",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/common/wdma20/ddp_wdma.h",
+   "old": "e5e7b68710a4e67aa1330e030e8216bd0b55da1e",
+   "new": "4bc56de5ef6d53562e65b3f7d1cdee9335106c02",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/include/disp_session.h",
+   "old": "555e4a7b6df1ba8423013c0b45099c8b8a5898aa",
+   "new": "97a32d512494de1179490bdc3933db0d4fa31f56",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/include/mtkfb.h",
+   "old": "4bba955a6b4ee64d1b9e9e75accc5796e4c426fa",
+   "new": "170f38ddfff894edece0a420b7e5fe8bdc9f3414",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/mt6765/dispsys/Makefile",
+   "old": "680ca07fcac280842773a70ed1dc8383e05696c6",
+   "new": "634fd5f2a6318c65fe7ec5a2ce357e1ed42cfd08",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/mt6765/dispsys/ddp_debug.c",
+   "old": "25dc02a5db28e89b740564e37a0b8035f402ca3b",
+   "new": "af9a032c24c7940a742e647219b048fb97044bb3",
+   "evidence": {
+    "phil_only": 7,
+    "phil_only_in_ship": 0,
+    "amar_only": 5,
+    "amar_only_in_ship": 5,
+    "verdict": "amar"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/mt6765/dispsys/ddp_dsi.c",
+   "old": "e4d32c67bfc7567bfd28032c74fc60096f87c004",
+   "new": "a50bca4bd294bcaf9074e12e1da20a367f08ff27",
+   "evidence": {
+    "phil_only": 19,
+    "phil_only_in_ship": 1,
+    "amar_only": 4,
+    "amar_only_in_ship": 4,
+    "verdict": "amar"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/mt6765/dispsys/ddp_dsi.h",
+   "old": "18dc6f4f723da7a8b16e26393e769db86179cc9b",
+   "new": "5cac6a1502fb3b99f9dae375fa14019d9ea35219",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/mt6765/dispsys/ddp_info.h",
+   "old": "62880fcf8739829e41b5d9ccb25c2e7dc1683669",
+   "new": "d745b5816dff48dd4d487f42bb58fe3be8791f91",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/mt6765/dispsys/ddp_manager.c",
+   "old": "f2777600f8357e6a072588059dd7ff7ace909354",
+   "new": "f91cd09d10dc2d8741edd177522276ed76efca8b",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/mt6765/dispsys/ddp_mutex.c",
+   "old": "225cadef44e75e775ba83478f5c3bf475eab4f26",
+   "new": "e46379d4e359929445fcb5d383292c43b5680bc9",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/mt6765/videox/Makefile",
+   "old": "f0622b600ab4cffc221e859923588696c328742d",
+   "new": "039be770e956e5bd15c716ae23ea09ef6371252a",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/mt6765/videox/compat_mtk_disp_mgr.h",
+   "old": "69aa80bc5d47fd85059d28ebad4ca024ac6967bc",
+   "new": "5fdd7bacaedd454909f4d93c8863f44fbc28dba3",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/mt6765/videox/disp_dts_gpio.c",
+   "old": "ec34992465b733aff460efdea89989ed8ad5f115",
+   "new": "de27c3793dbd872caf4021bd6ede626b75d450c6",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 4,
+    "amar_only_in_ship": 4,
+    "verdict": "amar"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/mt6765/videox/disp_dts_gpio.h",
+   "old": "6aed69a55c9efa5d69df0c2761b23a972f3e7e51",
+   "new": "4e397d6769ad7389d9003401831e0bb971e28674",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/mt6765/videox/disp_helper.c",
+   "old": "1452c8e8ef9d5a692ad086e0d21d556c980aab12",
+   "new": "b6cc913e5c099dde9f04c5428ae7a683b4ae3a77",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/mt6765/videox/disp_lcm.c",
+   "old": "7c7f9698cb2bf9637449ce056b4e92f5d526bf62",
+   "new": "6654a7cb27a14a04a5a626c32675115f720a12e3",
+   "evidence": {
+    "phil_only": 1,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "tie"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/mt6765/videox/disp_recovery.c",
+   "old": "dbcdd2e88a15288026a3ef793244575bb2b7be7f",
+   "new": "3dbc15b760523f21cb66d0850e3d140d44487aa4",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 23,
+    "amar_only_in_ship": 22,
+    "verdict": "amar"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/mt6765/videox/disp_recovery.h",
+   "old": "f9a8c96dd0d1c8ba55f4ec8381c538350f23d293",
+   "new": "23ccd8710eb73df94b20ae5b32e38f4b2fca3fe6",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/mt6765/videox/mtkfb.c",
+   "old": "a863c24a0cbf2206f4d4b15067ebb191727ee036",
+   "new": "573933fc819558be6cb5f00f3d930241930abd92",
+   "evidence": {
+    "phil_only": 1,
+    "phil_only_in_ship": 0,
+    "amar_only": 2,
+    "amar_only_in_ship": 2,
+    "verdict": "amar"
+   }
+  },
+  {
+   "path": "drivers/misc/mediatek/video/mt6765/videox/primary_display.c",
+   "old": "51ac23a5705671dab064d0b2be5cd450c85dc109",
+   "new": "c17b363c3b80287b5d6440e74c9858ea919fccb0",
+   "evidence": {
+    "phil_only": 3,
+    "phil_only_in_ship": 0,
+    "amar_only": 4,
+    "amar_only_in_ship": 4,
+    "verdict": "amar"
+   }
+  }
+ ],
+ "kept": [
+  {
+   "path": "drivers/misc/mediatek/video/common/layering_rule_base/v1/Makefile",
+   "old": "0c87f7ca1f9db051861a5317c5f29e39f2443803",
+   "new": "37cd87b6f7b8c57003522e24930b6d999dc99317",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   },
+   "reason": "unit kept: shipping-string evidence favours philmb for video/common/layering_rule_base/v1/layering_rule_base.c"
+  },
+  {
+   "path": "drivers/misc/mediatek/video/common/layering_rule_base/v1/layering_rule_base.c",
+   "old": "ad3b1fe5921607741e7d6130a003f6644b66c0ba",
+   "new": "4eb079bc77ca49655cdcc351538da3e720a74b9f",
+   "evidence": {
+    "phil_only": 3,
+    "phil_only_in_ship": 3,
+    "amar_only": 4,
+    "amar_only_in_ship": 1,
+    "verdict": "phil"
+   },
+   "reason": "unit kept: shipping-string evidence favours philmb for video/common/layering_rule_base/v1/layering_rule_base.c"
+  },
+  {
+   "path": "drivers/misc/mediatek/video/common/layering_rule_base/v1/layering_rule_base.h",
+   "old": "f7018b03ed23f90c175d7f1401df10b52c53dc4a",
+   "new": "01ba933ce1aac488e8e9c9493fe027db1bb9e4be",
+   "evidence": {
+    "phil_only": 0,
+    "phil_only_in_ship": 0,
+    "amar_only": 0,
+    "amar_only_in_ship": 0,
+    "verdict": "no-literal-delta"
+   },
+   "reason": "unit kept: shipping-string evidence favours philmb for video/common/layering_rule_base/v1/layering_rule_base.c"
+  }
+ ],
+ "not_installed": [
+  {
+   "path": "drivers/misc/mediatek/video/mt6765/videox/disp_cust.c",
+   "blob": "2322f0005717daca19e5ccae0f2a8f0c015e4573",
+   "note": "philmb-only; left in place (the amar videox Makefile does not build it)"
+  },
+  {
+   "path": "drivers/misc/mediatek/video/mt6765/videox/disp_cust.h",
+   "blob": "c2cdf0da7b36f561422331c4a266faf76d9ce21e",
+   "note": "philmb-only; left in place (the amar videox Makefile does not build it)"
+  }
+ ],
+ "counts": {
+  "installed": 48,
+  "kept": 3,
+  "philmb_only": 2
+ }
+}

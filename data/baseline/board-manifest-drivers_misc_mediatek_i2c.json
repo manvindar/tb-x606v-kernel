@@ -1,0 +1,18 @@
+{
+"drivers/misc/mediatek/i2c/Kconfig": {
+"blob": "e33dc81c397f75c0fee46a0d6668e6be34602329",
+"bytes": 654
+},
+"drivers/misc/mediatek/i2c/Makefile": {
+"blob": "bb12605209aa15c26ed7b558d8bfa5c219c9fd4f",
+"bytes": 582
+},
+"drivers/misc/mediatek/i2c/ocp2131.c": {
+"blob": "21f55332d60407d2653416681759317729db5070",
+"bytes": 5043
+},
+"drivers/misc/mediatek/i2c/sgm37604a_driver.c": {
+"blob": "0ddfa096d68de21eacc0c3db73dec2839e0e7650",
+"bytes": 7674
+}
+}

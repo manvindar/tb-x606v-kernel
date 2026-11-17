@@ -1,0 +1,110 @@
+{
+"fs/exfat/Kconfig": {
+"blob": "78b32aa2ca19652168d34eadd74211814e5f7582",
+"bytes": 843
+},
+"fs/exfat/LICENSE": {
+"blob": "0a98ec0ff25a770509a048d2f9a3121c5c015f53",
+"bytes": 18429
+},
+"fs/exfat/Makefile": {
+"blob": "da7cdbd202e85059f0cd1c8bf849e3df633ae8e2",
+"bytes": 282
+},
+"fs/exfat/README.md": {
+"blob": "d595e3ed595f00c44596d6dfcff11ac231fa2be2",
+"bytes": 2437
+},
+"fs/exfat/dkms.conf": {
+"blob": "685b7c199d2c8c09a6e571ccfe24da1a8eaa8a74",
+"bytes": 195
+},
+"fs/exfat/exfat-km.mk": {
+"blob": "3d9957f363910ab519f878ed89b8cfad46d21794",
+"bytes": 486
+},
+"fs/exfat/exfat_api.c": {
+"blob": "193d764eb54eafdb68b134ed19d9f9535ff121a7",
+"bytes": 15659
+},
+"fs/exfat/exfat_api.h": {
+"blob": "a4b35535e534d403d40cb457b114afaafc26a26a",
+"bytes": 8143
+},
+"fs/exfat/exfat_bitmap.c": {
+"blob": "1947808c76d467547e4bef4587d8e8bd2f2a903f",
+"bytes": 2779
+},
+"fs/exfat/exfat_bitmap.h": {
+"blob": "ebc495b281e650dfb917cd1ed0359ba9c21e829a",
+"bytes": 2888
+},
+"fs/exfat/exfat_blkdev.c": {
+"blob": "87a9c2f4fafd78fde933797958cd0d809533717b",
+"bytes": 6265
+},
+"fs/exfat/exfat_blkdev.h": {
+"blob": "f9d8f3d030e522669da1a6e446250a203677cf0f",
+"bytes": 3646
+},
+"fs/exfat/exfat_cache.c": {
+"blob": "43ac7ef0e023983a691afbfe22904d649dbbc310",
+"bytes": 20461
+},
+"fs/exfat/exfat_cache.h": {
+"blob": "1c83ce09eae3beca6d11bc1479048f5578e7117e",
+"bytes": 4040
+},
+"fs/exfat/exfat_config.h": {
+"blob": "54bc85cb20b42a96a53ff80c8e36388f50ab2474",
+"bytes": 3285
+},
+"fs/exfat/exfat_core.c": {
+"blob": "4cba323e90992cfdd8efce3ba86f4e570e554406",
+"bytes": 138281
+},
+"fs/exfat/exfat_core.h": {
+"blob": "9572f59b001507ec4f24c62e06cd793239f8fb9c",
+"bytes": 27660
+},
+"fs/exfat/exfat_data.c": {
+"blob": "7efe26369fcb8d189087542e2a8245f8cf469e74",
+"bytes": 3537
+},
+"fs/exfat/exfat_data.h": {
+"blob": "c923be4bb0762b7bbec9e9b2796676d09504c6a4",
+"bytes": 2931
+},
+"fs/exfat/exfat_nls.c": {
+"blob": "f25bf08f74f50159cd5214f1e2c68eaabfb20c55",
+"bytes": 11783
+},
+"fs/exfat/exfat_nls.h": {
+"blob": "c0cf81cc4c075a5920a4d340f98a1414d0e0c668",
+"bytes": 4045
+},
+"fs/exfat/exfat_oal.c": {
+"blob": "50148760b3af371ad09f14395c47982f074f1602",
+"bytes": 6401
+},
+"fs/exfat/exfat_oal.h": {
+"blob": "a0fa7fcb4334f2fe58f324d1058f848f7e33fe1f",
+"bytes": 3600
+},
+"fs/exfat/exfat_super.c": {
+"blob": "3c22eb4f96fd2a512d09c345998c75e3822f12cb",
+"bytes": 72369
+},
+"fs/exfat/exfat_super.h": {
+"blob": "b9098e37d7a83725ef94573a7256e39451912db0",
+"bytes": 5232
+},
+"fs/exfat/exfat_upcase.c": {
+"blob": "f5a90cc89e52ef4dd28040cd5e81af2ec195455e",
+"bytes": 37801
+},
+"fs/exfat/exfat_version.h": {
+"blob": "683cb56ac738c2b3a3fd2e09d45c41ae62f87aee",
+"bytes": 1324
+}
+}

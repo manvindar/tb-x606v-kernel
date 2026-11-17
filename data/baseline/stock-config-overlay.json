@@ -1,0 +1,109 @@
+{
+ "policy": "A symbol the stock config does not contain is off in the candidate unless the tree needs it. Evidence per symbol: absent from the shipping kernel (no sdfat/knox/stlog/fslog/sqlite/PELT-16 code or symbol in its decoded kallsyms; shipping has fs/exfat only). Applied as explicit '# CONFIG_X is not set' lines before olddefconfig; the gate fails if olddefconfig turns any of them back on.",
+ "explicit_off": [
+  {
+   "symbol": "BALANCE_ANON_FILE_RECLAIM",
+   "kconfig": "mm/Kconfig:686",
+   "used_in": "mm/vmscan.c",
+   "effect": "reclaim treats anon and file pages equally (changes reclaim balance)"
+  },
+  {
+   "symbol": "DIRECT_RECLAIM_FILE_PAGES_ONLY",
+   "kconfig": "mm/Kconfig:707",
+   "used_in": "mm/vmscan.c",
+   "effect": "direct reclaim scans file pages only"
+  },
+  {
+   "symbol": "INCREASE_MAXIMUM_SWAPPINESS",
+   "kconfig": "mm/Kconfig:702",
+   "used_in": "kernel/sysctl.c",
+   "effect": "raises the accepted vm.swappiness maximum to 200"
+  },
+  {
+   "symbol": "PELT_UTIL_HALFLIFE_16",
+   "kconfig": "init/Kconfig:999",
+   "used_in": "kernel/sched/fair.c",
+   "effect": "PELT half-life 16 ms instead of 32 ms: different load_avg constants and tables, changes utilization seen by schedutil and EAS"
+  },
+  {
+   "symbol": "KNOX_NCM",
+   "kconfig": "net/ncm/Kconfig:5",
+   "used_in": "net/Makefile, net/ncm/Makefile, net/netfilter/Makefile",
+   "effect": "adds Samsung Knox network-monitor objects to net/ and netfilter"
+  },
+  {
+   "symbol": "PROC_DLOG",
+   "kconfig": "fs/proc/Kconfig:103",
+   "used_in": "fs/Makefile, fs/internal.h, fs/namei.c",
+   "effect": "adds a Samsung dlog hook in namei"
+  },
+  {
+   "symbol": "PROC_FSLOG",
+   "kconfig": "fs/proc/Kconfig:93",
+   "used_in": "fs/proc/Makefile, fs/sdfat/misc.c",
+   "effect": "Samsung /proc fslog"
+  },
+  {
+   "symbol": "PROC_STLOG",
+   "kconfig": "fs/proc/Kconfig:100",
+   "used_in": "include/linux/fslog.h",
+   "effect": "Samsung storage-log API (header only declarations)"
+  },
+  {
+   "symbol": "PROC_TRIGGER_SQLITE_BUG",
+   "kconfig": "fs/proc/Kconfig:113",
+   "used_in": "fs/proc/base.c",
+   "effect": "Samsung /proc trigger"
+  },
+  {
+   "symbol": "BLOCK_SUPPORT_STLOG",
+   "kconfig": "block/Kconfig:140",
+   "used_in": "block/genhd.c",
+   "effect": "storage-log calls in genhd"
+  },
+  {
+   "symbol": "MMC_SUPPORT_STLOG",
+   "kconfig": "drivers/mmc/Kconfig:22",
+   "used_in": "drivers/mmc/card/block.c, drivers/mmc/core/bus.c, drivers/mmc/core/core.c",
+   "effect": "storage-log calls in the eMMC path"
+  },
+  {
+   "symbol": "FAT_SUPPORT_STLOG",
+   "kconfig": "fs/fat/Kconfig:132",
+   "used_in": "fs/fat/fat.h",
+   "effect": "storage-log in FAT (struct msdos_sb_info is private to fs/fat)"
+  },
+  {
+   "symbol": "FAT_UEVENT",
+   "kconfig": "fs/fat/Kconfig:137",
+   "used_in": "fs/fat/fat.h, fs/fat/misc.c",
+   "effect": "uevent on FAT errors"
+  },
+  {
+   "symbol": "FAT_VIRTUAL_XATTR",
+   "kconfig": "fs/fat/Kconfig:118",
+   "used_in": "fs/fat/fat.h, fs/fat/file.c, fs/fat/namei_vfat.c",
+   "effect": "virtual xattr on FAT (also removes FAT_VIRTUAL_XATTR_SELINUX_LABEL)"
+  }
+ ],
+ "removed_by_hook": [
+  {
+   "symbols": "SDFAT_* (12 symbols)",
+   "how": "delete_line 'source \"fs/sdfat/Kconfig\"' in fs/Kconfig (stock-board-hooks.json); SDFAT_FS is a hidden 'tristate default y' so no config line can turn it off",
+   "effect": "drops the Samsung sdfat driver (registers 'sdfat'); exFAT comes from the Lenovo fs/exfat unit that the shipping kernel contains"
+  }
+ ],
+ "neutral_constants": [
+  {
+   "symbol": "MMAP_READAROUND_LIMIT",
+   "value": "0",
+   "why": "mm/filemap.c: '#if CONFIG_MMAP_READAROUND_LIMIT == 0 ra_pages = ra->ra_pages' i.e. no limit, same as mainline"
+  },
+  {
+   "symbol": "VMPRESSURE_LEVEL_MED",
+   "value": "60",
+   "why": "mm/vmpressure.c: vmpressure_level_med = CONFIG_VMPRESSURE_LEVEL_MED; mainline value is 60"
+  }
+ ],
+ "crc_layout_assessment": "None of these symbols guards a type that an exported symbol's prototype can reach: fat.h is private to fs/fat, fslog.h and the ncm sources add declarations only, the rest are function bodies and constants in .c files. Static assessment only; the export-CRC gate against the shipping kernel is the check."
+}

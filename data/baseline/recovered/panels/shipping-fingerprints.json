@@ -1,0 +1,613 @@
+{
+ "mipi_hx83102e_video_1200p": {
+  "set_util_funcs": {
+   "insns": 9,
+   "bytes": 36,
+   "sha256": "48d9c560502e3f43f87311d2b3f0d1023ef5f0d5c83ab0c279150a700cd8eed9"
+  },
+  "get_params": {
+   "insns": 53,
+   "bytes": 212,
+   "sha256": "8b09e2b2ef5f75c6797074ee19872e9f425a90152780ab1ef381c48615c6e798"
+  },
+  "init": {
+   "insns": 211,
+   "bytes": 844,
+   "sha256": "34724f81ecae5a6a894a099a79f61bc1dc35da3c5f9c4601927c8a4679a8070a"
+  },
+  "suspend": {
+   "insns": 76,
+   "bytes": 304,
+   "sha256": "cd8ffa382a253852188bc1808d58cf5c76c1927aadd63528d69fcaae9def1dd8"
+  },
+  "resume": {
+   "insns": 8,
+   "bytes": 32,
+   "sha256": "3caa0f930e3079b2d1d5a073792965bb9661805acaaa93bc94a8ce05bdb021ff"
+  },
+  "set_cabc_mode": {
+   "insns": 63,
+   "bytes": 252,
+   "sha256": "997c0ddba450813920bd3bdc92aaf72a09114f4b4f775d8c7725006037b17d8c"
+  },
+  "init_power": {
+   "insns": 1,
+   "bytes": 4,
+   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee"
+  },
+  "suspend_power": {
+   "insns": 1,
+   "bytes": 4,
+   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee"
+  },
+  "resume_power": {
+   "insns": 1,
+   "bytes": 4,
+   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee"
+  },
+  "set_recovery_backlight": {
+   "insns": 61,
+   "bytes": 244,
+   "sha256": "2bfc672ed628c5c040474662e3f93700440fce327e19fc5140180d52f0151393"
+  },
+  "update": {
+   "insns": 1,
+   "bytes": 4,
+   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee"
+  },
+  "compare_id": {
+   "insns": 125,
+   "bytes": 500,
+   "sha256": "2cbcc17c027938fce54208d5081b570fb618d43a99e957a4726dcaa47e76b2d6"
+  },
+  "setbacklight_cmdq": {
+   "insns": 74,
+   "bytes": 296,
+   "sha256": "fd761f853bea18234a85de9877492ead108398671636875577fd6ee6f57ea504"
+  },
+  "esd_check": {
+   "insns": 44,
+   "bytes": 176,
+   "sha256": "0bb2eb8b6298861c7ef43092c625eb241362008a611b11f7444fe485b2309d4a"
+  },
+  "ata_check": {
+   "insns": 82,
+   "bytes": 328,
+   "sha256": "2a85f482f4042e473f0cccae248d5e697b574d7296f56d170c3bcf66c71deeba"
+  },
+  "switch_mode": {
+   "insns": 2,
+   "bytes": 8,
+   "sha256": "295b0c93363d27208c79cf8c39c7ee4492156161cd8740103d6591f50eb4c09e"
+  }
+ },
+ "mipi_hx83102p_inx_video_1200p": {
+  "set_util_funcs": {
+   "insns": 9,
+   "bytes": 36,
+   "sha256": "48d9c560502e3f43f87311d2b3f0d1023ef5f0d5c83ab0c279150a700cd8eed9"
+  },
+  "get_params": {
+   "insns": 53,
+   "bytes": 212,
+   "sha256": "8b09e2b2ef5f75c6797074ee19872e9f425a90152780ab1ef381c48615c6e798"
+  },
+  "init": {
+   "insns": 762,
+   "bytes": 3048,
+   "sha256": "0d2305707842351556835653c581149dfed9881bed198a4da302d47702513d62"
+  },
+  "suspend": {
+   "insns": 73,
+   "bytes": 292,
+   "sha256": "5fc1c704bc5dfcf4d81d461c01cdaf47d2ab24eb5b547dbd14544f8ca417bca9"
+  },
+  "resume": {
+   "insns": 8,
+   "bytes": 32,
+   "sha256": "3caa0f930e3079b2d1d5a073792965bb9661805acaaa93bc94a8ce05bdb021ff"
+  },
+  "set_cabc_mode": {
+   "insns": 63,
+   "bytes": 252,
+   "sha256": "997c0ddba450813920bd3bdc92aaf72a09114f4b4f775d8c7725006037b17d8c"
+  },
+  "init_power": {
+   "insns": 1,
+   "bytes": 4,
+   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee"
+  },
+  "suspend_power": {
+   "insns": 1,
+   "bytes": 4,
+   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee"
+  },
+  "resume_power": {
+   "insns": 1,
+   "bytes": 4,
+   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee"
+  },
+  "set_recovery_backlight": {
+   "insns": 61,
+   "bytes": 244,
+   "sha256": "2bfc672ed628c5c040474662e3f93700440fce327e19fc5140180d52f0151393"
+  },
+  "update": {
+   "insns": 1,
+   "bytes": 4,
+   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee"
+  },
+  "compare_id": {
+   "insns": 125,
+   "bytes": 500,
+   "sha256": "2cbcc17c027938fce54208d5081b570fb618d43a99e957a4726dcaa47e76b2d6"
+  },
+  "setbacklight_cmdq": {
+   "insns": 74,
+   "bytes": 296,
+   "sha256": "fd761f853bea18234a85de9877492ead108398671636875577fd6ee6f57ea504"
+  },
+  "esd_check": {
+   "insns": 44,
+   "bytes": 176,
+   "sha256": "0bb2eb8b6298861c7ef43092c625eb241362008a611b11f7444fe485b2309d4a"
+  },
+  "ata_check": {
+   "insns": 82,
+   "bytes": 328,
+   "sha256": "2a85f482f4042e473f0cccae248d5e697b574d7296f56d170c3bcf66c71deeba"
+  },
+  "switch_mode": {
+   "insns": 2,
+   "bytes": 8,
+   "sha256": "295b0c93363d27208c79cf8c39c7ee4492156161cd8740103d6591f50eb4c09e"
+  }
+ },
+ "mipi_hx83102e_2nd_video_1200p": {
+  "set_util_funcs": {
+   "insns": 9,
+   "bytes": 36,
+   "sha256": "48d9c560502e3f43f87311d2b3f0d1023ef5f0d5c83ab0c279150a700cd8eed9"
+  },
+  "get_params": {
+   "insns": 56,
+   "bytes": 224,
+   "sha256": "e6ab4bc1291893fd5771e4c537282143e34cbf0912d11c3c77b59929b7e3de3b"
+  },
+  "init": {
+   "insns": 789,
+   "bytes": 3156,
+   "sha256": "f2760e6ba8b30dc111b07b6e163f9fc34e63bb553f0e98b63a209d2abb9c8355"
+  },
+  "suspend": {
+   "insns": 79,
+   "bytes": 316,
+   "sha256": "7b23c975baf890bf5114d7fa7b0e1fdbcb59db89dd0087443b4284e29919fc5c"
+  },
+  "resume": {
+   "insns": 8,
+   "bytes": 32,
+   "sha256": "3caa0f930e3079b2d1d5a073792965bb9661805acaaa93bc94a8ce05bdb021ff"
+  },
+  "set_cabc_mode": {
+   "insns": 63,
+   "bytes": 252,
+   "sha256": "997c0ddba450813920bd3bdc92aaf72a09114f4b4f775d8c7725006037b17d8c"
+  },
+  "init_power": {
+   "insns": 1,
+   "bytes": 4,
+   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee"
+  },
+  "suspend_power": {
+   "insns": 1,
+   "bytes": 4,
+   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee"
+  },
+  "resume_power": {
+   "insns": 1,
+   "bytes": 4,
+   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee"
+  },
+  "set_recovery_backlight": {
+   "insns": 61,
+   "bytes": 244,
+   "sha256": "2bfc672ed628c5c040474662e3f93700440fce327e19fc5140180d52f0151393"
+  },
+  "update": {
+   "insns": 1,
+   "bytes": 4,
+   "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee"
+  },
+  "compare_id": {
+   "insns": 125,
+   "bytes": 500,
+   "sha256": "2cbcc17c027938fce54208d5081b570fb618d43a99e957a4726dcaa47e76b2d6"
+  },
+  "setbacklight_cmdq": {
+   "insns": 142,
+   "bytes": 568,
+   "sha256": "3cd32619ce30b6414deaa190d038299d156de6fd5e448cd55c088731d51227e7"
+  },
+  "esd_check": {
+   "insns": 44,
+   "bytes": 176,
+   "sha256": "0bb2eb8b6298861c7ef43092c625eb241362008a611b11f7444fe485b2309d4a"
+  },
+  "ata_check": {
+   "insns": 82,
+   "bytes": 328,
+   "sha256": "2a85f482f4042e473f0cccae248d5e697b574d7296f56d170c3bcf66c71deeba"
+  },
+  "switch_mode": {
+   "insns": 2,
+   "bytes": 8,
+   "sha256": "295b0c93363d27208c79cf8c39c7ee4492156161cd8740103d6591f50eb4c09e"
+  }
+ },
+ "nt36523w": {
+  "anchor": "nvt_ts_probe",
+  "functions": {
+   "Boot_Update_Firmware": {
+    "insns": 124,
+    "bytes": 496,
+    "sha256": "c81028a6cae5091b3a866b36be29015fbd2e9406338625d0cac62db42c6cf760"
+   },
+   "CTP_I2C_READ": {
+    "insns": 96,
+    "bytes": 384,
+    "sha256": "1118be9e6a5b022e7f6b933c5b9847284e19a3a26adefb0955c33d7c6ede797e"
+   },
+   "CTP_I2C_WRITE": {
+    "insns": 89,
+    "bytes": 356,
+    "sha256": "1f50771d3b267fd5e237fb3ebdc1ac1cf332add0285f86b7ae01b5d33ead3197"
+   },
+   "Check_CheckSum": {
+    "insns": 266,
+    "bytes": 1064,
+    "sha256": "ae3c26230b6a309a074474109adcffa4e335073ee017604eac4475c83765df02"
+   },
+   "Check_FW_Ver": {
+    "insns": 99,
+    "bytes": 396,
+    "sha256": "23c66117191b2e0f47aebeed9023a171fdb2c203bdfae49c7f4fd38111378763"
+   },
+   "Erase_Flash": {
+    "insns": 396,
+    "bytes": 1584,
+    "sha256": "87845abe4c928115fdb2b44e087c871da88daf8b054e96297c295b126d72b451"
+   },
+   "Init_BootLoader": {
+    "insns": 94,
+    "bytes": 376,
+    "sha256": "b070ab70a936a2e9504db87c492c98a2851f6018eed718d4ffd75f6171040473"
+   },
+   "Resume_PD": {
+    "insns": 88,
+    "bytes": 352,
+    "sha256": "13310f352366ef994b0854364402c04f79e65f95a479090da159e24d019eb316"
+   },
+   "Update_Firmware": {
+    "insns": 20,
+    "bytes": 80,
+    "sha256": "bd40ebab774005a7bf7a32982dbc47205e71a92f5277b7112c8a34598ceb0cd8"
+   },
+   "Verify_Flash": {
+    "insns": 256,
+    "bytes": 1024,
+    "sha256": "8fc53a62c8eeceda4e9d6d9a869f88ec2e5cec0a3301ed9068dded9ead9559bb"
+   },
+   "Write_Flash": {
+    "insns": 392,
+    "bytes": 1568,
+    "sha256": "a1b11cf3d421e0985f47048d275734b2ec45d9377a2a5df7f97b67b03631a91f"
+   },
+   "c_fw_version_show": {
+    "insns": 14,
+    "bytes": 56,
+    "sha256": "621ecb6f8a5835139543628df71da67c2b5343f45891c1efd90372da77b5d7de"
+   },
+   "c_next": {
+    "insns": 5,
+    "bytes": 20,
+    "sha256": "d85d7c45b8e47ddd3439be5712f52c7a2a53eea160800abfc4544fb48bed7250"
+   },
+   "c_pen_1d_diff_show": {
+    "insns": 116,
+    "bytes": 464,
+    "sha256": "6286716ecff4a0928ee3b5b9bbeddadd0489642fccb836d66700e4a28b1849a7"
+   },
+   "c_show": {
+    "insns": 50,
+    "bytes": 200,
+    "sha256": "e2a18efea0b8aef60a288e22ee7d47f51c92053d2529dc780788703f0f72b5b1"
+   },
+   "c_show_selftest": {
+    "insns": 511,
+    "bytes": 2044,
+    "sha256": "f76fba1065b524c47f2b5fe6b04cac6f2a9d14a0f0053fdf7fab1643ed17675b"
+   },
+   "c_start": {
+    "insns": 4,
+    "bytes": 16,
+    "sha256": "99ce40a3aa341007fb880f87ba984d561c42693e49a525280e81a805e90a7110"
+   },
+   "c_stop": {
+    "insns": 1,
+    "bytes": 4,
+    "sha256": "85e4aea19de2d285c91b909a8dcd3d895ad511f5c888998471db1734c996c1ee"
+   },
+   "nvt_baseline_open": {
+    "insns": 106,
+    "bytes": 424,
+    "sha256": "21403ca8616dc68b7336bf6d7a5b1ec358ebbc529c0aad4d8f30bbbee0219979"
+   },
+   "nvt_bootloader_reset": {
+    "insns": 44,
+    "bytes": 176,
+    "sha256": "5bdf85ad271349e83a29ab05b4f26622700fac4b3e4df3e50f8caf3690f0401d"
+   },
+   "nvt_change_mode": {
+    "insns": 49,
+    "bytes": 196,
+    "sha256": "aa88141966965ca2c5dbaf7743383646994f871efdebf9d65fdb05fb476f2d20"
+   },
+   "nvt_check_flash_end_flag": {
+    "insns": 187,
+    "bytes": 748,
+    "sha256": "ee61321a94d325d631853417d44fdf7ff4ed6f0495e06ccf8e81295c95831b7c"
+   },
+   "nvt_check_fw_reset_state": {
+    "insns": 60,
+    "bytes": 240,
+    "sha256": "c2f4012e0cc34eb1167d49f1e037e9fc4ecabe0e5ff51c76e0755fb2f6f8ea29"
+   },
+   "nvt_check_fw_status": {
+    "insns": 67,
+    "bytes": 268,
+    "sha256": "d7079acd93b63d0f8150bc65c54dee4e25256fcfcc2e6f6d9ca1a35d22a560bf"
+   },
+   "nvt_clear_fw_status": {
+    "insns": 75,
+    "bytes": 300,
+    "sha256": "735237b6df020f33bec054564827dc804b58d63a5ed4d7ab42c4a8d0546f4339"
+   },
+   "nvt_diff_open": {
+    "insns": 125,
+    "bytes": 500,
+    "sha256": "1e1068f5644ab2396b4472d6602d59d7e796d489224738c40fef42edfddb7b92"
+   },
+   "nvt_extra_proc_deinit": {
+    "insns": 116,
+    "bytes": 464,
+    "sha256": "7188efab9ff56e5eade00d1ed416589e1f4a0cd1011e2a739b97b202a46a7238"
+   },
+   "nvt_extra_proc_init": {
+    "insns": 198,
+    "bytes": 792,
+    "sha256": "1ed8f3e8f5d0db7b55b4332056506d0fc6be3b14b042924cf4b31b8a5075c17c"
+   },
+   "nvt_fb_notifier_callback": {
+    "insns": 286,
+    "bytes": 1144,
+    "sha256": "387d734f2b8b7b868a21487e3bab38514b13eb709379bd682cba569945513aac"
+   },
+   "nvt_flash_close": {
+    "insns": 8,
+    "bytes": 32,
+    "sha256": "81518931c8a5ed93d95bbad74f5a189facc57f2e5ce8fccc78cfa4be6bb0b4cf"
+   },
+   "nvt_flash_open": {
+    "insns": 30,
+    "bytes": 120,
+    "sha256": "8e2909ee5f08e51f04b3b61444d4bffd5f8cc6ce7f293fb0ff8063be640a734c"
+   },
+   "nvt_flash_read": {
+    "insns": 206,
+    "bytes": 824,
+    "sha256": "b2bf1e544c69e633f27b45678850ad0c1399ad9e739c6aea15cc365be4c3a5f4"
+   },
+   "nvt_fw_version_open": {
+    "insns": 44,
+    "bytes": 176,
+    "sha256": "d17772b12e15ae4a836055229cac339f711dd331402527f47fef48515e3f84d9"
+   },
+   "nvt_gesture_open": {
+    "insns": 9,
+    "bytes": 36,
+    "sha256": "ef6c5c6696c6614641160fad52615fbc8c0aaa8ac5bd81ca9fe82a06cecdba8f"
+   },
+   "nvt_gesture_show": {
+    "insns": 15,
+    "bytes": 60,
+    "sha256": "026a262b984208b1afe6fae7da72f7cf7ee88f0eb58407cccb7dd7fc25f7266c"
+   },
+   "nvt_gesture_status": {
+    "insns": 24,
+    "bytes": 96,
+    "sha256": "bad373329b4e402d698bd3ba51a2b6995ba4b4c1cfa6e11bb67060fd12af4fa3"
+   },
+   "nvt_gesture_store": {
+    "insns": 63,
+    "bytes": 252,
+    "sha256": "ef8b8325233f34d61069a291e677f7891b73c37e14d028fcfa5e8bceb4e5cd3d"
+   },
+   "nvt_get_fw_info": {
+    "insns": 173,
+    "bytes": 692,
+    "sha256": "cd9f771c5001907fce06becc68ce806d1675b8ddc9ea35e7d0561d4acca9b2d7"
+   },
+   "nvt_get_fw_pipe": {
+    "insns": 35,
+    "bytes": 140,
+    "sha256": "4c41894ef27b3a5cd1ffcc8827db19adafaaba83766ebc60ed6d5c5d521f5585"
+   },
+   "nvt_get_mdata": {
+    "insns": 19,
+    "bytes": 76,
+    "sha256": "ca2ad0e9d4d8e631bed543890317489645903404e10b11f10f6c5eed7fd5db56"
+   },
+   "nvt_mp_buffer_init": {
+    "insns": 590,
+    "bytes": 2360,
+    "sha256": "e7d17660d02718a76361f2aa7d0e2574952f9d53b6384a5ddffbdfb1e51e2908"
+   },
+   "nvt_mp_parse_ain": {
+    "insns": 93,
+    "bytes": 372,
+    "sha256": "4b4435687f18175fec0e5de3e424ec36354b8e2b65b3b4d364e70ef9cbfd0e26"
+   },
+   "nvt_mp_parse_array": {
+    "insns": 97,
+    "bytes": 388,
+    "sha256": "4f6926c590e768f1d7c688a7b393606255b94981bc7d27637c3a71b95006850c"
+   },
+   "nvt_mp_parse_dt": {
+    "insns": 500,
+    "bytes": 2000,
+    "sha256": "97922465a1800364fb7d062b4b2faed558ba1534f5102c46b0456a7c2179e2e2"
+   },
+   "nvt_mp_parse_pen_array": {
+    "insns": 95,
+    "bytes": 380,
+    "sha256": "e6305108ef4a2ceb31cd998354b6f8044b41fe8f8b77bb053deaed0559eae5ec"
+   },
+   "nvt_mp_parse_u32": {
+    "insns": 35,
+    "bytes": 140,
+    "sha256": "98f36d351b26c9a2a928ef781a70a5c03b0a32e138649cb23c29dd826ec30e6f"
+   },
+   "nvt_mp_proc_deinit": {
+    "insns": 214,
+    "bytes": 856,
+    "sha256": "2da911c0573516f24ff24ed51e7fe4c4b1a079d115214e121beeac81cede54a3"
+   },
+   "nvt_mp_proc_init": {
+    "insns": 46,
+    "bytes": 184,
+    "sha256": "a20101e7c7cceae0013ffb29922cfef71aa9d1c78317179afe89b96c8c3df2dd"
+   },
+   "nvt_pen_diff_open": {
+    "insns": 140,
+    "bytes": 560,
+    "sha256": "c79bf861f617de3a64ec08fe62d7fff754d40c0c84822f94598dd824df087bcf"
+   },
+   "nvt_polling_hand_shake_status": {
+    "insns": 92,
+    "bytes": 368,
+    "sha256": "5e92ca324f85d8d01380f163155acf9304bc71db8a41ea6523c3b20102dc100d"
+   },
+   "nvt_print_data_log_in_one_line": {
+    "insns": 53,
+    "bytes": 212,
+    "sha256": "c1f9fd6dc77e5097da0feee33bd64523342465a4745a31133e445f9c057b0bed"
+   },
+   "nvt_print_result_log_in_one_line": {
+    "insns": 54,
+    "bytes": 216,
+    "sha256": "2c70f4663364af90fe63d2d6b26a6ce7ccbf1d0f809d4b2c059df5c558c1699a"
+   },
+   "nvt_raw_open": {
+    "insns": 125,
+    "bytes": 500,
+    "sha256": "6b66b4320e084ea28d68acd0e6c8bd151ea1820b473cb27a79dd25ffb3e44f5c"
+   },
+   "nvt_read_get_num_mdata": {
+    "insns": 188,
+    "bytes": 752,
+    "sha256": "4e5e702f6b15ef6cd4581e1f9e3344485008193b89a24c59b03ffb77dfe6b0e6"
+   },
+   "nvt_read_mdata": {
+    "insns": 180,
+    "bytes": 720,
+    "sha256": "13ab7c00ce02286feda5e15be52f797353dcde7553ce94fe2df4ce00b9997478"
+   },
+   "nvt_read_pid": {
+    "insns": 57,
+    "bytes": 228,
+    "sha256": "5b7f0d2a4ea48082209a79d287146373474c06726b73d942209c5caf42ab1658"
+   },
+   "nvt_save_rawdata_to_csv": {
+    "insns": 227,
+    "bytes": 908,
+    "sha256": "442b62900cd7708e944296c961ce8d70ebc0d536c87fe0aca549c9699ad1767e"
+   },
+   "nvt_selftest_open": {
+    "insns": 3258,
+    "bytes": 13032,
+    "sha256": "6bef83cc3e73c7120af7a6b12f91a5472ae3a6d055004713bca83c0b26e45a06"
+   },
+   "nvt_set_page": {
+    "insns": 29,
+    "bytes": 116,
+    "sha256": "910a99ff00a81e36a5ec3b6aaa9c83baacd085040d8807f3840f59a71039579e"
+   },
+   "nvt_set_pen_inband_mode_1": {
+    "insns": 118,
+    "bytes": 472,
+    "sha256": "0c83b9782a7f21b697394b5b60accc94480cf4c88f50ce1fb228d18fa3e7b1b2"
+   },
+   "nvt_set_pen_normal_mode": {
+    "insns": 112,
+    "bytes": 448,
+    "sha256": "0e5efc7fbba65d960237ce552911852d83cad3726640598af4b35054a6d99f22"
+   },
+   "nvt_stop_crc_reboot": {
+    "insns": 113,
+    "bytes": 452,
+    "sha256": "69a7cd5a5b2021adee2fe396d8b94d71498b2b210ac0ee3736a07e7340911ebe"
+   },
+   "nvt_sw_reset_idle": {
+    "insns": 26,
+    "bytes": 104,
+    "sha256": "cd60215aa258f4e20142aa6f00456281684b65f6645501266e302999ed46d3bd"
+   },
+   "nvt_ts_check_chip_ver_trim": {
+    "insns": 187,
+    "bytes": 748,
+    "sha256": "05c06e609faa4e93d54ad4bc8a14797e24e4cbb76faf69027b4adb7ba9e3a0d4"
+   },
+   "nvt_ts_probe": {
+    "insns": 912,
+    "bytes": 3648,
+    "sha256": "d6526cb187003cc1b72a5cc45ab6b691a1ddfcf407a03cbad8cecfd0b1a4bd2d"
+   },
+   "nvt_ts_remove": {
+    "insns": 120,
+    "bytes": 480,
+    "sha256": "873a442875a5d76761a9e9137713cc0eceea4a90ea67d591d8615e631e73a9c7"
+   },
+   "nvt_ts_shutdown": {
+    "insns": 84,
+    "bytes": 336,
+    "sha256": "963f9230845c7b205539cffb02a7a672703a1183392ffa146c6692e7345e9e00"
+   },
+   "nvt_ts_wakeup_gesture_report_customize": {
+    "insns": 72,
+    "bytes": 288,
+    "sha256": "94006da638c51fdc7299e41de60dff26c540880113b1c7f41beaf0a2464d6214"
+   },
+   "nvt_ts_work_func": {
+    "insns": 394,
+    "bytes": 1576,
+    "sha256": "61ed4a588e865cdaf660f3e188eff898695abd6a45b17197aaaaed8750736226"
+   },
+   "print_selftest_result": {
+    "insns": 133,
+    "bytes": 532,
+    "sha256": "2376cc3c1a4affc2a613cb5afb3d2525c7fce7d3070fff5e3c7d29d1b5508ddb"
+   },
+   "update_firmware_release": {
+    "insns": 11,
+    "bytes": 44,
+    "sha256": "4cbee9489f107818c3b8e309b8cc1e1dca09742f70fc4e6727879222027fa737"
+   },
+   "update_firmware_request": {
+    "insns": 131,
+    "bytes": 524,
+    "sha256": "e7fead4138e49a85a2843c1d7f5326516ee8fcb8d123d06374eb4cff0d75430d"
+   }
+  }
+ }
+}

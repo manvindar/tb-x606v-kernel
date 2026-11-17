@@ -6,6 +6,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import camera_transplant as ct
 import sensor_contract_guard as g
+import text_fidelity as tf
 
 HEADER = '''#define SENSOR_FEATURE_START 3000
 enum ACDK_SENSOR_FEATURE_ENUM {
@@ -121,6 +122,42 @@ class Transplant(unittest.TestCase):
             pins = self.setup(d)
             (Path(d) / 'lenovo/unit/extra.c').write_text('x')
             self.assertFalse(ct.transplant(Path(d) / 'lenovo', Path(d) / 'tree', pins, base=d)['ok'])
+
+
+class Fidelity(unittest.TestCase):
+    REF = json.loads((Path(__file__).resolve().parents[2] / 'data/baseline/shipping-sensor-symbols.json').read_text())
+    SHIP = [(x['name'], x['delta']) for x in REF['region']]
+
+    def nm(self, rows, base=0xffffff8008600000):
+        out, a = [], base
+        for n, d in rows:
+            out.append('%016x t %s' % (a, n) if n != 'x' else '')
+            a += d
+        out.append('%016x T imgsensor_dfs_ctrl' % a)
+        return out
+
+    def test_same_layout_is_layout_match_only(self):  # equal names and sizes never claim identical code
+        r = tf.compare(self.SHIP, tf.candidate_region(self.nm(self.SHIP)))
+        self.assertEqual(r['summary']['matching-symbol-layout'], 10)
+        self.assertEqual(sum(r['summary'].values()), 10)
+        self.assertEqual(r['source_identity'], 'unproved')
+        self.assertEqual(r['evidence_class'], 'symbol-layout')
+        self.assertTrue(all(v['source_identity'] == 'unproved' for v in r['blocks'].values()))
+        self.assertNotIn('identical', r['summary'])
+
+    def test_one_size_difference_is_located(self):
+        rows = [(n, d + 8 if (n == 'feature_control' and i == 4) else d) for i, (n, d) in enumerate(self.SHIP)]
+        r = tf.compare(self.SHIP, tf.candidate_region(self.nm(rows)))
+        self.assertEqual(r['summary']['same-symbols-different-sizes'], 1)
+        bad = [v for v in r['blocks'].values() if v['status'] != 'matching-symbol-layout'][0]
+        self.assertEqual(bad['differences'][0]['symbol'], 'feature_control')
+
+    def test_missing_sensor_blocks_are_absent(self):
+        keep = [i for i, (n, _) in enumerate(self.SHIP) if n.endswith('MIPI_RAW_SensorInit')]
+        cut = keep[1]   # drop the first sensor block entirely (as when its source is missing)
+        r = tf.compare(self.SHIP, tf.candidate_region(self.nm(self.SHIP[cut:])))
+        self.assertEqual(r['summary']['absent-in-candidate'], 1)
+        self.assertEqual(r['summary']['matching-symbol-layout'], 9)
 
 
 if __name__ == '__main__':

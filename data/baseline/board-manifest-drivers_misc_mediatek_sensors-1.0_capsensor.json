@@ -1,0 +1,18 @@
+{
+"drivers/misc/mediatek/sensors-1.0/capsensor/Kconfig": {
+"blob": "24f6bf4ed6518f7989f5e5d6d9b836a0e44186de",
+"bytes": 214
+},
+"drivers/misc/mediatek/sensors-1.0/capsensor/Makefile": {
+"blob": "d3f6355704189d9f95b0f291dbba72e38f1445d9",
+"bytes": 137
+},
+"drivers/misc/mediatek/sensors-1.0/capsensor/sx9310.c": {
+"blob": "a98eb337db8fa09d17ed5366a3586af2a57589ba",
+"bytes": 32688
+},
+"drivers/misc/mediatek/sensors-1.0/capsensor/sx9310.h": {
+"blob": "79d48c9c2bf262f956513844824d058d8e17b487",
+"bytes": 8847
+}
+}

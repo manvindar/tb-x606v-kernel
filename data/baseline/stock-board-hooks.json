@@ -1,0 +1,387 @@
+[
+ {
+  "file": "drivers/misc/Kconfig",
+  "pre_blob": "46e02d776deda03403021702adb09c9b6ef53abe",
+  "post_blob": "e800b1fcaffe3c7b52727de217319fe15fac811e",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "source \"drivers/misc/mediatek/Kconfig\""
+    ],
+    "insert": "source \"drivers/misc/hqsysfs/Kconfig\"\n",
+    "serves": "HQ_SYSFS_SUPPORT",
+    "lenovo_line": 803
+   }
+  ]
+ },
+ {
+  "file": "drivers/misc/Makefile",
+  "pre_blob": "f3df6d104438e0b0c2df98e9720e3c3ada027a6b",
+  "post_blob": "3a3b34a7427191fdf64d6b66c6b06c1f2bf93579",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "lkdtm-$(CONFIG_LKDTM)\t\t+= lkdtm_usercopy.o"
+    ],
+    "insert": "obj-$(CONFIG_HQ_SYSFS_SUPPORT)\t+= hqsysfs/\n",
+    "serves": "HQ_SYSFS_SUPPORT",
+    "lenovo_line": 67
+   }
+  ]
+ },
+ {
+  "file": "drivers/misc/mediatek/Kconfig",
+  "pre_blob": "7fa3723acf417d62ecf7a26bc244b2ca6c5fe6be",
+  "post_blob": "5c9cc8abc1d3ca36a472a5eed7119a32eb856c06",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "source \"drivers/misc/mediatek/dfrc/Kconfig\""
+    ],
+    "insert": "source \"drivers/misc/mediatek/i2c/Kconfig\"\n",
+    "serves": "MTK_LCM_BIAS_OCP2131, MTK_LCM_BACKLIGHT_SGM37604A",
+    "lenovo_line": 251
+   }
+  ]
+ },
+ {
+  "file": "drivers/misc/mediatek/Makefile",
+  "pre_blob": "8c93ce8c9b9bad536b5ad9f5b8c71704275ca176",
+  "post_blob": "da85875291e3230d192b08aa8920e3bf7e18ea78",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "obj-y += irtx/"
+    ],
+    "insert": "obj-y += i2c/\n",
+    "serves": "MTK_LCM_BIAS_OCP2131, MTK_LCM_BACKLIGHT_SGM37604A",
+    "lenovo_line": 48
+   }
+  ]
+ },
+ {
+  "file": "drivers/misc/mediatek/sensors-1.0/Kconfig",
+  "pre_blob": "13845a4b4eab40a752e28105de08d96b828e6023",
+  "post_blob": "6102e8766b125d7d2666eb6ab21eda4ce399518c",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "source \"drivers/misc/mediatek/sensors-1.0/high_freq_sensor/Kconfig\""
+    ],
+    "insert": "source \"drivers/misc/mediatek/sensors-1.0/capsensor/Kconfig\"\n",
+    "serves": "MTK_SX9310",
+    "lenovo_line": 18
+   }
+  ]
+ },
+ {
+  "file": "drivers/misc/mediatek/sensors-1.0/Makefile",
+  "pre_blob": "ea26285bde4657b6d976d38d1b504325ffbc1bc4",
+  "post_blob": "8f5e317688df00aefaf001158c568015e92d03a9",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "obj-y += dummy.o",
+     "endif"
+    ],
+    "insert": "obj-$(CONFIG_MTK_SX9310) += capsensor/\n",
+    "serves": "MTK_SX9310",
+    "lenovo_line": 26
+   }
+  ]
+ },
+ {
+  "file": "drivers/misc/mediatek/usb20/mt6765/Makefile",
+  "pre_blob": "aef66d50fab4d17bbc7789dbb2404f6de6fb3427",
+  "post_blob": "a09ab349f38f6b1a9ea9111440186836784fb995",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "obj-$(CONFIG_DEBUG_FS)\t+= usb20_phy_debugfs.o"
+    ],
+    "insert": "obj-$(CONFIG_CC_FUSB301)\t+= fusb301a.o\nobj-$(CONFIG_CC_WUSB3801)\t+= wusb3801x.o\n",
+    "serves": "CC_FUSB301, CC_WUSB3801",
+    "lenovo_line": 41
+   }
+  ]
+ },
+ {
+  "file": "drivers/input/keyboard/Makefile",
+  "pre_blob": "ed5876a67ef5532a905f246a5370ff49615a3d67",
+  "post_blob": "fbe4ee95688105f94598f7876ec20c10e317f0e5",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "obj-$(CONFIG_KEYBOARD_W90P910)\t\t+= w90p910_keypad.o"
+    ],
+    "insert": "obj-$(CONFIG_HALL_SENSOR)  \t\t+= hall_switch.o\n",
+    "serves": "HALL_SENSOR",
+    "lenovo_line": 68
+   }
+  ]
+ },
+ {
+  "file": "fs/Kconfig",
+  "pre_blob": "ba429e3caed1a863ed0f6ad50eb70e8821223c47",
+  "post_blob": "e6e05ec8329284da0f5cab5535949cdca22ed4dc",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "source \"fs/ntfs/Kconfig\""
+    ],
+    "insert": "source \"fs/exfat/Kconfig\"\n",
+    "serves": "EXFAT_FS",
+    "lenovo_line": 129
+   },
+   {
+    "op": "delete_line",
+    "line": "source \"fs/sdfat/Kconfig\"",
+    "serves": "SDFAT_* (12 symbols): absent from the shipping kernel (no sdfat symbols in its kallsyms); stock config has none of them"
+   }
+  ]
+ },
+ {
+  "file": "fs/Makefile",
+  "pre_blob": "3e9b7b7d11720413cce1b008fb967cdc72ce5165",
+  "post_blob": "0dc698248d77e2e3ef911bac943fdfac234b5bbf",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "obj-$(CONFIG_FAT_FS)\t\t+= fat/"
+    ],
+    "insert": "obj-$(CONFIG_EXFAT_FS)\t\t+= exfat/\n",
+    "serves": "EXFAT_FS",
+    "lenovo_line": 83
+   }
+  ]
+ },
+ {
+  "file": "sound/soc/codecs/Kconfig",
+  "pre_blob": "41e3b68b4a75a7b5a54e909c06ad6ec4c61adf77",
+  "post_blob": "5299b691cadcb3d257065802e3f793dc311b9e59",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "menu \"CODEC drivers\""
+    ],
+    "insert": "source sound/soc/codecs/dbmdx/Kconfig\n",
+    "serves": "SND_SOC_DBMDX_*",
+    "lenovo_line": 12
+   },
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "config SND_SOC_RT5509",
+     "\ttristate \"Richtek RT5509 Smart AMP\"",
+     "\tdepends on I2C",
+     "\tselect RT_REGMAP",
+     ""
+    ],
+    "insert": "config AC107\n\tbool \"ac107\"\n\tdepends on I2C\n\tdefault n\n\n",
+    "serves": "AC107 (recovered ac107.c, see data/baseline/recovered/ac107)"
+   }
+  ]
+ },
+ {
+  "file": "sound/soc/codecs/Makefile",
+  "pre_blob": "9e6023834c390e27f323d1eb616818a3355e3101",
+  "post_blob": "89a0c365033241447a573fe7569690a53b9263f9",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "obj-$(CONFIG_SND_SOC_MT6660)\t+= snd-soc-mt6660.o",
+     ""
+    ],
+    "insert": "#DSPG\nobj-$(CONFIG_SND_SOC_DBMDX)     += dbmdx/\n\n",
+    "serves": "SND_SOC_DBMDX_*",
+    "lenovo_line": 460
+   },
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "obj-$(CONFIG_SND_SOC_MT6660)\t+= snd-soc-mt6660.o",
+     ""
+    ],
+    "insert": "#ac107\nobj-$(CONFIG_AC107)\t+= ac107.o\n\n",
+    "serves": "AC107 (before dbmdx/: link order of the shipping image)"
+   }
+  ]
+ },
+ {
+  "file": "drivers/misc/mediatek/usb20/Kconfig",
+  "pre_blob": "d52630ab918df57f93c861b9ee8868c6799e2739",
+  "post_blob": "8a3f131a3688594ea325218727540f3f99e892db",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "\t  Say Y here if your want to enable port0 low power mode for saving power."
+    ],
+    "insert": "config CC_FUSB301\n\tbool \"FUSB301 usb-cc ic driver\"\n\thelp\n\t  Say Y here if your want to enable FUSB301.\n\nconfig CC_WUSB3801\n\tbool \"WUSB3801 usb-cc ic driver\"\n\thelp\n\t  Say Y here if your want to enable WUSB3801.\n",
+    "serves": "CC_FUSB301, CC_WUSB3801",
+    "lenovo_line": 82
+   }
+  ]
+ },
+ {
+  "file": "drivers/input/keyboard/Kconfig",
+  "pre_blob": "50a3d90398acdb2419de3db1dd26595735d5d90b",
+  "post_blob": "60b12d37cc6364c653195ecb55145e2bd2dfc9e1",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "\t  module will be called bcm-keypad.",
+     ""
+    ],
+    "insert": "config HALL_SENSOR\n\tbool \"Enable Sensors Driver Support for SSC\"\n\thelp\n\t  Add support for sensors SSC driver.\n\t  This driver is used for exercising sensors use case,\n          time syncing with ADSP clock.\n\n",
+    "serves": "HALL_SENSOR",
+    "lenovo_line": 737
+   }
+  ]
+ },
+ {
+  "file": "drivers/misc/mediatek/flashlight/Kconfig",
+  "pre_blob": "84b94985cff7a980c1b08b81fafcdfb591c3a427",
+  "post_blob": "df50d5379be4764a47ab1d6040444de28e43595e",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "\t  Say Y here if you want a flashlight driver IC MT6360.",
+     "\t  Select this only if your board has this IC.",
+     "",
+     "\t  Say M here if you want to compile this driver as a module.",
+     ""
+    ],
+    "insert": "config MTK_FLASHLIGHT_SYWT78\n\ttristate \"Mediatek flashlight sywt78 gpio driver\"\n\tdepends on MTK_FLASHLIGHT\n\tdefault n\n\thelp\n\t  This is flashlight sywt78 gpio driver for camera.\n\n\t  Say Y here if you want a driver IC with GPIO interface.\n",
+    "serves": "MTK_FLASHLIGHT_SYWT78",
+    "lenovo_line": 123
+   }
+  ]
+ },
+ {
+  "file": "drivers/misc/mediatek/flashlight/Makefile",
+  "pre_blob": "75daa1cd1ff13e8a1f78f6c4142ac4c29774f833",
+  "post_blob": "39f816cd556ba22480e9bb0db0416c725a60c8b7",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "obj-$(CONFIG_MTK_FLASHLIGHT_MT6370)      += flashlights-mt6370.o"
+    ],
+    "insert": "obj-$(CONFIG_MTK_FLASHLIGHT_SYWT78)      += flashlights-sywt78.o\n",
+    "serves": "MTK_FLASHLIGHT_SYWT78",
+    "lenovo_line": 17
+   },
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "ccflags-$(CONFIG_MTK_FLASHLIGHT_DEBUG)     := -D$(MTK_PLATFORM) -D$(MTK_PROJECT)"
+    ],
+    "insert": "ccflags-$(CONFIG_MTK_FLASHLIGHT_SYWT78)    += -DCONFIG_MTK_FLASHLIGHT_SYWT78\n",
+    "serves": "MTK_FLASHLIGHT_SYWT78",
+    "lenovo_line": 22
+   }
+  ]
+ },
+ {
+  "file": "sound/soc/mediatek/Kconfig",
+  "pre_blob": "3bea0dcb419e76da1f3424a3f21aab357fe4025d",
+  "post_blob": "7b405a2b0d3b4db9411bd6b0a72e87b8732aef7d",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "\t  that can be used with other platforms",
+     "\t  Select Y if you have such device.",
+     "\t  If unsure select \"N\"."
+    ],
+    "insert": "config SND_SOC_DSPG\n\tbool \"DSPG chip\"\n\tdefault n\n\thelp\n\t  This adds dsp driver for Mediatek boards\n\t  that can be used with other platforms\n\t  Select Y if you have such device.\n\t  If unsure select \"N\".\n",
+    "serves": "SND_SOC_DSPG",
+    "lenovo_line": 244
+   }
+  ]
+ },
+ {
+  "file": "drivers/input/touchscreen/mediatek/himax_mmi/himax_common.c",
+  "pre_blob": "6e3b63d8e6e2af0a8f0f788c43fd6c2ac229b894",
+  "post_blob": "91e4719b2006b3a0b0ab786c8bebdfe30eea477b",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "struct himax_ts_data *private_ts;",
+     "EXPORT_SYMBOL(private_ts);"
+    ],
+    "insert": "\nint Himax_gesture_status(void)\n{\n\tif (!private_ts)\n\t\treturn 0;\n\n\treturn private_ts->SMWP_enable;\n}\n"
+   }
+  ],
+  "note": "Himax_gesture_status() text equals the amar himax_common.c function (provider of the shipping symbol); required by the two recovered panels"
+ },
+ {
+  "file": "drivers/misc/mediatek/imgsensor/src/common/v1/imgsensor_sensor_list.c",
+  "pre_blob": "f64ef4807271b2b57f8f62028a571ed8f246cbfa",
+  "post_blob": "c40950ef1d247c818a406b9d5ecc01b927568ba9",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "#if defined(OV13B10QTECH_MIPI_RAW)",
+     "        {OV13B10QTECH_SENSOR_ID,",
+     "        SENSOR_DRVNAME_OV13B10QTECH_MIPI_RAW,",
+     "        OV13B10QTECH_MIPI_RAW_SensorInit},",
+     "#endif"
+    ],
+    "insert": "#if defined(OV5675_MIPI_RAW)\n\t{OV5675_SENSOR_ID,\n\tSENSOR_DRVNAME_OV5675_MIPI_RAW,\n\tOV5675_MIPI_RAW_SensorInit},\n#endif\n"
+   }
+  ]
+ },
+ {
+  "file": "drivers/misc/mediatek/imgsensor/src/common/v1/imgsensor_sensor_list.h",
+  "pre_blob": "be0a69cf3ef15404be1d0b0c5f792ad83a494a69",
+  "post_blob": "5e9fd1b1fc1c1ab1221cdd24ebf7c1589ea090b4",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "UINT32 OV13B10QTECH_MIPI_RAW_SensorInit(struct SENSOR_FUNCTION_STRUCT **pfFunc);"
+    ],
+    "insert": "UINT32 OV5675_MIPI_RAW_SensorInit(struct SENSOR_FUNCTION_STRUCT **pfFunc);\n"
+   }
+  ]
+ },
+ {
+  "file": "drivers/misc/mediatek/imgsensor/inc/kd_imgsensor.h",
+  "pre_blob": "530deb72d51fbcaf28503c909088f4935a7de4f1",
+  "post_blob": "1e2e0c3c3df5c6cc265c56b1112df7950db882f7",
+  "ops": [
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "#define OV5675MIPI_SENSOR_ID                    0x5675"
+    ],
+    "insert": "#define OV5675_SENSOR_ID                        0x5675\n"
+   },
+   {
+    "op": "insert_after",
+    "anchor_lines": [
+     "#define SENSOR_DRVNAME_OV5675_MIPI_RAW          \"ov5675mipiraw\""
+    ],
+    "insert": "#undef SENSOR_DRVNAME_OV5675_MIPI_RAW\n#define SENSOR_DRVNAME_OV5675_MIPI_RAW          \"ov5675_mipi_raw\"\n"
+   }
+  ]
+ }
+]

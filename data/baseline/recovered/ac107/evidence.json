@@ -1,0 +1,5073 @@
+{
+ "functions": {
+  "ac107_codec0_get": {
+   "object": {
+    "size": 180,
+    "unmasked_words": 45,
+    "masked_words": 8,
+    "relocations": [
+     [
+      24,
+      275,
+      "__stack_chk_guard",
+      0,
+      "60ffffe0"
+     ],
+     [
+      28,
+      286,
+      "__stack_chk_guard",
+      0,
+      "003ffc00"
+     ],
+     [
+      32,
+      275,
+      ".bss",
+      0,
+      "60ffffe0"
+     ],
+     [
+      52,
+      286,
+      ".bss",
+      0,
+      "003ffc00"
+     ],
+     [
+      128,
+      275,
+      "__stack_chk_guard",
+      0,
+      "60ffffe0"
+     ],
+     [
+      136,
+      286,
+      "__stack_chk_guard",
+      0,
+      "003ffc00"
+     ],
+     [
+      176,
+      283,
+      "__stack_chk_fail",
+      0,
+      "03ffffff"
+     ]
+    ],
+    "resolved_branches": [
+     [
+      96,
+      "ac107_read"
+     ]
+    ],
+    "calls": [
+     [
+      176,
+      "__stack_chk_fail"
+     ],
+     [
+      96,
+      "ac107_read"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 24,
+      "lo12": 28,
+      "section": "__stack_chk_guard",
+      "offset": 0
+     },
+     {
+      "adrp": 32,
+      "lo12": 52,
+      "section": ".bss",
+      "offset": 0
+     },
+     {
+      "adrp": 128,
+      "lo12": 136,
+      "section": "__stack_chk_guard",
+      "offset": 0
+     }
+    ],
+    "unpaired_adrp": 0,
+    "unmasked_sha256": "d4e01f0e4584d12fe75f93d745cb4c1df169ec96a3e2b0ee2811ea657c6cb551"
+   },
+   "shipping": {
+    "va": "0xffffff8008c4552c",
+    "size": 180,
+    "unmasked_sha256": "d4e01f0e4584d12fe75f93d745cb4c1df169ec96a3e2b0ee2811ea657c6cb551",
+    "calls": [
+     [
+      176,
+      "__stack_chk_fail"
+     ],
+     [
+      96,
+      "ac107_read"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 24,
+      "section": "__stack_chk_guard",
+      "object_offset": 0,
+      "shipping_va": "0xffffff80098dda48",
+      "shipping_symbol_address": "0xffffff80098dda48"
+     },
+     {
+      "adrp": 32,
+      "section": ".bss",
+      "object_offset": 0,
+      "shipping_va": "0xffffff800a0d7420",
+      "expected_va": "0xffffff800a0d7420"
+     },
+     {
+      "adrp": 128,
+      "section": "__stack_chk_guard",
+      "object_offset": 0,
+      "shipping_va": "0xffffff80098dda48",
+      "shipping_symbol_address": "0xffffff80098dda48"
+     }
+    ],
+    "verdict": "MATCH",
+    "failures": []
+   }
+  },
+  "ac107_read": {
+   "object": {
+    "size": 228,
+    "unmasked_words": 57,
+    "masked_words": 16,
+    "relocations": [
+     [
+      20,
+      275,
+      "__stack_chk_guard",
+      0,
+      "60ffffe0"
+     ],
+     [
+      24,
+      286,
+      "__stack_chk_guard",
+      0,
+      "003ffc00"
+     ],
+     [
+      80,
+      283,
+      "i2c_master_send",
+      0,
+      "03ffffff"
+     ],
+     [
+      104,
+      283,
+      "i2c_master_recv",
+      0,
+      "03ffffff"
+     ],
+     [
+      124,
+      275,
+      ".rodata.str1.1",
+      70,
+      "60ffffe0"
+     ],
+     [
+      128,
+      277,
+      ".rodata.str1.1",
+      70,
+      "003ffc00"
+     ],
+     [
+      132,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      140,
+      275,
+      ".rodata.str1.1",
+      118,
+      "60ffffe0"
+     ],
+     [
+      148,
+      277,
+      ".rodata.str1.1",
+      118,
+      "003ffc00"
+     ],
+     [
+      152,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      164,
+      275,
+      ".rodata.str1.1",
+      153,
+      "60ffffe0"
+     ],
+     [
+      172,
+      277,
+      ".rodata.str1.1",
+      153,
+      "003ffc00"
+     ],
+     [
+      176,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      184,
+      275,
+      "__stack_chk_guard",
+      0,
+      "60ffffe0"
+     ],
+     [
+      192,
+      286,
+      "__stack_chk_guard",
+      0,
+      "003ffc00"
+     ],
+     [
+      224,
+      283,
+      "__stack_chk_fail",
+      0,
+      "03ffffff"
+     ]
+    ],
+    "resolved_branches": [],
+    "calls": [
+     [
+      80,
+      "i2c_master_send"
+     ],
+     [
+      104,
+      "i2c_master_recv"
+     ],
+     [
+      132,
+      "printk"
+     ],
+     [
+      152,
+      "printk"
+     ],
+     [
+      176,
+      "printk"
+     ],
+     [
+      224,
+      "__stack_chk_fail"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 20,
+      "lo12": 24,
+      "section": "__stack_chk_guard",
+      "offset": 0
+     },
+     {
+      "adrp": 124,
+      "lo12": 128,
+      "section": ".rodata.str1.1",
+      "offset": 70,
+      "string": "\u00013ac107_read client or client->adapter is NULL\n"
+     },
+     {
+      "adrp": 140,
+      "lo12": 148,
+      "section": ".rodata.str1.1",
+      "offset": 118,
+      "string": "\u00013ac107_read error1->[REG-0x%02x]\n"
+     },
+     {
+      "adrp": 164,
+      "lo12": 172,
+      "section": ".rodata.str1.1",
+      "offset": 153,
+      "string": "\u00013ac107_read error2->[REG-0x%02x], ret=%d\n"
+     },
+     {
+      "adrp": 184,
+      "lo12": 192,
+      "section": "__stack_chk_guard",
+      "offset": 0
+     }
+    ],
+    "unpaired_adrp": 0,
+    "unmasked_sha256": "c5eb5102a3c061ce5bfea5834f72dd31f092b15c19179057fa4e56bb8cec57fd"
+   },
+   "shipping": {
+    "va": "0xffffff8008c455e0",
+    "size": 228,
+    "unmasked_sha256": "c5eb5102a3c061ce5bfea5834f72dd31f092b15c19179057fa4e56bb8cec57fd",
+    "calls": [
+     [
+      80,
+      "i2c_master_send"
+     ],
+     [
+      104,
+      "i2c_master_recv"
+     ],
+     [
+      132,
+      "printk"
+     ],
+     [
+      152,
+      "printk"
+     ],
+     [
+      176,
+      "printk"
+     ],
+     [
+      224,
+      "__stack_chk_fail"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 20,
+      "section": "__stack_chk_guard",
+      "object_offset": 0,
+      "shipping_va": "0xffffff80098dda48",
+      "shipping_symbol_address": "0xffffff80098dda48"
+     },
+     {
+      "adrp": 124,
+      "section": ".rodata.str1.1",
+      "object_offset": 70,
+      "shipping_va": "0xffffff80092c8297",
+      "shipping_string": "\u00013ac107_read client or client->adapter is NULL\n"
+     },
+     {
+      "adrp": 140,
+      "section": ".rodata.str1.1",
+      "object_offset": 118,
+      "shipping_va": "0xffffff80092c82c7",
+      "shipping_string": "\u00013ac107_read error1->[REG-0x%02x]\n"
+     },
+     {
+      "adrp": 164,
+      "section": ".rodata.str1.1",
+      "object_offset": 153,
+      "shipping_va": "0xffffff80092c82ea",
+      "shipping_string": "\u00013ac107_read error2->[REG-0x%02x], ret=%d\n"
+     },
+     {
+      "adrp": 184,
+      "section": "__stack_chk_guard",
+      "object_offset": 0,
+      "shipping_va": "0xffffff80098dda48",
+      "shipping_symbol_address": "0xffffff80098dda48"
+     }
+    ],
+    "verdict": "MATCH",
+    "failures": []
+   }
+  },
+  "ac107_codec0_put": {
+   "object": {
+    "size": 284,
+    "unmasked_words": 71,
+    "masked_words": 15,
+    "relocations": [
+     [
+      20,
+      275,
+      "__stack_chk_guard",
+      0,
+      "60ffffe0"
+     ],
+     [
+      24,
+      286,
+      "__stack_chk_guard",
+      0,
+      "003ffc00"
+     ],
+     [
+      28,
+      275,
+      ".bss",
+      0,
+      "60ffffe0"
+     ],
+     [
+      44,
+      286,
+      ".bss",
+      0,
+      "003ffc00"
+     ],
+     [
+      188,
+      283,
+      "i2c_master_send",
+      0,
+      "03ffffff"
+     ],
+     [
+      200,
+      275,
+      ".rodata.str1.1",
+      245,
+      "60ffffe0"
+     ],
+     [
+      208,
+      277,
+      ".rodata.str1.1",
+      245,
+      "003ffc00"
+     ],
+     [
+      216,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      224,
+      275,
+      ".rodata.str1.1",
+      196,
+      "60ffffe0"
+     ],
+     [
+      228,
+      277,
+      ".rodata.str1.1",
+      196,
+      "003ffc00"
+     ],
+     [
+      232,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      236,
+      275,
+      "__stack_chk_guard",
+      0,
+      "60ffffe0"
+     ],
+     [
+      244,
+      286,
+      "__stack_chk_guard",
+      0,
+      "003ffc00"
+     ],
+     [
+      280,
+      283,
+      "__stack_chk_fail",
+      0,
+      "03ffffff"
+     ]
+    ],
+    "resolved_branches": [
+     [
+      128,
+      "ac107_read"
+     ]
+    ],
+    "calls": [
+     [
+      188,
+      "i2c_master_send"
+     ],
+     [
+      216,
+      "printk"
+     ],
+     [
+      232,
+      "printk"
+     ],
+     [
+      280,
+      "__stack_chk_fail"
+     ],
+     [
+      128,
+      "ac107_read"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 20,
+      "lo12": 24,
+      "section": "__stack_chk_guard",
+      "offset": 0
+     },
+     {
+      "adrp": 28,
+      "lo12": 44,
+      "section": ".bss",
+      "offset": 0
+     },
+     {
+      "adrp": 200,
+      "lo12": 208,
+      "section": ".rodata.str1.1",
+      "offset": 245,
+      "string": "\u00013ac107_write error->[REG-0x%02x,val-0x%02x]\n"
+     },
+     {
+      "adrp": 224,
+      "lo12": 228,
+      "section": ".rodata.str1.1",
+      "offset": 196,
+      "string": "\u00013ac107_write client or client->adapter is NULL\n"
+     },
+     {
+      "adrp": 236,
+      "lo12": 244,
+      "section": "__stack_chk_guard",
+      "offset": 0
+     }
+    ],
+    "unpaired_adrp": 0,
+    "unmasked_sha256": "65a2d76825c1ba88638765e5af01227be216cfa3ba00e95fdea42046c1bfc8ad"
+   },
+   "shipping": {
+    "va": "0xffffff8008c456c4",
+    "size": 284,
+    "unmasked_sha256": "65a2d76825c1ba88638765e5af01227be216cfa3ba00e95fdea42046c1bfc8ad",
+    "calls": [
+     [
+      188,
+      "i2c_master_send"
+     ],
+     [
+      216,
+      "printk"
+     ],
+     [
+      232,
+      "printk"
+     ],
+     [
+      280,
+      "__stack_chk_fail"
+     ],
+     [
+      128,
+      "ac107_read"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 20,
+      "section": "__stack_chk_guard",
+      "object_offset": 0,
+      "shipping_va": "0xffffff80098dda48",
+      "shipping_symbol_address": "0xffffff80098dda48"
+     },
+     {
+      "adrp": 28,
+      "section": ".bss",
+      "object_offset": 0,
+      "shipping_va": "0xffffff800a0d7420",
+      "expected_va": "0xffffff800a0d7420"
+     },
+     {
+      "adrp": 200,
+      "section": ".rodata.str1.1",
+      "object_offset": 245,
+      "shipping_va": "0xffffff80092c8346",
+      "shipping_string": "\u00013ac107_write error->[REG-0x%02x,val-0x%02x]\n"
+     },
+     {
+      "adrp": 224,
+      "section": ".rodata.str1.1",
+      "object_offset": 196,
+      "shipping_va": "0xffffff80092c8315",
+      "shipping_string": "\u00013ac107_write client or client->adapter is NULL\n"
+     },
+     {
+      "adrp": 236,
+      "section": "__stack_chk_guard",
+      "object_offset": 0,
+      "shipping_va": "0xffffff80098dda48",
+      "shipping_symbol_address": "0xffffff80098dda48"
+     }
+    ],
+    "verdict": "MATCH",
+    "failures": []
+   }
+  },
+  "ac107_dump_regs": {
+   "object": {
+    "size": 136,
+    "unmasked_words": 34,
+    "masked_words": 9,
+    "relocations": [
+     [
+      20,
+      275,
+      "__stack_chk_guard",
+      0,
+      "60ffffe0"
+     ],
+     [
+      24,
+      286,
+      "__stack_chk_guard",
+      0,
+      "003ffc00"
+     ],
+     [
+      28,
+      275,
+      ".rodata.str1.1",
+      0,
+      "60ffffe0"
+     ],
+     [
+      40,
+      277,
+      ".rodata.str1.1",
+      0,
+      "003ffc00"
+     ],
+     [
+      76,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      92,
+      275,
+      "__stack_chk_guard",
+      0,
+      "60ffffe0"
+     ],
+     [
+      100,
+      286,
+      "__stack_chk_guard",
+      0,
+      "003ffc00"
+     ],
+     [
+      132,
+      283,
+      "__stack_chk_fail",
+      0,
+      "03ffffff"
+     ]
+    ],
+    "resolved_branches": [
+     [
+      60,
+      "ac107_read"
+     ]
+    ],
+    "calls": [
+     [
+      76,
+      "printk"
+     ],
+     [
+      132,
+      "__stack_chk_fail"
+     ],
+     [
+      60,
+      "ac107_read"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 20,
+      "lo12": 24,
+      "section": "__stack_chk_guard",
+      "offset": 0
+     },
+     {
+      "adrp": 28,
+      "lo12": 40,
+      "section": ".rodata.str1.1",
+      "offset": 0,
+      "string": "\u00013ac107_read [REG-0x%02x] =0x%d\n"
+     },
+     {
+      "adrp": 92,
+      "lo12": 100,
+      "section": "__stack_chk_guard",
+      "offset": 0
+     }
+    ],
+    "unpaired_adrp": 0,
+    "unmasked_sha256": "5ff06eca99b8b0acc64bc598a9c5115e8a57e316535f685b48845ad7eb26b4fb"
+   },
+   "shipping": {
+    "va": "0xffffff8008c457e0",
+    "size": 136,
+    "unmasked_sha256": "5ff06eca99b8b0acc64bc598a9c5115e8a57e316535f685b48845ad7eb26b4fb",
+    "calls": [
+     [
+      76,
+      "printk"
+     ],
+     [
+      132,
+      "__stack_chk_fail"
+     ],
+     [
+      60,
+      "ac107_read"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 20,
+      "section": "__stack_chk_guard",
+      "object_offset": 0,
+      "shipping_va": "0xffffff80098dda48",
+      "shipping_symbol_address": "0xffffff80098dda48"
+     },
+     {
+      "adrp": 28,
+      "section": ".rodata.str1.1",
+      "object_offset": 0,
+      "shipping_va": "0xffffff80092c8251",
+      "shipping_string": "\u00013ac107_read [REG-0x%02x] =0x%d\n"
+     },
+     {
+      "adrp": 92,
+      "section": "__stack_chk_guard",
+      "object_offset": 0,
+      "shipping_va": "0xffffff80098dda48",
+      "shipping_symbol_address": "0xffffff80098dda48"
+     }
+    ],
+    "verdict": "MATCH",
+    "failures": []
+   }
+  },
+  "loader_set_value": {
+   "object": {
+    "size": 220,
+    "unmasked_words": 55,
+    "masked_words": 14,
+    "relocations": [
+     [
+      28,
+      275,
+      "__stack_chk_guard",
+      0,
+      "60ffffe0"
+     ],
+     [
+      32,
+      286,
+      "__stack_chk_guard",
+      0,
+      "003ffc00"
+     ],
+     [
+      36,
+      275,
+      ".rodata",
+      114,
+      "60ffffe0"
+     ],
+     [
+      40,
+      275,
+      ".rodata.str1.1",
+      196,
+      "60ffffe0"
+     ],
+     [
+      44,
+      275,
+      ".rodata.str1.1",
+      245,
+      "60ffffe0"
+     ],
+     [
+      56,
+      277,
+      ".rodata",
+      114,
+      "003ffc00"
+     ],
+     [
+      60,
+      277,
+      ".rodata.str1.1",
+      196,
+      "003ffc00"
+     ],
+     [
+      64,
+      277,
+      ".rodata.str1.1",
+      245,
+      "003ffc00"
+     ],
+     [
+      116,
+      283,
+      "i2c_master_send",
+      0,
+      "03ffffff"
+     ],
+     [
+      140,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      152,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      168,
+      275,
+      "__stack_chk_guard",
+      0,
+      "60ffffe0"
+     ],
+     [
+      176,
+      286,
+      "__stack_chk_guard",
+      0,
+      "003ffc00"
+     ],
+     [
+      216,
+      283,
+      "__stack_chk_fail",
+      0,
+      "03ffffff"
+     ]
+    ],
+    "resolved_branches": [],
+    "calls": [
+     [
+      116,
+      "i2c_master_send"
+     ],
+     [
+      140,
+      "printk"
+     ],
+     [
+      152,
+      "printk"
+     ],
+     [
+      216,
+      "__stack_chk_fail"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 28,
+      "lo12": 32,
+      "section": "__stack_chk_guard",
+      "offset": 0
+     },
+     {
+      "adrp": 36,
+      "lo12": 56,
+      "section": ".rodata",
+      "offset": 114
+     },
+     {
+      "adrp": 40,
+      "lo12": 60,
+      "section": ".rodata.str1.1",
+      "offset": 196,
+      "string": "\u00013ac107_write client or client->adapter is NULL\n"
+     },
+     {
+      "adrp": 44,
+      "lo12": 64,
+      "section": ".rodata.str1.1",
+      "offset": 245,
+      "string": "\u00013ac107_write error->[REG-0x%02x,val-0x%02x]\n"
+     },
+     {
+      "adrp": 168,
+      "lo12": 176,
+      "section": "__stack_chk_guard",
+      "offset": 0
+     }
+    ],
+    "unpaired_adrp": 0,
+    "unmasked_sha256": "33a28bd1ae66c372047f404d8e1dcb3c02f56b835d826b6bfe3fa463742dc853"
+   },
+   "shipping": {
+    "va": "0xffffff8008c45868",
+    "size": 220,
+    "unmasked_sha256": "33a28bd1ae66c372047f404d8e1dcb3c02f56b835d826b6bfe3fa463742dc853",
+    "calls": [
+     [
+      116,
+      "i2c_master_send"
+     ],
+     [
+      140,
+      "printk"
+     ],
+     [
+      152,
+      "printk"
+     ],
+     [
+      216,
+      "__stack_chk_fail"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 28,
+      "section": "__stack_chk_guard",
+      "object_offset": 0,
+      "shipping_va": "0xffffff80098dda48",
+      "shipping_symbol_address": "0xffffff80098dda48"
+     },
+     {
+      "adrp": 36,
+      "section": ".rodata",
+      "object_offset": 114,
+      "shipping_va": "0xffffff8008fca5ea",
+      "expected_va": "0xffffff8008fca5ea"
+     },
+     {
+      "adrp": 40,
+      "section": ".rodata.str1.1",
+      "object_offset": 196,
+      "shipping_va": "0xffffff80092c8315",
+      "shipping_string": "\u00013ac107_write client or client->adapter is NULL\n"
+     },
+     {
+      "adrp": 44,
+      "section": ".rodata.str1.1",
+      "object_offset": 245,
+      "shipping_va": "0xffffff80092c8346",
+      "shipping_string": "\u00013ac107_write error->[REG-0x%02x,val-0x%02x]\n"
+     },
+     {
+      "adrp": 168,
+      "section": "__stack_chk_guard",
+      "object_offset": 0,
+      "shipping_va": "0xffffff80098dda48",
+      "shipping_symbol_address": "0xffffff80098dda48"
+     }
+    ],
+    "verdict": "MATCH",
+    "failures": []
+   }
+  },
+  "ac107_start": {
+   "object": {
+    "size": 244,
+    "unmasked_words": 61,
+    "masked_words": 21,
+    "relocations": [
+     [
+      28,
+      275,
+      "__stack_chk_guard",
+      0,
+      "60ffffe0"
+     ],
+     [
+      32,
+      286,
+      "__stack_chk_guard",
+      0,
+      "003ffc00"
+     ],
+     [
+      36,
+      275,
+      ".rodata",
+      114,
+      "60ffffe0"
+     ],
+     [
+      40,
+      275,
+      ".rodata.str1.1",
+      196,
+      "60ffffe0"
+     ],
+     [
+      44,
+      275,
+      ".rodata.str1.1",
+      245,
+      "60ffffe0"
+     ],
+     [
+      52,
+      275,
+      ".bss",
+      0,
+      "60ffffe0"
+     ],
+     [
+      56,
+      286,
+      ".bss",
+      0,
+      "003ffc00"
+     ],
+     [
+      64,
+      277,
+      ".rodata",
+      114,
+      "003ffc00"
+     ],
+     [
+      68,
+      277,
+      ".rodata.str1.1",
+      196,
+      "003ffc00"
+     ],
+     [
+      72,
+      277,
+      ".rodata.str1.1",
+      245,
+      "003ffc00"
+     ],
+     [
+      120,
+      283,
+      "i2c_master_send",
+      0,
+      "03ffffff"
+     ],
+     [
+      144,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      156,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      172,
+      275,
+      ".rodata.str1.1",
+      33,
+      "60ffffe0"
+     ],
+     [
+      176,
+      275,
+      ".rodata.str1.1",
+      47,
+      "60ffffe0"
+     ],
+     [
+      180,
+      277,
+      ".rodata.str1.1",
+      33,
+      "003ffc00"
+     ],
+     [
+      184,
+      277,
+      ".rodata.str1.1",
+      47,
+      "003ffc00"
+     ],
+     [
+      188,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      192,
+      275,
+      "__stack_chk_guard",
+      0,
+      "60ffffe0"
+     ],
+     [
+      200,
+      286,
+      "__stack_chk_guard",
+      0,
+      "003ffc00"
+     ],
+     [
+      240,
+      283,
+      "__stack_chk_fail",
+      0,
+      "03ffffff"
+     ]
+    ],
+    "resolved_branches": [],
+    "calls": [
+     [
+      120,
+      "i2c_master_send"
+     ],
+     [
+      144,
+      "printk"
+     ],
+     [
+      156,
+      "printk"
+     ],
+     [
+      188,
+      "printk"
+     ],
+     [
+      240,
+      "__stack_chk_fail"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 28,
+      "lo12": 32,
+      "section": "__stack_chk_guard",
+      "offset": 0
+     },
+     {
+      "adrp": 36,
+      "lo12": 64,
+      "section": ".rodata",
+      "offset": 114
+     },
+     {
+      "adrp": 40,
+      "lo12": 68,
+      "section": ".rodata.str1.1",
+      "offset": 196,
+      "string": "\u00013ac107_write client or client->adapter is NULL\n"
+     },
+     {
+      "adrp": 44,
+      "lo12": 72,
+      "section": ".rodata.str1.1",
+      "offset": 245,
+      "string": "\u00013ac107_write error->[REG-0x%02x,val-0x%02x]\n"
+     },
+     {
+      "adrp": 52,
+      "lo12": 56,
+      "section": ".bss",
+      "offset": 0
+     },
+     {
+      "adrp": 172,
+      "lo12": 180,
+      "section": ".rodata.str1.1",
+      "offset": 33,
+      "string": "\u00013[AC107] %s\n"
+     },
+     {
+      "adrp": 176,
+      "lo12": 184,
+      "section": ".rodata.str1.1",
+      "offset": 47,
+      "string": "ac107_start"
+     },
+     {
+      "adrp": 192,
+      "lo12": 200,
+      "section": "__stack_chk_guard",
+      "offset": 0
+     }
+    ],
+    "unpaired_adrp": 0,
+    "unmasked_sha256": "436aecca62c5419c87ba8774180b681135e39665269a23499a893a2db20fe4a7"
+   },
+   "shipping": {
+    "va": "0xffffff8008c45944",
+    "size": 244,
+    "unmasked_sha256": "436aecca62c5419c87ba8774180b681135e39665269a23499a893a2db20fe4a7",
+    "calls": [
+     [
+      120,
+      "i2c_master_send"
+     ],
+     [
+      144,
+      "printk"
+     ],
+     [
+      156,
+      "printk"
+     ],
+     [
+      188,
+      "printk"
+     ],
+     [
+      240,
+      "__stack_chk_fail"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 28,
+      "section": "__stack_chk_guard",
+      "object_offset": 0,
+      "shipping_va": "0xffffff80098dda48",
+      "shipping_symbol_address": "0xffffff80098dda48"
+     },
+     {
+      "adrp": 36,
+      "section": ".rodata",
+      "object_offset": 114,
+      "shipping_va": "0xffffff8008fca5ea",
+      "expected_va": "0xffffff8008fca5ea"
+     },
+     {
+      "adrp": 40,
+      "section": ".rodata.str1.1",
+      "object_offset": 196,
+      "shipping_va": "0xffffff80092c8315",
+      "shipping_string": "\u00013ac107_write client or client->adapter is NULL\n"
+     },
+     {
+      "adrp": 44,
+      "section": ".rodata.str1.1",
+      "object_offset": 245,
+      "shipping_va": "0xffffff80092c8346",
+      "shipping_string": "\u00013ac107_write error->[REG-0x%02x,val-0x%02x]\n"
+     },
+     {
+      "adrp": 52,
+      "section": ".bss",
+      "object_offset": 0,
+      "shipping_va": "0xffffff800a0d7420",
+      "expected_va": "0xffffff800a0d7420"
+     },
+     {
+      "adrp": 172,
+      "section": ".rodata.str1.1",
+      "object_offset": 33,
+      "shipping_va": "0xffffff80092c8272",
+      "shipping_string": "\u00013[AC107] %s\n"
+     },
+     {
+      "adrp": 176,
+      "section": ".rodata.str1.1",
+      "object_offset": 47,
+      "shipping_va": "0xffffff80092c8280",
+      "shipping_string": "ac107_start"
+     },
+     {
+      "adrp": 192,
+      "section": "__stack_chk_guard",
+      "object_offset": 0,
+      "shipping_va": "0xffffff80098dda48",
+      "shipping_symbol_address": "0xffffff80098dda48"
+     }
+    ],
+    "verdict": "MATCH",
+    "failures": []
+   }
+  },
+  "ac107_stop": {
+   "object": {
+    "size": 164,
+    "unmasked_words": 41,
+    "masked_words": 19,
+    "relocations": [
+     [
+      12,
+      275,
+      "__stack_chk_guard",
+      0,
+      "60ffffe0"
+     ],
+     [
+      16,
+      286,
+      "__stack_chk_guard",
+      0,
+      "003ffc00"
+     ],
+     [
+      24,
+      275,
+      ".bss",
+      0,
+      "60ffffe0"
+     ],
+     [
+      28,
+      286,
+      ".bss",
+      0,
+      "003ffc00"
+     ],
+     [
+      60,
+      283,
+      "i2c_master_send",
+      0,
+      "03ffffff"
+     ],
+     [
+      72,
+      275,
+      ".rodata.str1.1",
+      245,
+      "60ffffe0"
+     ],
+     [
+      76,
+      277,
+      ".rodata.str1.1",
+      245,
+      "003ffc00"
+     ],
+     [
+      88,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      96,
+      275,
+      ".rodata.str1.1",
+      196,
+      "60ffffe0"
+     ],
+     [
+      100,
+      277,
+      ".rodata.str1.1",
+      196,
+      "003ffc00"
+     ],
+     [
+      104,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      108,
+      275,
+      ".rodata.str1.1",
+      33,
+      "60ffffe0"
+     ],
+     [
+      112,
+      275,
+      ".rodata.str1.1",
+      59,
+      "60ffffe0"
+     ],
+     [
+      116,
+      277,
+      ".rodata.str1.1",
+      33,
+      "003ffc00"
+     ],
+     [
+      120,
+      277,
+      ".rodata.str1.1",
+      59,
+      "003ffc00"
+     ],
+     [
+      124,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      128,
+      275,
+      "__stack_chk_guard",
+      0,
+      "60ffffe0"
+     ],
+     [
+      136,
+      286,
+      "__stack_chk_guard",
+      0,
+      "003ffc00"
+     ],
+     [
+      160,
+      283,
+      "__stack_chk_fail",
+      0,
+      "03ffffff"
+     ]
+    ],
+    "resolved_branches": [],
+    "calls": [
+     [
+      60,
+      "i2c_master_send"
+     ],
+     [
+      88,
+      "printk"
+     ],
+     [
+      104,
+      "printk"
+     ],
+     [
+      124,
+      "printk"
+     ],
+     [
+      160,
+      "__stack_chk_fail"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 12,
+      "lo12": 16,
+      "section": "__stack_chk_guard",
+      "offset": 0
+     },
+     {
+      "adrp": 24,
+      "lo12": 28,
+      "section": ".bss",
+      "offset": 0
+     },
+     {
+      "adrp": 72,
+      "lo12": 76,
+      "section": ".rodata.str1.1",
+      "offset": 245,
+      "string": "\u00013ac107_write error->[REG-0x%02x,val-0x%02x]\n"
+     },
+     {
+      "adrp": 96,
+      "lo12": 100,
+      "section": ".rodata.str1.1",
+      "offset": 196,
+      "string": "\u00013ac107_write client or client->adapter is NULL\n"
+     },
+     {
+      "adrp": 108,
+      "lo12": 116,
+      "section": ".rodata.str1.1",
+      "offset": 33,
+      "string": "\u00013[AC107] %s\n"
+     },
+     {
+      "adrp": 112,
+      "lo12": 120,
+      "section": ".rodata.str1.1",
+      "offset": 59,
+      "string": "ac107_stop"
+     },
+     {
+      "adrp": 128,
+      "lo12": 136,
+      "section": "__stack_chk_guard",
+      "offset": 0
+     }
+    ],
+    "unpaired_adrp": 0,
+    "unmasked_sha256": "5f86f1819f01ee535175c38cc403ee4774f4b4cb169bbcad585b61531396fa49"
+   },
+   "shipping": {
+    "va": "0xffffff8008c45a38",
+    "size": 164,
+    "unmasked_sha256": "5f86f1819f01ee535175c38cc403ee4774f4b4cb169bbcad585b61531396fa49",
+    "calls": [
+     [
+      60,
+      "i2c_master_send"
+     ],
+     [
+      88,
+      "printk"
+     ],
+     [
+      104,
+      "printk"
+     ],
+     [
+      124,
+      "printk"
+     ],
+     [
+      160,
+      "__stack_chk_fail"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 12,
+      "section": "__stack_chk_guard",
+      "object_offset": 0,
+      "shipping_va": "0xffffff80098dda48",
+      "shipping_symbol_address": "0xffffff80098dda48"
+     },
+     {
+      "adrp": 24,
+      "section": ".bss",
+      "object_offset": 0,
+      "shipping_va": "0xffffff800a0d7420",
+      "expected_va": "0xffffff800a0d7420"
+     },
+     {
+      "adrp": 72,
+      "section": ".rodata.str1.1",
+      "object_offset": 245,
+      "shipping_va": "0xffffff80092c8346",
+      "shipping_string": "\u00013ac107_write error->[REG-0x%02x,val-0x%02x]\n"
+     },
+     {
+      "adrp": 96,
+      "section": ".rodata.str1.1",
+      "object_offset": 196,
+      "shipping_va": "0xffffff80092c8315",
+      "shipping_string": "\u00013ac107_write client or client->adapter is NULL\n"
+     },
+     {
+      "adrp": 108,
+      "section": ".rodata.str1.1",
+      "object_offset": 33,
+      "shipping_va": "0xffffff80092c8272",
+      "shipping_string": "\u00013[AC107] %s\n"
+     },
+     {
+      "adrp": 112,
+      "section": ".rodata.str1.1",
+      "object_offset": 59,
+      "shipping_va": "0xffffff80092c828c",
+      "shipping_string": "ac107_stop"
+     },
+     {
+      "adrp": 128,
+      "section": "__stack_chk_guard",
+      "object_offset": 0,
+      "shipping_va": "0xffffff80098dda48",
+      "shipping_symbol_address": "0xffffff80098dda48"
+     }
+    ],
+    "verdict": "MATCH",
+    "failures": []
+   }
+  },
+  "ac107_probe": {
+   "object": {
+    "size": 124,
+    "unmasked_words": 31,
+    "masked_words": 6,
+    "relocations": [
+     [
+      24,
+      275,
+      ".rodata",
+      456,
+      "60ffffe0"
+     ],
+     [
+      28,
+      277,
+      ".rodata",
+      456,
+      "003ffc00"
+     ],
+     [
+      48,
+      283,
+      "__devm_regmap_init_i2c",
+      0,
+      "03ffffff"
+     ],
+     [
+      88,
+      275,
+      ".rodata.str1.1",
+      291,
+      "60ffffe0"
+     ],
+     [
+      92,
+      277,
+      ".rodata.str1.1",
+      291,
+      "003ffc00"
+     ],
+     [
+      100,
+      283,
+      "dev_err",
+      0,
+      "03ffffff"
+     ]
+    ],
+    "resolved_branches": [],
+    "calls": [
+     [
+      48,
+      "__devm_regmap_init_i2c"
+     ],
+     [
+      100,
+      "dev_err"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 24,
+      "lo12": 28,
+      "section": ".rodata",
+      "offset": 456
+     },
+     {
+      "adrp": 88,
+      "lo12": 92,
+      "section": ".rodata.str1.1",
+      "offset": 291,
+      "string": "AC107 regmap init I2C Failed: %d\n"
+     }
+    ],
+    "unpaired_adrp": 0,
+    "unmasked_sha256": "d416e0a8dce63cf2f7bcbe200e05221554e58a6a148ecc992cff3de87f430ffe"
+   },
+   "shipping": {
+    "va": "0xffffff8008c45adc",
+    "size": 124,
+    "unmasked_sha256": "d416e0a8dce63cf2f7bcbe200e05221554e58a6a148ecc992cff3de87f430ffe",
+    "calls": [
+     [
+      48,
+      "__devm_regmap_init_i2c"
+     ],
+     [
+      100,
+      "dev_err"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 24,
+      "section": ".rodata",
+      "object_offset": 456,
+      "shipping_va": "0xffffff8008fca740",
+      "expected_va": "0xffffff8008fca740"
+     },
+     {
+      "adrp": 88,
+      "section": ".rodata.str1.1",
+      "object_offset": 291,
+      "shipping_va": "0xffffff80092c8374",
+      "shipping_string": "AC107 regmap init I2C Failed: %d\n"
+     }
+    ],
+    "verdict": "MATCH",
+    "failures": []
+   }
+  },
+  "ac107_remove": {
+   "object": {
+    "size": 8,
+    "unmasked_words": 2,
+    "masked_words": 0,
+    "relocations": [],
+    "resolved_branches": [],
+    "calls": [],
+    "data_refs": [],
+    "unpaired_adrp": 0,
+    "unmasked_sha256": "2b59db05426e0f313d72b30f3398c65721de2562a59dc46ceeba224f98d0b876"
+   },
+   "shipping": {
+    "va": "0xffffff8008c45b58",
+    "size": 8,
+    "unmasked_sha256": "2b59db05426e0f313d72b30f3398c65721de2562a59dc46ceeba224f98d0b876",
+    "calls": [],
+    "data_refs": [],
+    "verdict": "MATCH",
+    "failures": []
+   }
+  },
+  "ac107_suspend": {
+   "object": {
+    "size": 172,
+    "unmasked_words": 43,
+    "masked_words": 17,
+    "relocations": [
+     [
+      12,
+      275,
+      "__stack_chk_guard",
+      0,
+      "60ffffe0"
+     ],
+     [
+      16,
+      286,
+      "__stack_chk_guard",
+      0,
+      "003ffc00"
+     ],
+     [
+      64,
+      283,
+      "i2c_master_send",
+      0,
+      "03ffffff"
+     ],
+     [
+      76,
+      275,
+      ".rodata.str1.1",
+      245,
+      "60ffffe0"
+     ],
+     [
+      80,
+      277,
+      ".rodata.str1.1",
+      245,
+      "003ffc00"
+     ],
+     [
+      92,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      100,
+      275,
+      ".rodata.str1.1",
+      196,
+      "60ffffe0"
+     ],
+     [
+      104,
+      277,
+      ".rodata.str1.1",
+      196,
+      "003ffc00"
+     ],
+     [
+      108,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      112,
+      275,
+      ".rodata.str1.1",
+      325,
+      "60ffffe0"
+     ],
+     [
+      116,
+      275,
+      ".rodata.str1.1",
+      355,
+      "60ffffe0"
+     ],
+     [
+      120,
+      277,
+      ".rodata.str1.1",
+      325,
+      "003ffc00"
+     ],
+     [
+      124,
+      277,
+      ".rodata.str1.1",
+      355,
+      "003ffc00"
+     ],
+     [
+      128,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      132,
+      275,
+      "__stack_chk_guard",
+      0,
+      "60ffffe0"
+     ],
+     [
+      140,
+      286,
+      "__stack_chk_guard",
+      0,
+      "003ffc00"
+     ],
+     [
+      168,
+      283,
+      "__stack_chk_fail",
+      0,
+      "03ffffff"
+     ]
+    ],
+    "resolved_branches": [],
+    "calls": [
+     [
+      64,
+      "i2c_master_send"
+     ],
+     [
+      92,
+      "printk"
+     ],
+     [
+      108,
+      "printk"
+     ],
+     [
+      128,
+      "printk"
+     ],
+     [
+      168,
+      "__stack_chk_fail"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 12,
+      "lo12": 16,
+      "section": "__stack_chk_guard",
+      "offset": 0
+     },
+     {
+      "adrp": 76,
+      "lo12": 80,
+      "section": ".rodata.str1.1",
+      "offset": 245,
+      "string": "\u00013ac107_write error->[REG-0x%02x,val-0x%02x]\n"
+     },
+     {
+      "adrp": 100,
+      "lo12": 104,
+      "section": ".rodata.str1.1",
+      "offset": 196,
+      "string": "\u00013ac107_write client or client->adapter is NULL\n"
+     },
+     {
+      "adrp": 112,
+      "lo12": 120,
+      "section": ".rodata.str1.1",
+      "offset": 325,
+      "string": "\u00013[AC107] %s: CHIP_AUDIO_RST\n"
+     },
+     {
+      "adrp": 116,
+      "lo12": 124,
+      "section": ".rodata.str1.1",
+      "offset": 355,
+      "string": "ac107_suspend"
+     },
+     {
+      "adrp": 132,
+      "lo12": 140,
+      "section": "__stack_chk_guard",
+      "offset": 0
+     }
+    ],
+    "unpaired_adrp": 0,
+    "unmasked_sha256": "4eaf341fb5cac437119aa6b11de977c045b7e35192185efce0466e030e51a0af"
+   },
+   "shipping": {
+    "va": "0xffffff8008c45b60",
+    "size": 172,
+    "unmasked_sha256": "4eaf341fb5cac437119aa6b11de977c045b7e35192185efce0466e030e51a0af",
+    "calls": [
+     [
+      64,
+      "i2c_master_send"
+     ],
+     [
+      92,
+      "printk"
+     ],
+     [
+      108,
+      "printk"
+     ],
+     [
+      128,
+      "printk"
+     ],
+     [
+      168,
+      "__stack_chk_fail"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 12,
+      "section": "__stack_chk_guard",
+      "object_offset": 0,
+      "shipping_va": "0xffffff80098dda48",
+      "shipping_symbol_address": "0xffffff80098dda48"
+     },
+     {
+      "adrp": 76,
+      "section": ".rodata.str1.1",
+      "object_offset": 245,
+      "shipping_va": "0xffffff80092c8346",
+      "shipping_string": "\u00013ac107_write error->[REG-0x%02x,val-0x%02x]\n"
+     },
+     {
+      "adrp": 100,
+      "section": ".rodata.str1.1",
+      "object_offset": 196,
+      "shipping_va": "0xffffff80092c8315",
+      "shipping_string": "\u00013ac107_write client or client->adapter is NULL\n"
+     },
+     {
+      "adrp": 112,
+      "section": ".rodata.str1.1",
+      "object_offset": 325,
+      "shipping_va": "0xffffff80092c8396",
+      "shipping_string": "\u00013[AC107] %s: CHIP_AUDIO_RST\n"
+     },
+     {
+      "adrp": 116,
+      "section": ".rodata.str1.1",
+      "object_offset": 355,
+      "shipping_va": "0xffffff80092c83b4",
+      "shipping_string": "ac107_suspend"
+     },
+     {
+      "adrp": 132,
+      "section": "__stack_chk_guard",
+      "object_offset": 0,
+      "shipping_va": "0xffffff80098dda48",
+      "shipping_symbol_address": "0xffffff80098dda48"
+     }
+    ],
+    "verdict": "MATCH",
+    "failures": []
+   }
+  },
+  "ac107_resume": {
+   "object": {
+    "size": 8,
+    "unmasked_words": 2,
+    "masked_words": 0,
+    "relocations": [],
+    "resolved_branches": [],
+    "calls": [],
+    "data_refs": [],
+    "unpaired_adrp": 0,
+    "unmasked_sha256": "2b59db05426e0f313d72b30f3398c65721de2562a59dc46ceeba224f98d0b876"
+   },
+   "shipping": {
+    "va": "0xffffff8008c45c0c",
+    "size": 8,
+    "unmasked_sha256": "2b59db05426e0f313d72b30f3398c65721de2562a59dc46ceeba224f98d0b876",
+    "calls": [],
+    "data_refs": [],
+    "verdict": "MATCH",
+    "failures": []
+   }
+  },
+  "ac107_codec_read": {
+   "object": {
+    "size": 88,
+    "unmasked_words": 22,
+    "masked_words": 6,
+    "relocations": [
+     [
+      12,
+      275,
+      "__stack_chk_guard",
+      0,
+      "60ffffe0"
+     ],
+     [
+      16,
+      286,
+      "__stack_chk_guard",
+      0,
+      "003ffc00"
+     ],
+     [
+      48,
+      275,
+      "__stack_chk_guard",
+      0,
+      "60ffffe0"
+     ],
+     [
+      60,
+      286,
+      "__stack_chk_guard",
+      0,
+      "003ffc00"
+     ],
+     [
+      84,
+      283,
+      "__stack_chk_fail",
+      0,
+      "03ffffff"
+     ]
+    ],
+    "resolved_branches": [
+     [
+      44,
+      "ac107_read"
+     ]
+    ],
+    "calls": [
+     [
+      84,
+      "__stack_chk_fail"
+     ],
+     [
+      44,
+      "ac107_read"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 12,
+      "lo12": 16,
+      "section": "__stack_chk_guard",
+      "offset": 0
+     },
+     {
+      "adrp": 48,
+      "lo12": 60,
+      "section": "__stack_chk_guard",
+      "offset": 0
+     }
+    ],
+    "unpaired_adrp": 0,
+    "unmasked_sha256": "b26442f028a28ff5ed49b91f814b5b69cd9c08d4f5ebd142260579e661ea415e"
+   },
+   "shipping": {
+    "va": "0xffffff8008c45c14",
+    "size": 88,
+    "unmasked_sha256": "b26442f028a28ff5ed49b91f814b5b69cd9c08d4f5ebd142260579e661ea415e",
+    "calls": [
+     [
+      84,
+      "__stack_chk_fail"
+     ],
+     [
+      44,
+      "ac107_read"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 12,
+      "section": "__stack_chk_guard",
+      "object_offset": 0,
+      "shipping_va": "0xffffff80098dda48",
+      "shipping_symbol_address": "0xffffff80098dda48"
+     },
+     {
+      "adrp": 48,
+      "section": "__stack_chk_guard",
+      "object_offset": 0,
+      "shipping_va": "0xffffff80098dda48",
+      "shipping_symbol_address": "0xffffff80098dda48"
+     }
+    ],
+    "verdict": "MATCH",
+    "failures": []
+   }
+  },
+  "ac107_codec_write": {
+   "object": {
+    "size": 164,
+    "unmasked_words": 41,
+    "masked_words": 14,
+    "relocations": [
+     [
+      16,
+      275,
+      "__stack_chk_guard",
+      0,
+      "60ffffe0"
+     ],
+     [
+      20,
+      286,
+      "__stack_chk_guard",
+      0,
+      "003ffc00"
+     ],
+     [
+      28,
+      275,
+      ".bss",
+      0,
+      "60ffffe0"
+     ],
+     [
+      32,
+      286,
+      ".bss",
+      0,
+      "003ffc00"
+     ],
+     [
+      72,
+      283,
+      "i2c_master_send",
+      0,
+      "03ffffff"
+     ],
+     [
+      84,
+      275,
+      ".rodata.str1.1",
+      245,
+      "60ffffe0"
+     ],
+     [
+      96,
+      277,
+      ".rodata.str1.1",
+      245,
+      "003ffc00"
+     ],
+     [
+      100,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      108,
+      275,
+      ".rodata.str1.1",
+      196,
+      "60ffffe0"
+     ],
+     [
+      112,
+      277,
+      ".rodata.str1.1",
+      196,
+      "003ffc00"
+     ],
+     [
+      116,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      120,
+      275,
+      "__stack_chk_guard",
+      0,
+      "60ffffe0"
+     ],
+     [
+      128,
+      286,
+      "__stack_chk_guard",
+      0,
+      "003ffc00"
+     ],
+     [
+      160,
+      283,
+      "__stack_chk_fail",
+      0,
+      "03ffffff"
+     ]
+    ],
+    "resolved_branches": [],
+    "calls": [
+     [
+      72,
+      "i2c_master_send"
+     ],
+     [
+      100,
+      "printk"
+     ],
+     [
+      116,
+      "printk"
+     ],
+     [
+      160,
+      "__stack_chk_fail"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 16,
+      "lo12": 20,
+      "section": "__stack_chk_guard",
+      "offset": 0
+     },
+     {
+      "adrp": 28,
+      "lo12": 32,
+      "section": ".bss",
+      "offset": 0
+     },
+     {
+      "adrp": 84,
+      "lo12": 96,
+      "section": ".rodata.str1.1",
+      "offset": 245,
+      "string": "\u00013ac107_write error->[REG-0x%02x,val-0x%02x]\n"
+     },
+     {
+      "adrp": 108,
+      "lo12": 112,
+      "section": ".rodata.str1.1",
+      "offset": 196,
+      "string": "\u00013ac107_write client or client->adapter is NULL\n"
+     },
+     {
+      "adrp": 120,
+      "lo12": 128,
+      "section": "__stack_chk_guard",
+      "offset": 0
+     }
+    ],
+    "unpaired_adrp": 0,
+    "unmasked_sha256": "51bf5febf42d9d2287e4ac6e3937af95e0222985e48e0873931da4f75bd3437a"
+   },
+   "shipping": {
+    "va": "0xffffff8008c45c6c",
+    "size": 164,
+    "unmasked_sha256": "51bf5febf42d9d2287e4ac6e3937af95e0222985e48e0873931da4f75bd3437a",
+    "calls": [
+     [
+      72,
+      "i2c_master_send"
+     ],
+     [
+      100,
+      "printk"
+     ],
+     [
+      116,
+      "printk"
+     ],
+     [
+      160,
+      "__stack_chk_fail"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 16,
+      "section": "__stack_chk_guard",
+      "object_offset": 0,
+      "shipping_va": "0xffffff80098dda48",
+      "shipping_symbol_address": "0xffffff80098dda48"
+     },
+     {
+      "adrp": 28,
+      "section": ".bss",
+      "object_offset": 0,
+      "shipping_va": "0xffffff800a0d7420",
+      "expected_va": "0xffffff800a0d7420"
+     },
+     {
+      "adrp": 84,
+      "section": ".rodata.str1.1",
+      "object_offset": 245,
+      "shipping_va": "0xffffff80092c8346",
+      "shipping_string": "\u00013ac107_write error->[REG-0x%02x,val-0x%02x]\n"
+     },
+     {
+      "adrp": 108,
+      "section": ".rodata.str1.1",
+      "object_offset": 196,
+      "shipping_va": "0xffffff80092c8315",
+      "shipping_string": "\u00013ac107_write client or client->adapter is NULL\n"
+     },
+     {
+      "adrp": 120,
+      "section": "__stack_chk_guard",
+      "object_offset": 0,
+      "shipping_va": "0xffffff80098dda48",
+      "shipping_symbol_address": "0xffffff80098dda48"
+     }
+    ],
+    "verdict": "MATCH",
+    "failures": []
+   }
+  },
+  "ac107_i2c_probe": {
+   "object": {
+    "size": 548,
+    "unmasked_words": 137,
+    "masked_words": 54,
+    "relocations": [
+     [
+      28,
+      275,
+      "__stack_chk_guard",
+      0,
+      "60ffffe0"
+     ],
+     [
+      32,
+      286,
+      "__stack_chk_guard",
+      0,
+      "003ffc00"
+     ],
+     [
+      64,
+      283,
+      "devm_kmalloc",
+      0,
+      "03ffffff"
+     ],
+     [
+      72,
+      275,
+      ".rodata.str1.1",
+      459,
+      "60ffffe0"
+     ],
+     [
+      88,
+      277,
+      ".rodata.str1.1",
+      459,
+      "003ffc00"
+     ],
+     [
+      96,
+      283,
+      "regulator_get",
+      0,
+      "03ffffff"
+     ],
+     [
+      132,
+      283,
+      "regulator_set_voltage",
+      0,
+      "03ffffff"
+     ],
+     [
+      140,
+      283,
+      "regulator_enable",
+      0,
+      "03ffffff"
+     ],
+     [
+      148,
+      275,
+      ".rodata.str1.1",
+      514,
+      "60ffffe0"
+     ],
+     [
+      152,
+      275,
+      ".rodata.str1.1",
+      589,
+      "60ffffe0"
+     ],
+     [
+      156,
+      277,
+      ".rodata.str1.1",
+      514,
+      "003ffc00"
+     ],
+     [
+      160,
+      277,
+      ".rodata.str1.1",
+      589,
+      "003ffc00"
+     ],
+     [
+      164,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      168,
+      275,
+      ".data",
+      216,
+      "60ffffe0"
+     ],
+     [
+      176,
+      277,
+      ".data",
+      216,
+      "003ffc00"
+     ],
+     [
+      180,
+      283,
+      "sysfs_create_group",
+      0,
+      "03ffffff"
+     ],
+     [
+      188,
+      275,
+      ".rodata.str1.1",
+      605,
+      "60ffffe0"
+     ],
+     [
+      192,
+      277,
+      ".rodata.str1.1",
+      605,
+      "003ffc00"
+     ],
+     [
+      196,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      200,
+      275,
+      ".rodata.str1.1",
+      636,
+      "60ffffe0"
+     ],
+     [
+      204,
+      277,
+      ".rodata.str1.1",
+      636,
+      "003ffc00"
+     ],
+     [
+      208,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      212,
+      275,
+      ".rodata",
+      114,
+      "60ffffe0"
+     ],
+     [
+      216,
+      275,
+      ".rodata.str1.1",
+      196,
+      "60ffffe0"
+     ],
+     [
+      220,
+      275,
+      ".rodata.str1.1",
+      245,
+      "60ffffe0"
+     ],
+     [
+      228,
+      275,
+      ".bss",
+      0,
+      "60ffffe0"
+     ],
+     [
+      232,
+      277,
+      ".rodata",
+      114,
+      "003ffc00"
+     ],
+     [
+      236,
+      277,
+      ".rodata.str1.1",
+      196,
+      "003ffc00"
+     ],
+     [
+      240,
+      277,
+      ".rodata.str1.1",
+      245,
+      "003ffc00"
+     ],
+     [
+      244,
+      286,
+      ".bss",
+      0,
+      "003ffc00"
+     ],
+     [
+      292,
+      283,
+      "i2c_master_send",
+      0,
+      "03ffffff"
+     ],
+     [
+      316,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      328,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      344,
+      286,
+      ".bss",
+      0,
+      "003ffc00"
+     ],
+     [
+      348,
+      275,
+      ".rodata.str1.1",
+      0,
+      "60ffffe0"
+     ],
+     [
+      356,
+      277,
+      ".rodata.str1.1",
+      0,
+      "003ffc00"
+     ],
+     [
+      388,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      404,
+      286,
+      ".bss",
+      0,
+      "003ffc00"
+     ],
+     [
+      408,
+      275,
+      ".bss",
+      8,
+      "60ffffe0"
+     ],
+     [
+      412,
+      277,
+      ".bss",
+      8,
+      "003ffc00"
+     ],
+     [
+      436,
+      275,
+      ".rodata.str1.1",
+      653,
+      "60ffffe0"
+     ],
+     [
+      440,
+      277,
+      ".rodata.str1.1",
+      653,
+      "003ffc00"
+     ],
+     [
+      444,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      452,
+      275,
+      ".rodata.str1.1",
+      420,
+      "60ffffe0"
+     ],
+     [
+      456,
+      277,
+      ".rodata.str1.1",
+      420,
+      "003ffc00"
+     ],
+     [
+      464,
+      283,
+      "dev_err",
+      0,
+      "03ffffff"
+     ],
+     [
+      476,
+      275,
+      ".rodata.str1.1",
+      470,
+      "60ffffe0"
+     ],
+     [
+      480,
+      277,
+      ".rodata.str1.1",
+      470,
+      "003ffc00"
+     ],
+     [
+      484,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      492,
+      275,
+      "__stack_chk_guard",
+      0,
+      "60ffffe0"
+     ],
+     [
+      500,
+      286,
+      "__stack_chk_guard",
+      0,
+      "003ffc00"
+     ],
+     [
+      544,
+      283,
+      "__stack_chk_fail",
+      0,
+      "03ffffff"
+     ]
+    ],
+    "resolved_branches": [
+     [
+      372,
+      "ac107_read"
+     ],
+     [
+      424,
+      "ac107_read"
+     ]
+    ],
+    "calls": [
+     [
+      64,
+      "devm_kmalloc"
+     ],
+     [
+      96,
+      "regulator_get"
+     ],
+     [
+      132,
+      "regulator_set_voltage"
+     ],
+     [
+      140,
+      "regulator_enable"
+     ],
+     [
+      164,
+      "printk"
+     ],
+     [
+      180,
+      "sysfs_create_group"
+     ],
+     [
+      196,
+      "printk"
+     ],
+     [
+      208,
+      "printk"
+     ],
+     [
+      292,
+      "i2c_master_send"
+     ],
+     [
+      316,
+      "printk"
+     ],
+     [
+      328,
+      "printk"
+     ],
+     [
+      388,
+      "printk"
+     ],
+     [
+      444,
+      "printk"
+     ],
+     [
+      464,
+      "dev_err"
+     ],
+     [
+      484,
+      "printk"
+     ],
+     [
+      544,
+      "__stack_chk_fail"
+     ],
+     [
+      372,
+      "ac107_read"
+     ],
+     [
+      424,
+      "ac107_read"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 28,
+      "lo12": 32,
+      "section": "__stack_chk_guard",
+      "offset": 0
+     },
+     {
+      "adrp": 72,
+      "lo12": 88,
+      "section": ".rodata.str1.1",
+      "offset": 459,
+      "string": "vcn33_wifi"
+     },
+     {
+      "adrp": 148,
+      "lo12": 156,
+      "section": ".rodata.str1.1",
+      "offset": 514,
+      "string": "\u00013[AC107] %s: some error happen, fail to enable regulator avcc_vccio_3v3!\n"
+     },
+     {
+      "adrp": 152,
+      "lo12": 160,
+      "section": ".rodata.str1.1",
+      "offset": 589,
+      "string": "ac107_i2c_probe"
+     },
+     {
+      "adrp": 168,
+      "lo12": 176,
+      "section": ".data",
+      "offset": 216
+     },
+     {
+      "adrp": 188,
+      "lo12": 192,
+      "section": ".rodata.str1.1",
+      "offset": 605,
+      "string": "\u00013failed to create attr group\n"
+     },
+     {
+      "adrp": 200,
+      "lo12": 204,
+      "section": ".rodata.str1.1",
+      "offset": 636,
+      "string": "\u00013ac107_hw_init\n"
+     },
+     {
+      "adrp": 212,
+      "lo12": 232,
+      "section": ".rodata",
+      "offset": 114
+     },
+     {
+      "adrp": 216,
+      "lo12": 236,
+      "section": ".rodata.str1.1",
+      "offset": 196,
+      "string": "\u00013ac107_write client or client->adapter is NULL\n"
+     },
+     {
+      "adrp": 220,
+      "lo12": 240,
+      "section": ".rodata.str1.1",
+      "offset": 245,
+      "string": "\u00013ac107_write error->[REG-0x%02x,val-0x%02x]\n"
+     },
+     {
+      "adrp": 228,
+      "lo12": 244,
+      "section": ".bss",
+      "offset": 0
+     },
+     {
+      "adrp": 348,
+      "lo12": 356,
+      "section": ".rodata.str1.1",
+      "offset": 0,
+      "string": "\u00013ac107_read [REG-0x%02x] =0x%d\n"
+     },
+     {
+      "adrp": 408,
+      "lo12": 412,
+      "section": ".bss",
+      "offset": 8
+     },
+     {
+      "adrp": 436,
+      "lo12": 440,
+      "section": ".rodata.str1.1",
+      "offset": 653,
+      "string": "\u00013probe ac107: failed to read chip id\n"
+     },
+     {
+      "adrp": 452,
+      "lo12": 456,
+      "section": ".rodata.str1.1",
+      "offset": 420,
+      "string": "Unable to allocate ac107 private data\n"
+     },
+     {
+      "adrp": 476,
+      "lo12": 480,
+      "section": ".rodata.str1.1",
+      "offset": 470,
+      "string": "\u00013get ac107 avcc_vccio_3v3 failed, return!\n"
+     },
+     {
+      "adrp": 492,
+      "lo12": 500,
+      "section": "__stack_chk_guard",
+      "offset": 0
+     }
+    ],
+    "unpaired_adrp": 0,
+    "unmasked_sha256": "b5bc5e3e51fffe2b3909b51acecfce78955eb6c1194d550bad496b5ecf9902d4"
+   },
+   "shipping": {
+    "va": "0xffffff8008c45d10",
+    "size": 548,
+    "unmasked_sha256": "b5bc5e3e51fffe2b3909b51acecfce78955eb6c1194d550bad496b5ecf9902d4",
+    "calls": [
+     [
+      64,
+      "devm_kmalloc"
+     ],
+     [
+      96,
+      "regulator_get"
+     ],
+     [
+      132,
+      "regulator_set_voltage"
+     ],
+     [
+      140,
+      "regulator_enable"
+     ],
+     [
+      164,
+      "printk"
+     ],
+     [
+      180,
+      "sysfs_create_group"
+     ],
+     [
+      196,
+      "printk"
+     ],
+     [
+      208,
+      "printk"
+     ],
+     [
+      292,
+      "i2c_master_send"
+     ],
+     [
+      316,
+      "printk"
+     ],
+     [
+      328,
+      "printk"
+     ],
+     [
+      388,
+      "printk"
+     ],
+     [
+      444,
+      "printk"
+     ],
+     [
+      464,
+      "dev_err"
+     ],
+     [
+      484,
+      "printk"
+     ],
+     [
+      544,
+      "__stack_chk_fail"
+     ],
+     [
+      372,
+      "ac107_read"
+     ],
+     [
+      424,
+      "ac107_read"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 28,
+      "section": "__stack_chk_guard",
+      "object_offset": 0,
+      "shipping_va": "0xffffff80098dda48",
+      "shipping_symbol_address": "0xffffff80098dda48"
+     },
+     {
+      "adrp": 72,
+      "section": ".rodata.str1.1",
+      "object_offset": 459,
+      "shipping_va": "0xffffff800918101b",
+      "shipping_string": "vcn33_wifi"
+     },
+     {
+      "adrp": 148,
+      "section": ".rodata.str1.1",
+      "object_offset": 514,
+      "shipping_va": "0xffffff80092c8448",
+      "shipping_string": "\u00013[AC107] %s: some error happen, fail to enable regulator avcc_vccio_3v3!\n"
+     },
+     {
+      "adrp": 152,
+      "section": ".rodata.str1.1",
+      "object_offset": 589,
+      "shipping_va": "0xffffff80092c8493",
+      "shipping_string": "ac107_i2c_probe"
+     },
+     {
+      "adrp": 168,
+      "section": ".data",
+      "object_offset": 216,
+      "shipping_va": "0xffffff8009a171b0",
+      "expected_va": "0xffffff8009a171b0"
+     },
+     {
+      "adrp": 188,
+      "section": ".rodata.str1.1",
+      "object_offset": 605,
+      "shipping_va": "0xffffff80092c84a3",
+      "shipping_string": "\u00013failed to create attr group\n"
+     },
+     {
+      "adrp": 200,
+      "section": ".rodata.str1.1",
+      "object_offset": 636,
+      "shipping_va": "0xffffff80092c84c2",
+      "shipping_string": "\u00013ac107_hw_init\n"
+     },
+     {
+      "adrp": 212,
+      "section": ".rodata",
+      "object_offset": 114,
+      "shipping_va": "0xffffff8008fca5ea",
+      "expected_va": "0xffffff8008fca5ea"
+     },
+     {
+      "adrp": 216,
+      "section": ".rodata.str1.1",
+      "object_offset": 196,
+      "shipping_va": "0xffffff80092c8315",
+      "shipping_string": "\u00013ac107_write client or client->adapter is NULL\n"
+     },
+     {
+      "adrp": 220,
+      "section": ".rodata.str1.1",
+      "object_offset": 245,
+      "shipping_va": "0xffffff80092c8346",
+      "shipping_string": "\u00013ac107_write error->[REG-0x%02x,val-0x%02x]\n"
+     },
+     {
+      "adrp": 228,
+      "section": ".bss",
+      "object_offset": 0,
+      "shipping_va": "0xffffff800a0d7420",
+      "expected_va": "0xffffff800a0d7420"
+     },
+     {
+      "adrp": 348,
+      "section": ".rodata.str1.1",
+      "object_offset": 0,
+      "shipping_va": "0xffffff80092c8251",
+      "shipping_string": "\u00013ac107_read [REG-0x%02x] =0x%d\n"
+     },
+     {
+      "adrp": 408,
+      "section": ".bss",
+      "object_offset": 8,
+      "shipping_va": "0xffffff800a0d7428",
+      "expected_va": "0xffffff800a0d7428"
+     },
+     {
+      "adrp": 436,
+      "section": ".rodata.str1.1",
+      "object_offset": 653,
+      "shipping_va": "0xffffff80092c84d3",
+      "shipping_string": "\u00013probe ac107: failed to read chip id\n"
+     },
+     {
+      "adrp": 452,
+      "section": ".rodata.str1.1",
+      "object_offset": 420,
+      "shipping_va": "0xffffff80092c83f5",
+      "shipping_string": "Unable to allocate ac107 private data\n"
+     },
+     {
+      "adrp": 476,
+      "section": ".rodata.str1.1",
+      "object_offset": 470,
+      "shipping_va": "0xffffff80092c841c",
+      "shipping_string": "\u00013get ac107 avcc_vccio_3v3 failed, return!\n"
+     },
+     {
+      "adrp": 492,
+      "section": "__stack_chk_guard",
+      "object_offset": 0,
+      "shipping_va": "0xffffff80098dda48",
+      "shipping_symbol_address": "0xffffff80098dda48"
+     }
+    ],
+    "verdict": "MATCH",
+    "failures": []
+   }
+  },
+  "ac107_i2c_remove": {
+   "object": {
+    "size": 8,
+    "unmasked_words": 2,
+    "masked_words": 0,
+    "relocations": [],
+    "resolved_branches": [],
+    "calls": [],
+    "data_refs": [],
+    "unpaired_adrp": 0,
+    "unmasked_sha256": "2b59db05426e0f313d72b30f3398c65721de2562a59dc46ceeba224f98d0b876"
+   },
+   "shipping": {
+    "va": "0xffffff8008c45f34",
+    "size": 8,
+    "unmasked_sha256": "2b59db05426e0f313d72b30f3398c65721de2562a59dc46ceeba224f98d0b876",
+    "calls": [],
+    "data_refs": [],
+    "verdict": "MATCH",
+    "failures": []
+   }
+  },
+  "ac107_i2c_detect": {
+   "object": {
+    "size": 208,
+    "unmasked_words": 52,
+    "masked_words": 17,
+    "relocations": [
+     [
+      20,
+      275,
+      ".bss",
+      8,
+      "60ffffe0"
+     ],
+     [
+      28,
+      277,
+      ".bss",
+      8,
+      "003ffc00"
+     ],
+     [
+      60,
+      275,
+      ".rodata.str1.1",
+      1079,
+      "60ffffe0"
+     ],
+     [
+      64,
+      277,
+      ".rodata.str1.1",
+      1079,
+      "003ffc00"
+     ],
+     [
+      68,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      100,
+      275,
+      ".rodata",
+      0,
+      "60ffffe0"
+     ],
+     [
+      104,
+      277,
+      ".rodata",
+      0,
+      "003ffc00"
+     ],
+     [
+      124,
+      275,
+      ".rodata.str1.1",
+      1112,
+      "60ffffe0"
+     ],
+     [
+      128,
+      277,
+      ".rodata.str1.1",
+      1112,
+      "003ffc00"
+     ],
+     [
+      144,
+      275,
+      ".rodata.str1.1",
+      1120,
+      "60ffffe0"
+     ],
+     [
+      148,
+      277,
+      ".rodata.str1.1",
+      1120,
+      "003ffc00"
+     ],
+     [
+      156,
+      275,
+      ".rodata.str1.1",
+      1128,
+      "60ffffe0"
+     ],
+     [
+      160,
+      277,
+      ".rodata.str1.1",
+      1128,
+      "003ffc00"
+     ],
+     [
+      168,
+      275,
+      ".rodata.str1.1",
+      1136,
+      "60ffffe0"
+     ],
+     [
+      172,
+      277,
+      ".rodata.str1.1",
+      1136,
+      "003ffc00"
+     ],
+     [
+      184,
+      283,
+      "strlcpy",
+      0,
+      "03ffffff"
+     ]
+    ],
+    "resolved_branches": [
+     [
+      48,
+      "ac107_read"
+     ]
+    ],
+    "calls": [
+     [
+      68,
+      "printk"
+     ],
+     [
+      184,
+      "strlcpy"
+     ],
+     [
+      48,
+      "ac107_read"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 20,
+      "lo12": 28,
+      "section": ".bss",
+      "offset": 8
+     },
+     {
+      "adrp": 60,
+      "lo12": 64,
+      "section": ".rodata.str1.1",
+      "offset": 1079,
+      "string": "\nAC107_Chip_ID on I2C-%d:0x%02X\n"
+     },
+     {
+      "adrp": 100,
+      "lo12": 104,
+      "section": ".rodata",
+      "offset": 0
+     },
+     {
+      "adrp": 124,
+      "lo12": 128,
+      "section": ".rodata.str1.1",
+      "offset": 1112,
+      "string": "ac107_0"
+     },
+     {
+      "adrp": 144,
+      "lo12": 148,
+      "section": ".rodata.str1.1",
+      "offset": 1120,
+      "string": "ac107_1"
+     },
+     {
+      "adrp": 156,
+      "lo12": 160,
+      "section": ".rodata.str1.1",
+      "offset": 1128,
+      "string": "ac107_2"
+     },
+     {
+      "adrp": 168,
+      "lo12": 172,
+      "section": ".rodata.str1.1",
+      "offset": 1136,
+      "string": "ac107_3"
+     }
+    ],
+    "unpaired_adrp": 0,
+    "unmasked_sha256": "1956d4158f7db4356244a2597a7d20aea55b77ad535581f26f68094e44d589db"
+   },
+   "shipping": {
+    "va": "0xffffff8008c45f3c",
+    "size": 208,
+    "unmasked_sha256": "1956d4158f7db4356244a2597a7d20aea55b77ad535581f26f68094e44d589db",
+    "calls": [
+     [
+      68,
+      "printk"
+     ],
+     [
+      184,
+      "strlcpy"
+     ],
+     [
+      48,
+      "ac107_read"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 20,
+      "section": ".bss",
+      "object_offset": 8,
+      "shipping_va": "0xffffff800a0d7428",
+      "expected_va": "0xffffff800a0d7428"
+     },
+     {
+      "adrp": 60,
+      "section": ".rodata.str1.1",
+      "object_offset": 1079,
+      "shipping_va": "0xffffff80092c8673",
+      "shipping_string": "\nAC107_Chip_ID on I2C-%d:0x%02X\n"
+     },
+     {
+      "adrp": 100,
+      "section": ".rodata",
+      "object_offset": 0,
+      "shipping_va": "0xffffff8008fca578",
+      "expected_va": "0xffffff8008fca578"
+     },
+     {
+      "adrp": 124,
+      "section": ".rodata.str1.1",
+      "object_offset": 1112,
+      "shipping_va": "0xffffff80092c8694",
+      "shipping_string": "ac107_0"
+     },
+     {
+      "adrp": 144,
+      "section": ".rodata.str1.1",
+      "object_offset": 1120,
+      "shipping_va": "0xffffff80092c869c",
+      "shipping_string": "ac107_1"
+     },
+     {
+      "adrp": 156,
+      "section": ".rodata.str1.1",
+      "object_offset": 1128,
+      "shipping_va": "0xffffff80092c86a4",
+      "shipping_string": "ac107_2"
+     },
+     {
+      "adrp": 168,
+      "section": ".rodata.str1.1",
+      "object_offset": 1136,
+      "shipping_va": "0xffffff80092c86ac",
+      "shipping_string": "ac107_3"
+     }
+    ],
+    "verdict": "MATCH",
+    "failures": []
+   }
+  },
+  "ac107_show": {
+   "object": {
+    "size": 104,
+    "unmasked_words": 26,
+    "masked_words": 17,
+    "relocations": [
+     [
+      12,
+      275,
+      ".rodata.str1.1",
+      704,
+      "60ffffe0"
+     ],
+     [
+      16,
+      277,
+      ".rodata.str1.1",
+      704,
+      "003ffc00"
+     ],
+     [
+      24,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      28,
+      275,
+      ".rodata.str1.1",
+      742,
+      "60ffffe0"
+     ],
+     [
+      32,
+      277,
+      ".rodata.str1.1",
+      742,
+      "003ffc00"
+     ],
+     [
+      36,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      40,
+      275,
+      ".rodata.str1.1",
+      769,
+      "60ffffe0"
+     ],
+     [
+      44,
+      277,
+      ".rodata.str1.1",
+      769,
+      "003ffc00"
+     ],
+     [
+      48,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      52,
+      275,
+      ".rodata.str1.1",
+      826,
+      "60ffffe0"
+     ],
+     [
+      56,
+      277,
+      ".rodata.str1.1",
+      826,
+      "003ffc00"
+     ],
+     [
+      60,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      64,
+      275,
+      ".bss",
+      8,
+      "60ffffe0"
+     ],
+     [
+      68,
+      278,
+      ".bss",
+      8,
+      "003ffc00"
+     ],
+     [
+      72,
+      275,
+      ".rodata.str1.1",
+      895,
+      "60ffffe0"
+     ],
+     [
+      76,
+      277,
+      ".rodata.str1.1",
+      895,
+      "003ffc00"
+     ],
+     [
+      84,
+      283,
+      "sprintf",
+      0,
+      "03ffffff"
+     ]
+    ],
+    "resolved_branches": [],
+    "calls": [
+     [
+      24,
+      "printk"
+     ],
+     [
+      36,
+      "printk"
+     ],
+     [
+      48,
+      "printk"
+     ],
+     [
+      60,
+      "printk"
+     ],
+     [
+      84,
+      "sprintf"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 12,
+      "lo12": 16,
+      "section": ".rodata.str1.1",
+      "offset": 704,
+      "string": "/*** AC107 driver version: V1.0 ***/\n"
+     },
+     {
+      "adrp": 28,
+      "lo12": 32,
+      "section": ".rodata.str1.1",
+      "offset": 742,
+      "string": "echo flag|reg|val > ac107\n"
+     },
+     {
+      "adrp": 40,
+      "lo12": 44,
+      "section": ".rodata.str1.1",
+      "offset": 769,
+      "string": "eg->read start addres=0x00,count=0xff: echo 00ff >ac107\n"
+     },
+     {
+      "adrp": 52,
+      "lo12": 56,
+      "section": ".rodata.str1.1",
+      "offset": 826,
+      "string": "eg->write start addres=0x70,value=0xa0,count=0x2: echo 270a0 >ac107\n"
+     },
+     {
+      "adrp": 64,
+      "lo12": 68,
+      "section": ".bss",
+      "offset": 8
+     },
+     {
+      "adrp": 72,
+      "lo12": 76,
+      "section": ".rodata.str1.1",
+      "offset": 895,
+      "string": "0x%02x\n"
+     }
+    ],
+    "unpaired_adrp": 0,
+    "unmasked_sha256": "ea37cf7db503ebde94fb2fbcd42015b452a49b07cea6d7bbb27282c9cfa16e81"
+   },
+   "shipping": {
+    "va": "0xffffff8008c4600c",
+    "size": 104,
+    "unmasked_sha256": "ea37cf7db503ebde94fb2fbcd42015b452a49b07cea6d7bbb27282c9cfa16e81",
+    "calls": [
+     [
+      24,
+      "printk"
+     ],
+     [
+      36,
+      "printk"
+     ],
+     [
+      48,
+      "printk"
+     ],
+     [
+      60,
+      "printk"
+     ],
+     [
+      84,
+      "sprintf"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 12,
+      "section": ".rodata.str1.1",
+      "object_offset": 704,
+      "shipping_va": "0xffffff80092c8506",
+      "shipping_string": "/*** AC107 driver version: V1.0 ***/\n"
+     },
+     {
+      "adrp": 28,
+      "section": ".rodata.str1.1",
+      "object_offset": 742,
+      "shipping_va": "0xffffff80092c852c",
+      "shipping_string": "echo flag|reg|val > ac107\n"
+     },
+     {
+      "adrp": 40,
+      "section": ".rodata.str1.1",
+      "object_offset": 769,
+      "shipping_va": "0xffffff80092c8547",
+      "shipping_string": "eg->read start addres=0x00,count=0xff: echo 00ff >ac107\n"
+     },
+     {
+      "adrp": 52,
+      "section": ".rodata.str1.1",
+      "object_offset": 826,
+      "shipping_va": "0xffffff80092c8580",
+      "shipping_string": "eg->write start addres=0x70,value=0xa0,count=0x2: echo 270a0 >ac107\n"
+     },
+     {
+      "adrp": 64,
+      "section": ".bss",
+      "object_offset": 8,
+      "shipping_va": "0xffffff800a0d7428",
+      "expected_va": "0xffffff800a0d7428"
+     },
+     {
+      "adrp": 72,
+      "section": ".rodata.str1.1",
+      "object_offset": 895,
+      "shipping_va": "0xffffff8009289cb7",
+      "shipping_string": "0x%02x\n"
+     }
+    ],
+    "verdict": "MATCH",
+    "failures": []
+   }
+  },
+  "ac107_store": {
+   "object": {
+    "size": 436,
+    "unmasked_words": 109,
+    "masked_words": 29,
+    "relocations": [
+     [
+      32,
+      275,
+      "__stack_chk_guard",
+      0,
+      "60ffffe0"
+     ],
+     [
+      36,
+      286,
+      "__stack_chk_guard",
+      0,
+      "003ffc00"
+     ],
+     [
+      64,
+      283,
+      "simple_strtol",
+      0,
+      "03ffffff"
+     ],
+     [
+      88,
+      275,
+      ".rodata.str1.1",
+      903,
+      "60ffffe0"
+     ],
+     [
+      92,
+      277,
+      ".rodata.str1.1",
+      903,
+      "003ffc00"
+     ],
+     [
+      108,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      116,
+      275,
+      ".rodata.str1.1",
+      196,
+      "60ffffe0"
+     ],
+     [
+      120,
+      275,
+      ".rodata.str1.1",
+      953,
+      "60ffffe0"
+     ],
+     [
+      124,
+      275,
+      ".rodata.str1.1",
+      245,
+      "60ffffe0"
+     ],
+     [
+      128,
+      277,
+      ".rodata.str1.1",
+      196,
+      "003ffc00"
+     ],
+     [
+      132,
+      277,
+      ".rodata.str1.1",
+      953,
+      "003ffc00"
+     ],
+     [
+      136,
+      277,
+      ".rodata.str1.1",
+      245,
+      "003ffc00"
+     ],
+     [
+      172,
+      283,
+      "i2c_master_send",
+      0,
+      "03ffffff"
+     ],
+     [
+      196,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      208,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      224,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      244,
+      275,
+      ".rodata.str1.1",
+      981,
+      "60ffffe0"
+     ],
+     [
+      248,
+      277,
+      ".rodata.str1.1",
+      981,
+      "003ffc00"
+     ],
+     [
+      260,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      264,
+      275,
+      ".rodata.str1.1",
+      1019,
+      "60ffffe0"
+     ],
+     [
+      268,
+      275,
+      ".rodata.str1.1",
+      1042,
+      "60ffffe0"
+     ],
+     [
+      276,
+      277,
+      ".rodata.str1.1",
+      1019,
+      "003ffc00"
+     ],
+     [
+      280,
+      277,
+      ".rodata.str1.1",
+      1042,
+      "003ffc00"
+     ],
+     [
+      316,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      364,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      376,
+      275,
+      "__stack_chk_guard",
+      0,
+      "60ffffe0"
+     ],
+     [
+      384,
+      286,
+      "__stack_chk_guard",
+      0,
+      "003ffc00"
+     ],
+     [
+      432,
+      283,
+      "__stack_chk_fail",
+      0,
+      "03ffffff"
+     ]
+    ],
+    "resolved_branches": [
+     [
+      300,
+      "ac107_read"
+     ]
+    ],
+    "calls": [
+     [
+      64,
+      "simple_strtol"
+     ],
+     [
+      108,
+      "printk"
+     ],
+     [
+      172,
+      "i2c_master_send"
+     ],
+     [
+      196,
+      "printk"
+     ],
+     [
+      208,
+      "printk"
+     ],
+     [
+      224,
+      "printk"
+     ],
+     [
+      260,
+      "printk"
+     ],
+     [
+      316,
+      "printk"
+     ],
+     [
+      364,
+      "printk"
+     ],
+     [
+      432,
+      "__stack_chk_fail"
+     ],
+     [
+      300,
+      "ac107_read"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 32,
+      "lo12": 36,
+      "section": "__stack_chk_guard",
+      "offset": 0
+     },
+     {
+      "adrp": 88,
+      "lo12": 92,
+      "section": ".rodata.str1.1",
+      "offset": 903,
+      "string": "\nWrite: start REG:0x%02x,val:0x%02x,count:0x%02x\n"
+     },
+     {
+      "adrp": 116,
+      "lo12": 128,
+      "section": ".rodata.str1.1",
+      "offset": 196,
+      "string": "\u00013ac107_write client or client->adapter is NULL\n"
+     },
+     {
+      "adrp": 120,
+      "lo12": 132,
+      "section": ".rodata.str1.1",
+      "offset": 953,
+      "string": "Write 0x%02x to REG:0x%02x\n"
+     },
+     {
+      "adrp": 124,
+      "lo12": 136,
+      "section": ".rodata.str1.1",
+      "offset": 245,
+      "string": "\u00013ac107_write error->[REG-0x%02x,val-0x%02x]\n"
+     },
+     {
+      "adrp": 244,
+      "lo12": 248,
+      "section": ".rodata.str1.1",
+      "offset": 981,
+      "string": "\nRead: start REG:0x%02x,count:0x%02x\n"
+     },
+     {
+      "adrp": 264,
+      "lo12": 276,
+      "section": ".rodata.str1.1",
+      "offset": 1019,
+      "string": "REG[0x%02x]: 0x%02x;  "
+     },
+     {
+      "adrp": 268,
+      "lo12": 280,
+      "section": ".rodata.str1.1",
+      "offset": 1042,
+      "string": "\n"
+     },
+     {
+      "adrp": 376,
+      "lo12": 384,
+      "section": "__stack_chk_guard",
+      "offset": 0
+     }
+    ],
+    "unpaired_adrp": 0,
+    "unmasked_sha256": "aeaa18593fc576ece1c085b8b1bbe4ba1049fc41022dacea2f811c092a5e89cd"
+   },
+   "shipping": {
+    "va": "0xffffff8008c46074",
+    "size": 436,
+    "unmasked_sha256": "aeaa18593fc576ece1c085b8b1bbe4ba1049fc41022dacea2f811c092a5e89cd",
+    "calls": [
+     [
+      64,
+      "simple_strtol"
+     ],
+     [
+      108,
+      "printk"
+     ],
+     [
+      172,
+      "i2c_master_send"
+     ],
+     [
+      196,
+      "printk"
+     ],
+     [
+      208,
+      "printk"
+     ],
+     [
+      224,
+      "printk"
+     ],
+     [
+      260,
+      "printk"
+     ],
+     [
+      316,
+      "printk"
+     ],
+     [
+      364,
+      "printk"
+     ],
+     [
+      432,
+      "__stack_chk_fail"
+     ],
+     [
+      300,
+      "ac107_read"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 32,
+      "section": "__stack_chk_guard",
+      "object_offset": 0,
+      "shipping_va": "0xffffff80098dda48",
+      "shipping_symbol_address": "0xffffff80098dda48"
+     },
+     {
+      "adrp": 88,
+      "section": ".rodata.str1.1",
+      "object_offset": 903,
+      "shipping_va": "0xffffff80092c85c5",
+      "shipping_string": "\nWrite: start REG:0x%02x,val:0x%02x,count:0x%02x\n"
+     },
+     {
+      "adrp": 116,
+      "section": ".rodata.str1.1",
+      "object_offset": 196,
+      "shipping_va": "0xffffff80092c8315",
+      "shipping_string": "\u00013ac107_write client or client->adapter is NULL\n"
+     },
+     {
+      "adrp": 120,
+      "section": ".rodata.str1.1",
+      "object_offset": 953,
+      "shipping_va": "0xffffff80092c85f7",
+      "shipping_string": "Write 0x%02x to REG:0x%02x\n"
+     },
+     {
+      "adrp": 124,
+      "section": ".rodata.str1.1",
+      "object_offset": 245,
+      "shipping_va": "0xffffff80092c8346",
+      "shipping_string": "\u00013ac107_write error->[REG-0x%02x,val-0x%02x]\n"
+     },
+     {
+      "adrp": 244,
+      "section": ".rodata.str1.1",
+      "object_offset": 981,
+      "shipping_va": "0xffffff80092c8613",
+      "shipping_string": "\nRead: start REG:0x%02x,count:0x%02x\n"
+     },
+     {
+      "adrp": 264,
+      "section": ".rodata.str1.1",
+      "object_offset": 1019,
+      "shipping_va": "0xffffff80092c8639",
+      "shipping_string": "REG[0x%02x]: 0x%02x;  "
+     },
+     {
+      "adrp": 268,
+      "section": ".rodata.str1.1",
+      "object_offset": 1042,
+      "shipping_va": "0xffffff80092aa5fe",
+      "shipping_string": "\n"
+     },
+     {
+      "adrp": 376,
+      "section": "__stack_chk_guard",
+      "object_offset": 0,
+      "shipping_va": "0xffffff80098dda48",
+      "shipping_symbol_address": "0xffffff80098dda48"
+     }
+    ],
+    "verdict": "MATCH",
+    "failures": []
+   }
+  },
+  "ac107_i2c_suspend": {
+   "object": {
+    "size": 168,
+    "unmasked_words": 42,
+    "masked_words": 19,
+    "relocations": [
+     [
+      12,
+      275,
+      "__stack_chk_guard",
+      0,
+      "60ffffe0"
+     ],
+     [
+      16,
+      286,
+      "__stack_chk_guard",
+      0,
+      "003ffc00"
+     ],
+     [
+      24,
+      275,
+      ".bss",
+      0,
+      "60ffffe0"
+     ],
+     [
+      28,
+      286,
+      ".bss",
+      0,
+      "003ffc00"
+     ],
+     [
+      60,
+      283,
+      "i2c_master_send",
+      0,
+      "03ffffff"
+     ],
+     [
+      72,
+      275,
+      ".rodata.str1.1",
+      245,
+      "60ffffe0"
+     ],
+     [
+      76,
+      277,
+      ".rodata.str1.1",
+      245,
+      "003ffc00"
+     ],
+     [
+      88,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      96,
+      275,
+      ".rodata.str1.1",
+      196,
+      "60ffffe0"
+     ],
+     [
+      100,
+      277,
+      ".rodata.str1.1",
+      196,
+      "003ffc00"
+     ],
+     [
+      104,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      108,
+      275,
+      ".rodata.str1.1",
+      33,
+      "60ffffe0"
+     ],
+     [
+      112,
+      275,
+      ".rodata.str1.1",
+      1044,
+      "60ffffe0"
+     ],
+     [
+      116,
+      277,
+      ".rodata.str1.1",
+      33,
+      "003ffc00"
+     ],
+     [
+      120,
+      277,
+      ".rodata.str1.1",
+      1044,
+      "003ffc00"
+     ],
+     [
+      124,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ],
+     [
+      128,
+      275,
+      "__stack_chk_guard",
+      0,
+      "60ffffe0"
+     ],
+     [
+      136,
+      286,
+      "__stack_chk_guard",
+      0,
+      "003ffc00"
+     ],
+     [
+      164,
+      283,
+      "__stack_chk_fail",
+      0,
+      "03ffffff"
+     ]
+    ],
+    "resolved_branches": [],
+    "calls": [
+     [
+      60,
+      "i2c_master_send"
+     ],
+     [
+      88,
+      "printk"
+     ],
+     [
+      104,
+      "printk"
+     ],
+     [
+      124,
+      "printk"
+     ],
+     [
+      164,
+      "__stack_chk_fail"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 12,
+      "lo12": 16,
+      "section": "__stack_chk_guard",
+      "offset": 0
+     },
+     {
+      "adrp": 24,
+      "lo12": 28,
+      "section": ".bss",
+      "offset": 0
+     },
+     {
+      "adrp": 72,
+      "lo12": 76,
+      "section": ".rodata.str1.1",
+      "offset": 245,
+      "string": "\u00013ac107_write error->[REG-0x%02x,val-0x%02x]\n"
+     },
+     {
+      "adrp": 96,
+      "lo12": 100,
+      "section": ".rodata.str1.1",
+      "offset": 196,
+      "string": "\u00013ac107_write client or client->adapter is NULL\n"
+     },
+     {
+      "adrp": 108,
+      "lo12": 116,
+      "section": ".rodata.str1.1",
+      "offset": 33,
+      "string": "\u00013[AC107] %s\n"
+     },
+     {
+      "adrp": 112,
+      "lo12": 120,
+      "section": ".rodata.str1.1",
+      "offset": 1044,
+      "string": "ac107_i2c_suspend"
+     },
+     {
+      "adrp": 128,
+      "lo12": 136,
+      "section": "__stack_chk_guard",
+      "offset": 0
+     }
+    ],
+    "unpaired_adrp": 0,
+    "unmasked_sha256": "489081df2d74699d4ca198dc475ce1e98bc55a4f08534047eb11ca1b3c500b59"
+   },
+   "shipping": {
+    "va": "0xffffff8008c46228",
+    "size": 168,
+    "unmasked_sha256": "489081df2d74699d4ca198dc475ce1e98bc55a4f08534047eb11ca1b3c500b59",
+    "calls": [
+     [
+      60,
+      "i2c_master_send"
+     ],
+     [
+      88,
+      "printk"
+     ],
+     [
+      104,
+      "printk"
+     ],
+     [
+      124,
+      "printk"
+     ],
+     [
+      164,
+      "__stack_chk_fail"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 12,
+      "section": "__stack_chk_guard",
+      "object_offset": 0,
+      "shipping_va": "0xffffff80098dda48",
+      "shipping_symbol_address": "0xffffff80098dda48"
+     },
+     {
+      "adrp": 24,
+      "section": ".bss",
+      "object_offset": 0,
+      "shipping_va": "0xffffff800a0d7420",
+      "expected_va": "0xffffff800a0d7420"
+     },
+     {
+      "adrp": 72,
+      "section": ".rodata.str1.1",
+      "object_offset": 245,
+      "shipping_va": "0xffffff80092c8346",
+      "shipping_string": "\u00013ac107_write error->[REG-0x%02x,val-0x%02x]\n"
+     },
+     {
+      "adrp": 96,
+      "section": ".rodata.str1.1",
+      "object_offset": 196,
+      "shipping_va": "0xffffff80092c8315",
+      "shipping_string": "\u00013ac107_write client or client->adapter is NULL\n"
+     },
+     {
+      "adrp": 108,
+      "section": ".rodata.str1.1",
+      "object_offset": 33,
+      "shipping_va": "0xffffff80092c8272",
+      "shipping_string": "\u00013[AC107] %s\n"
+     },
+     {
+      "adrp": 112,
+      "section": ".rodata.str1.1",
+      "object_offset": 1044,
+      "shipping_va": "0xffffff80092c8650",
+      "shipping_string": "ac107_i2c_suspend"
+     },
+     {
+      "adrp": 128,
+      "section": "__stack_chk_guard",
+      "object_offset": 0,
+      "shipping_va": "0xffffff80098dda48",
+      "shipping_symbol_address": "0xffffff80098dda48"
+     }
+    ],
+    "verdict": "MATCH",
+    "failures": []
+   }
+  },
+  "ac107_i2c_resume": {
+   "object": {
+    "size": 40,
+    "unmasked_words": 10,
+    "masked_words": 5,
+    "relocations": [
+     [
+      8,
+      275,
+      ".rodata.str1.1",
+      33,
+      "60ffffe0"
+     ],
+     [
+      12,
+      275,
+      ".rodata.str1.1",
+      1062,
+      "60ffffe0"
+     ],
+     [
+      16,
+      277,
+      ".rodata.str1.1",
+      33,
+      "003ffc00"
+     ],
+     [
+      20,
+      277,
+      ".rodata.str1.1",
+      1062,
+      "003ffc00"
+     ],
+     [
+      24,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ]
+    ],
+    "resolved_branches": [],
+    "calls": [
+     [
+      24,
+      "printk"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 8,
+      "lo12": 16,
+      "section": ".rodata.str1.1",
+      "offset": 33,
+      "string": "\u00013[AC107] %s\n"
+     },
+     {
+      "adrp": 12,
+      "lo12": 20,
+      "section": ".rodata.str1.1",
+      "offset": 1062,
+      "string": "ac107_i2c_resume"
+     }
+    ],
+    "unpaired_adrp": 0,
+    "unmasked_sha256": "1b32a957863575639029d8d3df5399de8a780ce598064cfc2ccf283a5e2f4d71"
+   },
+   "shipping": {
+    "va": "0xffffff8008c462d0",
+    "size": 40,
+    "unmasked_sha256": "1b32a957863575639029d8d3df5399de8a780ce598064cfc2ccf283a5e2f4d71",
+    "calls": [
+     [
+      24,
+      "printk"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 8,
+      "section": ".rodata.str1.1",
+      "object_offset": 33,
+      "shipping_va": "0xffffff80092c8272",
+      "shipping_string": "\u00013[AC107] %s\n"
+     },
+     {
+      "adrp": 12,
+      "section": ".rodata.str1.1",
+      "object_offset": 1062,
+      "shipping_va": "0xffffff80092c8662",
+      "shipping_string": "ac107_i2c_resume"
+     }
+    ],
+    "verdict": "MATCH",
+    "failures": []
+   }
+  },
+  "ac107_init": {
+   "object": {
+    "size": 68,
+    "unmasked_words": 17,
+    "masked_words": 6,
+    "relocations": [
+     [
+      12,
+      275,
+      ".data",
+      0,
+      "60ffffe0"
+     ],
+     [
+      16,
+      277,
+      ".data",
+      0,
+      "003ffc00"
+     ],
+     [
+      24,
+      283,
+      "i2c_register_driver",
+      0,
+      "03ffffff"
+     ],
+     [
+      36,
+      275,
+      ".rodata.str1.1",
+      369,
+      "60ffffe0"
+     ],
+     [
+      40,
+      277,
+      ".rodata.str1.1",
+      369,
+      "003ffc00"
+     ],
+     [
+      48,
+      283,
+      "printk",
+      0,
+      "03ffffff"
+     ]
+    ],
+    "resolved_branches": [],
+    "calls": [
+     [
+      24,
+      "i2c_register_driver"
+     ],
+     [
+      48,
+      "printk"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 12,
+      "lo12": 16,
+      "section": ".data",
+      "offset": 0
+     },
+     {
+      "adrp": 36,
+      "lo12": 40,
+      "section": ".rodata.str1.1",
+      "offset": 369,
+      "string": "\u00013Failed to register ac107 i2c driver : %d \n"
+     }
+    ],
+    "unpaired_adrp": 0,
+    "unmasked_sha256": "be049451a9c90fa32171093c1bfe180cdfe8edb37d419eacdd10605b8c29645f"
+   },
+   "shipping": {
+    "va": "0xffffff80093e2970",
+    "size": 68,
+    "unmasked_sha256": "be049451a9c90fa32171093c1bfe180cdfe8edb37d419eacdd10605b8c29645f",
+    "calls": [
+     [
+      24,
+      "i2c_register_driver"
+     ],
+     [
+      48,
+      "printk"
+     ]
+    ],
+    "data_refs": [
+     {
+      "adrp": 12,
+      "section": ".data",
+      "object_offset": 0,
+      "shipping_va": "0xffffff8009a170d8",
+      "expected_va": "0xffffff8009a170d8"
+     },
+     {
+      "adrp": 36,
+      "section": ".rodata.str1.1",
+      "object_offset": 369,
+      "shipping_va": "0xffffff80092c83c2",
+      "shipping_string": "\u00013Failed to register ac107 i2c driver : %d \n"
+     }
+    ],
+    "verdict": "MATCH",
+    "failures": []
+   }
+  }
+ },
+ "sections": {
+  ".rodata": {
+   "object": {
+    "size": 1124,
+    "slots": [
+     [
+      232,
+      "function",
+      "ac107_probe"
+     ],
+     [
+      240,
+      "function",
+      "ac107_remove"
+     ],
+     [
+      248,
+      "function",
+      "ac107_suspend"
+     ],
+     [
+      256,
+      "function",
+      "ac107_resume"
+     ],
+     [
+      392,
+      "function",
+      "ac107_codec_read"
+     ],
+     [
+      400,
+      "function",
+      "ac107_codec_write"
+     ],
+     [
+      888,
+      "function",
+      "ac107_i2c_suspend"
+     ],
+     [
+      896,
+      "function",
+      "ac107_i2c_resume"
+     ],
+     [
+      904,
+      "function",
+      "ac107_i2c_suspend"
+     ],
+     [
+      912,
+      "function",
+      "ac107_i2c_resume"
+     ],
+     [
+      920,
+      "function",
+      "ac107_i2c_suspend"
+     ],
+     [
+      928,
+      "function",
+      "ac107_i2c_resume"
+     ]
+    ],
+    "unmasked_sha256": "59e7a1dd69c25df674639f4a593826ccdd8c156065f27e157011703a60959feb",
+    "masked_bytes": 96
+   },
+   "shipping": {
+    "base": "0xf4a578",
+    "unmasked_sha256": "59e7a1dd69c25df674639f4a593826ccdd8c156065f27e157011703a60959feb",
+    "slots": [
+     [
+      232,
+      "function",
+      "ac107_probe"
+     ],
+     [
+      240,
+      "function",
+      "ac107_remove"
+     ],
+     [
+      248,
+      "function",
+      "ac107_suspend"
+     ],
+     [
+      256,
+      "function",
+      "ac107_resume"
+     ],
+     [
+      392,
+      "function",
+      "ac107_codec_read"
+     ],
+     [
+      400,
+      "function",
+      "ac107_codec_write"
+     ],
+     [
+      888,
+      "function",
+      "ac107_i2c_suspend"
+     ],
+     [
+      896,
+      "function",
+      "ac107_i2c_resume"
+     ],
+     [
+      904,
+      "function",
+      "ac107_i2c_suspend"
+     ],
+     [
+      912,
+      "function",
+      "ac107_i2c_resume"
+     ],
+     [
+      920,
+      "function",
+      "ac107_i2c_suspend"
+     ],
+     [
+      928,
+      "function",
+      "ac107_i2c_resume"
+     ]
+    ],
+    "verdict": "MATCH",
+    "failures": []
+   }
+  },
+  ".data": {
+   "object": {
+    "size": 304,
+    "slots": [
+     [
+      16,
+      "function",
+      "ac107_i2c_probe"
+     ],
+     [
+      24,
+      "function",
+      "ac107_i2c_remove"
+     ],
+     [
+      56,
+      "string",
+      "ac107"
+     ],
+     [
+      96,
+      "data",
+      ".rodata",
+      672
+     ],
+     [
+      160,
+      "data",
+      ".rodata",
+      872
+     ],
+     [
+      176,
+      "data",
+      ".rodata",
+      1056
+     ],
+     [
+      184,
+      "function",
+      "ac107_i2c_detect"
+     ],
+     [
+      192,
+      "data",
+      ".rodata",
+      1120
+     ],
+     [
+      216,
+      "string",
+      "ac107_debug"
+     ],
+     [
+      240,
+      "data",
+      ".data",
+      256
+     ],
+     [
+      256,
+      "data",
+      ".data",
+      272
+     ],
+     [
+      272,
+      "string",
+      "ac107"
+     ],
+     [
+      288,
+      "function",
+      "ac107_show"
+     ],
+     [
+      296,
+      "function",
+      "ac107_store"
+     ]
+    ],
+    "unmasked_sha256": "783435ba8afaf3b6dce7451a532b751af5af45c50e491690ae844edf5ee3bf6b",
+    "masked_bytes": 112
+   },
+   "shipping": {
+    "base": "0x19970d8",
+    "unmasked_sha256": "783435ba8afaf3b6dce7451a532b751af5af45c50e491690ae844edf5ee3bf6b",
+    "slots": [
+     [
+      16,
+      "function",
+      "ac107_i2c_probe"
+     ],
+     [
+      24,
+      "function",
+      "ac107_i2c_remove"
+     ],
+     [
+      56,
+      "string",
+      "ac107"
+     ],
+     [
+      96,
+      "data",
+      "0x2a0"
+     ],
+     [
+      160,
+      "data",
+      "0x368"
+     ],
+     [
+      176,
+      "data",
+      "0x420"
+     ],
+     [
+      184,
+      "function",
+      "ac107_i2c_detect"
+     ],
+     [
+      192,
+      "data",
+      "0x460"
+     ],
+     [
+      216,
+      "string",
+      "ac107_debug"
+     ],
+     [
+      240,
+      "data",
+      "0x100"
+     ],
+     [
+      256,
+      "data",
+      "0x110"
+     ],
+     [
+      272,
+      "string",
+      "ac107"
+     ],
+     [
+      288,
+      "function",
+      "ac107_show"
+     ],
+     [
+      296,
+      "function",
+      "ac107_store"
+     ]
+    ],
+    "verdict": "MATCH",
+    "failures": []
+   }
+  }
+ },
+ "meta": {
+  "evidence_class": "relocation-masked instruction and data equality under the stated compiler, flags and headers; not identical source text",
+  "source": {
+   "repo": "Bakoubak/android_kernel_lenovo_x306x-10",
+   "ref": "upstream",
+   "commit": "90ff197cbe3da896077ba4ba3b31751d23903b25",
+   "path": "ac107.c (public tree, sound/soc/codecs/ac107.c)",
+   "public_blob": "062ed14ffb20e0a9958c323a82b795c6a0dae63a",
+   "public_sha256": "155575b8c433a07c20e0c87f664fe07a765021ffd7953b209ecf99a1ba239110",
+   "candidate_blob": "c0fa4d44a547ec8c8c791b2b7be59fe255a33f1f",
+   "candidate_sha256": "755bce0d6f80b341020d8e7c3a57754e4f12e1dcec1dd55e4346e937e77157cc",
+   "ac107_h_blob": "5263e6860106daf4768c9b607c9362532b3bcc34",
+   "single_probe_delta": "--- upstream/Bakoubak_android_kernel_lenovo_x306x-10/ac107.c\t2026-11-16 18:41:53\n+++ candidate/ac107.c\t2026-11-16 18:52:57\n@@ -1812,6 +1812,7 @@\n \tpr_err(\"ac107_hw_init\\n\");\n \ti2c_ctrl[0]=i2c;\n \tac107_hw_init(i2c_ctrl[0]);\n+\tac107_dump_regs(i2c_ctrl[0]);\n \tac107_chip_id = 0;\n \tret = ac107_read(CHIP_AUDIO_RST,&ac107_chip_id,i2c_ctrl[0]);\n \tif (ret < 0) {\n",
+   "delta_effect": "public ac107_i2c_probe: 488 bytes, 37 differing words; with the delta 548 bytes and all words equal"
+  },
+  "toolchain": {
+   "clang": "Android (5484270 based on r353983c) clang version 9.0.3 (https://android.googlesource.com/toolchain/clang 745b335211bb9eadfa6aa6301f84715cee4b37c5) (https://android.googlesource.com/toolchain/llvm 60cf23e54e46c807513f7a36d0a7b777920b5881) (based on LLVM 9.0.3svn)",
+   "target": "aarch64-linux-gnu",
+   "cc_sh_sha256": "394d697ea64c36bb3f5d2ff181cd23ca0b9b77cfab40f319ef88a0a5214611c8",
+   "cc_sh": "#!/bin/sh\n# usage: cc.sh SRC.c OUT.o [extra flags]   Host compile with the shipping compiler (clang 9.0.3 r353983c, darwin build) and the\n# Lenovo-lineage headers + stock-config autoconf.h under ktree/. Flags are the kernel's KBUILD_CFLAGS for this config (Makefile, arch/arm64/Makefile).\nH=$(cd \"$(dirname \"$0\")\" && pwd)\nK=$H/ktree\nsrc=$1; out=$2; shift 2\nexec $H/tc-darwin/clang/bin/clang-9 --target=aarch64-linux-gnu -nostdinc -isystem $H/tc-darwin/clang/lib64/clang/9.0.3/include \\\n -I$K/arch/arm64/include -I$K/arch/arm64/include/generated/uapi -I$K/arch/arm64/include/generated -I$K/include \\\n -I$K/arch/arm64/include/uapi -I$K/include/uapi -I$K/include/linux -I$K/include/generated/uapi -include $K/include/linux/kconfig.h \\\n -D__KERNEL__ -Qunused-arguments -Wall -Wundef -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration \\\n -Wno-format-security -std=gnu89 -fno-PIE -mno-implicit-float -DCONFIG_AS_LSE=1 -fno-asynchronous-unwind-tables \\\n -fno-pic -fno-delete-null-pointer-checks -O2 -fstack-protector-strong -fno-omit-frame-pointer \\\n -fno-optimize-sibling-calls -g -mno-global-merge -Wno-unused-const-variable -Wno-gnu -Wno-address-of-packed-member -Wno-tautological-compare \\\n -DKBUILD_BASENAME='\"x\"' -DKBUILD_MODNAME='\"x\"' \"$@\" -c \"$src\" -o \"$out\"\n",
+   "autoconf_h_sha256": "4f11a3dafbc951ce232de91b66438dff8cb4b7c18d85e5467a742b7f638ab107",
+   "autoconf_selected": {
+    "CONFIG_SND_SOC": "1",
+    "CONFIG_CC_STACKPROTECTOR_STRONG": "1",
+    "CONFIG_MODULES": "1",
+    "CONFIG_I2C": "1",
+    "CONFIG_FRAME_POINTER": "1",
+    "CONFIG_ARM64": "1",
+    "CONFIG_DEBUG_INFO": "1"
+   },
+   "header_lineage": "Lenovo 4.9.117 drop 7f6a59c (not the exact 4.9.190 vendor tree, which is not public)",
+   "object_sha256": "a6e0d31aeb4dc049e0caba0823861d11c45992f68e95cf723ab605b40f7d6ab1"
+  },
+  "shipping": {
+   "Image_raw_sha256": "0da1eaa73036c36b0aa73491fad1d5a322c9da3893110932efd5c47694b605a4",
+   "kallsyms_sha256": "5af456797818b97ea65ee0a2479e00898cf20932cbe867c7a763500029f7f0e6",
+   "section_bases_file_offset": {
+    ".rodata": "0xf4a578",
+    ".data": "0x19970d8",
+    ".bss": "0x2057420"
+   },
+   "rela_entries": 146604
+  },
+  "masks": {
+   "rule": "only the operand field of a relocation present in the object, plus imm26 of an unrelocated branch to another function of the same section; unknown relocation types are an error",
+   "relocation_types_used": {
+    "275": {
+     "mask": "60ffffe0",
+     "count": 101
+    },
+    "286": {
+     "mask": "003ffc00",
+     "count": 35
+    },
+    "283": {
+     "mask": "03ffffff",
+     "count": 80
+    },
+    "277": {
+     "mask": "003ffc00",
+     "count": 67
+    },
+    "278": {
+     "mask": "003ffc00",
+     "count": 1
+    }
+   },
+   "operand_mask_table": {
+    "283": "03ffffff",
+    "282": "03ffffff",
+    "275": "60ffffe0",
+    "276": "60ffffe0",
+    "274": "60ffffe0",
+    "277": "003ffc00",
+    "278": "003ffc00",
+    "284": "003ffc00",
+    "285": "003ffc00",
+    "286": "003ffc00",
+    "299": "003ffc00",
+    "280": "00ffffe0",
+    "273": "00ffffe0",
+    "279": "0007ffe0"
+   },
+   "pointer_slots": "ABS64 slots (8 bytes) in .rodata/.data; shipping keeps zero bytes + R_AARCH64_RELATIVE entry, target compared by function name, string content or section placement"
+  },
+  "tools_sha256": {
+   "reloc_sig.py": "62679285ba001df7ae8a3d59eca483ee53f2685d51d3f5144a6f44ab23b649db",
+   "build_evidence.py": "faf85a473d11f459f207fb6fbfc11ce72a7df50c40e5e9f8c75771b925ea4cc3",
+   "cmpobj.py": "b113449e1c2c98848d31dcaea0fdfe700c8649fc6d5cee79df474ba2c7ba4f8a"
+  },
+  "totals": {
+   "functions": 21,
+   "function_bytes": 3600,
+   "masked_words": 292,
+   "words": 900,
+   "resolved_branches": 8,
+   "data_refs": 101,
+   "pointer_slots": 26
+  },
+  "extern_data_symbols": {
+   "__stack_chk_guard": {
+    "shipping_address": "0xffffff80098dda48",
+    "identity": "one consistent address in every reference; kallsyms carries no data symbols, so the name is not verified"
+   }
+  },
+  "not_covered": [
+   "ac107_exit (.exit.text, discarded in a built-in image)",
+   "debug sections",
+   "data bytes of .bss (no content)",
+   "behaviour: equal code under equal build is not proof of identical source text",
+   "chip presence / DT node on the board"
+  ]
+ }
+}
