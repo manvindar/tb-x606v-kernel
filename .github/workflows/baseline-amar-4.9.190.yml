@@ -343,7 +343,7 @@ jobs:
         run: |
           set -euo pipefail
           sha=$(python3 -c "import json;print(json.load(open('data/amar/dtbo-diagnostic.json'))['source']['sha'])")
-          mkdir src out-receipts && cd src && git init -q . && git fetch -q --depth 1 "$PHIL_REPO" "$sha" && git checkout -q FETCH_HEAD
+          mkdir -p out-receipts && mkdir src && cd src && git init -q . && git fetch -q --depth 1 "$PHIL_REPO" "$sha" && git checkout -q FETCH_HEAD
           test "$(git rev-parse HEAD)" = "$sha"
           grep -E '^(VERSION|PATCHLEVEL|SUBLEVEL) =' Makefile | tr -d ' ' | tr '\n' ' ' | grep -qx 'VERSION=4 PATCHLEVEL=9 SUBLEVEL=190 '
           cd ..
